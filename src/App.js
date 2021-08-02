@@ -1,4 +1,5 @@
-import './App.css';
+// src/App.js
+
 import React from "react";
 import About from "./components/About";
 import Contact from "./components/Contact";
@@ -9,7 +10,7 @@ import Testimonials from "./components/Testimonials";
 
 export default function App() {
   return (
-    <main className="text-gray-400 bg-gray-900 body-font">      
+    <main className="text-gray-400 bg-gray-900 body-font">
       <Navbar />
       <About />
       <Projects />
