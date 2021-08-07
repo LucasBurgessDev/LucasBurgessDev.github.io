@@ -21,7 +21,7 @@
 .navbar-logo {
     color: #fff;
     justify-self: start;
-    margin-left: 20px;
+    margin-left: 2px;
     cursor: pointer;
     text-decoration: none;
     font-size: 2rem;
@@ -36,8 +36,8 @@
 
 .nav-menu {
     display: grid;
-    grid-template-columns: repeat(4, auto);
-    grid-gap: 10px;
+    grid-template-columns: repeat(5, auto);
+    grid-gap: 5px;
     list-style: none;
     text-align: center;
     width: 60vw;

@@ -30,7 +30,7 @@ function NavBar() {
                 <div className="navbar-container">
                     <Link to="/" className="navbar-logo" OnClick=
                     {closeMobileMenu}>
-                        TRVL <i className="fas fa-football-ball"></i>
+                        <i className="fas fa-database"></i>LucasBurgessDev
                     </Link>
                     <div className="menu-icon" onClick={handleClick}>
                         <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
@@ -41,23 +41,28 @@ function NavBar() {
                                 Home
                             </Link>
                         </li>
-                                                <li className='nav-item'>
-                            <Link to='/services' className='nav-links' onClick={closeMobileMenu}>
-                                Services
+                        <li className='nav-item'>
+                            <Link to='/projects' className='nav-links' onClick={closeMobileMenu}>
+                                Projects
                             </Link>
                         </li>
-                                                <li className='nav-item'>
-                            <Link to='/products' className='nav-links' onClick={closeMobileMenu}>
-                                Products
+                        <li className='nav-item'>
+                            <Link to='/resume' className='nav-links' onClick={closeMobileMenu}>
+                                Resume
                             </Link>
                         </li>
-                                                <li className='nav-item'>
-                            <Link to='/sign-up' className='nav-links-mobile' onClick={closeMobileMenu}>
-                                Sign Up
+                        <li className='nav-item'>
+                            <Link to='/extra-projects' className='nav-links' onClick={closeMobileMenu}>
+                                Extra Projects
+                            </Link>
+                        </li>
+                        <li className='nav-item'>
+                            <Link to='/blog' className='nav-links' onClick={closeMobileMenu}>
+                                Blog
                             </Link>
                         </li>
                     </ul>
-                    {button && <Button buttonStyle='btn--outline'>SIGN UP</Button>}
+                    {button && <Button buttonStyle='btn--outline'>CONTACT ME</Button>}
                 </div>
             </nav>
         </>
