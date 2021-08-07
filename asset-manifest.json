@@ -1,24 +1,29 @@
 {
   "files": {
-    "main.css": "/static/css/main.144e16ad.chunk.css",
-    "main.js": "/static/js/main.278812fd.chunk.js",
-    "main.js.map": "/static/js/main.278812fd.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.a9c96fc9.js",
-    "runtime-main.js.map": "/static/js/runtime-main.a9c96fc9.js.map",
-    "static/js/2.585ac280.chunk.js": "/static/js/2.585ac280.chunk.js",
-    "static/js/2.585ac280.chunk.js.map": "/static/js/2.585ac280.chunk.js.map",
-    "static/js/3.6a11755b.chunk.js": "/static/js/3.6a11755b.chunk.js",
-    "static/js/3.6a11755b.chunk.js.map": "/static/js/3.6a11755b.chunk.js.map",
+    "main.css": "/static/css/main.2711fbae.chunk.css",
+    "main.js": "/static/js/main.429fa55d.chunk.js",
+    "main.js.map": "/static/js/main.429fa55d.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.645e556a.js",
+    "runtime-main.js.map": "/static/js/runtime-main.645e556a.js.map",
+    "static/js/2.4111a648.chunk.js": "/static/js/2.4111a648.chunk.js",
+    "static/js/2.4111a648.chunk.js.map": "/static/js/2.4111a648.chunk.js.map",
+    "static/js/3.75933efd.chunk.js": "/static/js/3.75933efd.chunk.js",
+    "static/js/3.75933efd.chunk.js.map": "/static/js/3.75933efd.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.144e16ad.chunk.css.map": "/static/css/main.144e16ad.chunk.css.map",
-    "static/js/2.585ac280.chunk.js.LICENSE.txt": "/static/js/2.585ac280.chunk.js.LICENSE.txt",
+    "static/css/main.2711fbae.chunk.css.map": "/static/css/main.2711fbae.chunk.css.map",
+    "static/js/2.4111a648.chunk.js.LICENSE.txt": "/static/js/2.4111a648.chunk.js.LICENSE.txt",
+    "static/media/adf.ee5938f4.png": "/static/media/adf.ee5938f4.png",
+    "static/media/github.cc9e7c91.png": "/static/media/github.cc9e7c91.png",
     "static/media/img-7.dfeef525.jpg": "/static/media/img-7.dfeef525.jpg",
+    "static/media/pythonspark.ac29cd0f.jpeg": "/static/media/pythonspark.ac29cd0f.jpeg",
+    "static/media/streamdata.daeb76e2.svg": "/static/media/streamdata.daeb76e2.svg",
+    "static/media/terraform.424a952a.svg": "/static/media/terraform.424a952a.svg",
     "static/media/video-5.910e8a45.mp4": "/static/media/video-5.910e8a45.mp4"
   },
   "entrypoints": [
-    "static/js/runtime-main.a9c96fc9.js",
-    "static/js/2.585ac280.chunk.js",
-    "static/css/main.144e16ad.chunk.css",
-    "static/js/main.278812fd.chunk.js"
+    "static/js/runtime-main.645e556a.js",
+    "static/js/2.4111a648.chunk.js",
+    "static/css/main.2711fbae.chunk.css",
+    "static/js/main.429fa55d.chunk.js"
   ]
 }
