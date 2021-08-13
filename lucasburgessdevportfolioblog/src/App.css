@@ -26,11 +26,10 @@
 }
 
 .resume {
-  background-image: url('./images/img-7.jpg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  color: #fff;
+  background-color: rgb(255, 255, 255);
   font-size: 100px;
 }
 
