@@ -13,8 +13,8 @@ function ResumeItems() {
     }
 return (
         <div className='resume'>
-{/*             <video src={Video} alt="background - Video by Pressmaster from Pexels" autoPlay loop muted />
-            <h1>RESUME</h1>*/}
+{/*             <video src={Video} alt="background - Video by Pressmaster from Pexels" autoPlay loop muted />*/}
+            <h1>RESUME</h1>
             <div className="resume-pages">
                         <Document
                             file={pdfFile}
