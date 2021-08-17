@@ -15,4 +15,7 @@ jobs:
         run: |
           npm install
           npm install gh-pages --save-dev
+          npm install react-pdf
+          npm install --save-dev url-loader file-loader
+          npm install react-router-dom
           npm run deploy
