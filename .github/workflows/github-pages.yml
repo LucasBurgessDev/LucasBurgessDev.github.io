@@ -19,4 +19,3 @@ jobs:
           npm install --save-dev url-loader file-loader
           npm install react-router-dom
           npm run deploy
-          gh-pages -d build
