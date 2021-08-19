@@ -1,8 +1,10 @@
 import '../App.css';
 import './Resume.css';
 import React from 'react';
-import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
+import { Document, Page } from 'react-pdf';
 import pdfFile from "../docs/Burgess_Luke_Data_Architect.pdf";
+import { pdfjs } from 'react-pdf';
+pdfjs.GlobalWorkerOptions.workerSrc = 'pdf.worker.min.js';
 //import Video from '../videos/video-5.mp4';
 
 function ResumeItems() {
@@ -14,7 +16,6 @@ function ResumeItems() {
 return (
         <div className='resume'>
 {/*             <video src={Video} alt="background - Video by Pressmaster from Pexels" autoPlay loop muted />*/}
-            <h1>RESUME</h1>
             <div className="resume-pages">
                         <Document
                             file={pdfFile}
