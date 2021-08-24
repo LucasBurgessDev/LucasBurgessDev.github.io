@@ -9,7 +9,7 @@ on:
       - main
 jobs:
   build-and-deploy:
-    runs-on: windows-latest
+    runs-on: macos-latest
 
     strategy:
       matrix:
