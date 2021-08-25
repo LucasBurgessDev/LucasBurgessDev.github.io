@@ -9,7 +9,9 @@ on:
       - main
 jobs:
   build-and-deploy:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
+    env:
+      CI: false
 
     strategy:
       matrix:
@@ -32,15 +34,20 @@ jobs:
       
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
+      
+    - name: Dump GitHub env object
+      env:
+        ENV_CONTEXT: ${{ toJson(env) }}
+      run: echo "$ENV_CONTEXT"
 
     - name: Build
       run: npm run build
       
     - name: Deploy
       run: |
-        git config --global user.name $user_name
-        git config --global user.email $user_email
-        git remote set-url origin https://github.com/LucasBurgessDev/LucasBurgessDev.github.io.git
+        git config --global user.name "LucasBurgessDev"
+        git config --global user.email lucasburgess8@gmail.com
+        git remote set-url origin https://${github_token}@github.com/${repository}
         npm run deploy
       env:
         user_name: 'github-actions[bot]'
