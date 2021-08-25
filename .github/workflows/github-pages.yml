@@ -45,8 +45,8 @@ jobs:
       
     - name: Deploy
       run: |
-        git config --global user.name $user_name
-        git config --global user.email $user_email
+        git config --global user.name "LucasBurgessDev"
+        git config --global user.email lucasburgess8@gmail.com
         git remote set-url origin https://github.com/LucasBurgessDev/LucasBurgessDev.github.io.git
         npm run deploy
       env:
