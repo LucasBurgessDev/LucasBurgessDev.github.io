@@ -25,7 +25,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - name: Install dependencies
-      run: npm install react-scripts --save
+      run: npm install
 
     - name: Run the tests
       run: npm test -- --coverage
@@ -34,7 +34,7 @@ jobs:
       uses: codecov/codecov-action@v1
 
     - name: Build
-      run: npm run build
+      run: CI=false npm run build
       
     - name: Deploy
       run: |
