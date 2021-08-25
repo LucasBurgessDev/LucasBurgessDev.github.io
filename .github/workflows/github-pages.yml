@@ -32,9 +32,16 @@ jobs:
       
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
+      
+    - name: Dump GitHub env object
+      env:
+        ENV_CONTEXT: ${{ toJson(env) }}
+      run: echo "$ENV_CONTEXT"
 
     - name: Build
-      run: CI=false npm run build
+      run: npm run build
+      env:
+         CI: ""
       
     - name: Deploy
       run: |
