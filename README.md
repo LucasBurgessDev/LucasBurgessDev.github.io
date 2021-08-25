@@ -1,3 +1,7 @@
+# This project builds the portfolio of LucasBurgessDev
+
+It uses GitHub actions for full CI/CD with test coverage from Codecov
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
