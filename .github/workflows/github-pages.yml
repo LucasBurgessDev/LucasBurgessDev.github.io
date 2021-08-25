@@ -10,6 +10,8 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      CI: false
 
     strategy:
       matrix:
@@ -40,8 +42,6 @@ jobs:
 
     - name: Build
       run: npm run build
-      env:
-         CI: ""
       
     - name: Deploy
       run: |
