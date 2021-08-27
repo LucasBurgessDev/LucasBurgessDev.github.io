@@ -1,9 +1,13 @@
 import '../App.css';
 import './Resume.css';
 import React from 'react';
-import { Document, Page } from 'react-pdf/dist/umd/entry.webpack';
+// using CommonJS modules
+import { Document, Page } from "react-pdf";
 import pdfFile from "../docs/Burgess_Luke_Data_Architect.pdf";
 //import Video from '../videos/video-5.mp4';
+import { pdfjs } from 'react-pdf';
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+
 
 function ResumeItems() {
 
