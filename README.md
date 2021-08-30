@@ -9,8 +9,7 @@ The env var CI is currently set to false in github actions so won't fail if warn
 
 [![Build and Deploy](https://github.com/LucasBurgessDev/LucasBurgessDev.github.io/actions/workflows/github-pages.yml/badge.svg?branch=main)](https://github.com/LucasBurgessDev/LucasBurgessDev.github.io/actions/workflows/github-pages.yml)
 
-[![codecov](https://codecov.io/gh/LucasBurgessDev/LucasBurgessDev.github.io/branch/master/graph/badge.svg)](https://codecov.io/gh/LucasBurgessDev/LucasBurgessDev.github.io)
-
+[![codecov](https://codecov.io/gh/LucasBurgessDev/LucasBurgessDev.github.io/branch/main/graph/badge.svg?token=AILYDF7SPM)](https://codecov.io/gh/LucasBurgessDev/LucasBurgessDev.github.io)
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
