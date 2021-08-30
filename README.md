@@ -5,9 +5,9 @@ The env var CI is currently set to false in github actions so won't fail if warn
 
 # Workflow Status
 
-![Testing](https://github.com/LucasBurgessDev/LucasBurgessDev.github.io/workflows/node.jsbadge.svg)
+[![Node.js CI](https://github.com/LucasBurgessDev/LucasBurgessDev.github.io/actions/workflows/node.js.yml/badge.svg?branch=test)](https://github.com/LucasBurgessDev/LucasBurgessDev.github.io/actions/workflows/node.js.yml)
 
-![CI/CD](https://github.com/LucasBurgessDev/LucasBurgessDev.github.io/workflows/github-pages/badge.svg)
+[![Build and Deploy](https://github.com/LucasBurgessDev/LucasBurgessDev.github.io/actions/workflows/github-pages.yml/badge.svg?branch=main)](https://github.com/LucasBurgessDev/LucasBurgessDev.github.io/actions/workflows/github-pages.yml)
 
 [![codecov](https://codecov.io/gh/LucasBurgessDev/LucasBurgessDev.github.io/branch/master/graph/badge.svg)](https://codecov.io/gh/LucasBurgessDev/LucasBurgessDev.github.io)
 
