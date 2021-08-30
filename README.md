@@ -3,6 +3,14 @@
 It uses GitHub actions for full CI/CD with test coverage from Codecov
 The env var CI is currently set to false in github actions so won't fail if warnings are present
 
+# Workflow Status
+
+![Testing](https://github.com/LucasBurgessDev/LucasBurgessDev.github.io/workflows/node.jsbadge.svg)
+
+![CI/CD](https://github.com/LucasBurgessDev/LucasBurgessDev.github.io/workflows/github-pages/badge.svg)
+
+[![codecov](https://codecov.io/gh/LucasBurgessDev/LucasBurgessDev.github.io/branch/master/graph/badge.svg)](https://codecov.io/gh/LucasBurgessDev/LucasBurgessDev.github.io)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
