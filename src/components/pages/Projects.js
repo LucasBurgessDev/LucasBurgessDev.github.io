@@ -1,9 +1,13 @@
 import React from 'react';
 import '../../App.css';
+import ProjectItems from '../ProjectItems';
 
 function Projects() {
     return (
-        <h1 className="projects">PROJECTS</h1>
+        <div>
+{/*         <h1 className="projects">PROJECTS</h1>
+ */}        <ProjectItems />
+        </div>
     )
 }
 

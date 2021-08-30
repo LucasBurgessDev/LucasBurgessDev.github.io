@@ -1,8 +1,15 @@
 # This project builds the portfolio of LucasBurgessDev
 
-It uses GitHub actions for full CI/CD with test coverage from Codecov
-The env var CI is currently set to false in github actions so won't fail if warnings are present
+It uses GitHub actions for full CI/CD with test coverage from Codecov.
+The env var CI is currently set to false in github actions so won't fail if warnings are present.
 
+# Workflow Status
+
+[![Node.js CI](https://github.com/LucasBurgessDev/LucasBurgessDev.github.io/actions/workflows/node.js.yml/badge.svg?branch=test)](https://github.com/LucasBurgessDev/LucasBurgessDev.github.io/actions/workflows/node.js.yml)
+
+[![Build and Deploy](https://github.com/LucasBurgessDev/LucasBurgessDev.github.io/actions/workflows/github-pages.yml/badge.svg?branch=main)](https://github.com/LucasBurgessDev/LucasBurgessDev.github.io/actions/workflows/github-pages.yml)
+
+[![codecov](https://codecov.io/gh/LucasBurgessDev/LucasBurgessDev.github.io/branch/main/graph/badge.svg?token=AILYDF7SPM)](https://codecov.io/gh/LucasBurgessDev/LucasBurgessDev.github.io)
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
