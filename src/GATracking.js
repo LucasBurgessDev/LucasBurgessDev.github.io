@@ -31,7 +31,7 @@ import ReactGA from 'react-ga';
 export default GATracking; */
 
 function GATracking() {
-  ReactGA.initialize("G-44YREV2G8B");
+  ReactGA.initialize("UA-206607078-1", { testMode: process.env.NODE_ENV === 'test' });
   ReactGA.pageview(window.location.pathname);
 }
 
