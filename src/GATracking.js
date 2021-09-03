@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+//import { useEffect, useState } from "react";
+//import { useLocation } from "react-router-dom";
 import ReactGA from 'react-ga';
 //import auth from './auth.ts'; // Sample authentication provider
 
@@ -10,7 +10,7 @@ import ReactGA from 'react-ga';
 })
  */
 
-function GATracking() {
+/* function GATracking() {
     let location = useLocation();
     const [initialized, setInitialized] = useState(false);
 
@@ -26,6 +26,13 @@ function GATracking() {
         ReactGA.pageview(location.pathname + location.search);
         }
     }, [initialized, location]);
+}
+
+export default GATracking; */
+
+function GATracking() {
+  ReactGA.initialize("G-44YREV2G8B", { testMode: process.env.NODE_ENV === 'test' });
+  ReactGA.pageview(window.location.pathname);
 }
 
 export default GATracking;
