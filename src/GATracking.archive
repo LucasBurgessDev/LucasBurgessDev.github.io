@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import ReactGA from 'react-ga';
 //import auth from './auth.ts'; // Sample authentication provider
 
-
 /* ReactGA.set({
   userId: auth.currentUserId(),
   // any data that is relevant to the user session
@@ -11,8 +10,8 @@ import ReactGA from 'react-ga';
 })
  */
 
-const GATracking = () => {
-    const location = useLocation();
+function GATracking() {
+    let location = useLocation();
     const [initialized, setInitialized] = useState(false);
 
     useEffect(() => {
@@ -27,6 +26,6 @@ const GATracking = () => {
         ReactGA.pageview(location.pathname + location.search);
         }
     }, [initialized, location]);
-};
+}
 
 export default GATracking;
