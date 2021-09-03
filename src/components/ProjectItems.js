@@ -5,9 +5,9 @@ import './ProjectItems.css';
 function ProjectItems() {
 
         const commands = {
-            hello: {
+            terraform_init: {
                 fn: args => {
-                    return `The arguments are ${args}`
+                    return `Terraform Initiated`
                 }
             }
         }
