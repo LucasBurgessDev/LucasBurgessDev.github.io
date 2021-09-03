@@ -31,6 +31,6 @@ function App() {
 export default App;
 
 function GATracking() {
-  ReactGA.initialize("G-44YREV2G8B", { testMode: process.env.NODE_ENV === 'test' });
+  ReactGA.initialize("G-44YREV2G8B");
   ReactGA.pageview(window.location.pathname);
 }
