@@ -23,7 +23,7 @@ function HeroSection() {
                     className="btns" 
                     buttonStyle="btn--primary"
                     buttonSize="btn--large"
-                    onClick={console.log('hey')}
+                    onClick={console.log('On Demand Demo Button Clicked')}
                     >
                     ON DEMAND DEMOS <i className="far fa-play-circle" />
                 </Button>
