@@ -1,12 +1,12 @@
 import React from 'react';
 import '../../App.css';
 import ProjectItems from '../ProjectItems';
+import HeroSection from '../HeroSection';
 
 function Projects() {
     return (
         <div>
-{/*         <h1 className="projects">PROJECTS</h1>
- */}        <ProjectItems />
+            <ProjectItems />
         </div>
     )
 }

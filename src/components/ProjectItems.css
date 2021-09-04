@@ -2,10 +2,20 @@
     font-family: Monospace;
     color: green;
     background-color: black;
-    width: 95%;
-    height: 500px;
+    width: 50%;
+    height: 400px;
     overflow: auto;
     padding: 1em;
     line-height: 16px;
     font-size: 16px;
+}
+
+.ProjectItems {
+    display: flex;
+    flex: 1;
+    margin: 0 1rem;
+    border-radius: 10px;
+    height: 100vh;
+    object-fit: contain;
+    flex-direction: column;
 }
