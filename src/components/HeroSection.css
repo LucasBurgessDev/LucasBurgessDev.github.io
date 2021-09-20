@@ -24,7 +24,6 @@ image {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-shadow: inset 0 0 0 1000px rgba(6, 58, 202, 0.2);
     object-fit: contain;
 }
 

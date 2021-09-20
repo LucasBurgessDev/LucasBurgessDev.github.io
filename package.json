@@ -6,9 +6,11 @@
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/user-event": "^12.8.3",
+    "ace-builds": "^1.4.12",
     "ink": "^3.0.9",
     "n": "^7.3.1",
     "react": "^17.0.2",
+    "react-ace": "^9.4.3",
     "react-command-line": "^1.0.3",
     "react-dom": "^17.0.2",
     "react-ga": "^3.3.0",
