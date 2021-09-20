@@ -69,8 +69,6 @@ function LoadLogs() {
     )
 }
 
-export default CodeEditor
-
 async function GetLogs(GitHubURL) {
     let response = await fetch(GitHubURL)
     let data = await response.json()
