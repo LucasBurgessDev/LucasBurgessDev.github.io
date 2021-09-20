@@ -1,0 +1,57 @@
+.react_cli {
+    font-family: Monospace;
+    color: green;
+    background-color: black;
+    width: 30%;
+    height: 400px;
+    overflow: auto;
+    padding: 1em;
+    line-height: 16px;
+    font-size: 16px;
+}
+
+.ProjectItems {
+    display: flex;
+    flex: 1;
+    margin: 0 1rem;
+    border-radius: 10px;
+    height: 450px;
+    object-fit: contain;
+/*    flex-direction: column;*/
+}
+
+.projects {
+    padding: 4rem;
+    background: #fff;
+}
+
+h1 {
+    text-align: center;
+    color: #242424;
+    font-size: 4rem;
+}
+
+h2 {
+    text-align: left;
+    color: #242424;
+    font-size: 3rem;
+    text-indent: 1%;
+}
+
+.projects__container {
+    /* display: flex; */
+    flex-flow: column;
+    align-items: center;
+    max-width: 1120px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.projects__wrapper {
+    position: relative;
+    margin: 50px 0 45px;
+}
+
+.projects__items {
+    margin-bottom: 24px;
+}

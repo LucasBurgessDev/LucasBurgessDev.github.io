@@ -1,6 +1,8 @@
 import React from 'react';
+import CommandLineComponent from 'react-command-line';
 import CommandLine from 'react-command-line';
-import './ProjectItems.css';
+import './Projects.css';
+import CodeEditor from './CodeEditor';
 
 function ProjectItems() {
 
@@ -31,12 +33,18 @@ sleep: Waits for 5 seconds, then returns with a message.`
       });
     },
     isAsync: true
+  },
+  clear: {
+    fn: args => {
+      return CommandLineComponent.clear;
+    }
   }
 }
 
 return (
     <div className='ProjectItems'>
             <CommandLine commands={commands} />
+            <CodeEditor />
     </div>
     )
 }
