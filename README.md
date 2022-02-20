@@ -3,6 +3,14 @@
 It uses GitHub actions for full CI/CD with test coverage from Codecov.
 The env var CI is currently set to false in github actions so won't fail if warnings are present.
 
+# TODO
+
+Handle Browser back/forward button events
+Set up domain properly
+Upgrade GA
+Finish terminal pages
+Set up blog space
+
 # Workflow Status
 
 [![Node.js CI](https://github.com/LucasBurgessDev/LucasBurgessDev.github.io/actions/workflows/node.js.yml/badge.svg?branch=test)](https://github.com/LucasBurgessDev/LucasBurgessDev.github.io/actions/workflows/node.js.yml)
