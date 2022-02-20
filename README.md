@@ -5,11 +5,11 @@ The env var CI is currently set to false in github actions so won't fail if warn
 
 # TODO
 
-Handle Browser back/forward button events
-Set up domain properly
-Upgrade GA
-Finish terminal pages
-Set up blog space
+* Handle Browser back/forward button events
+* Set up domain properly
+* Upgrade GA
+* Finish terminal pages
+* Set up blog space
 
 # Workflow Status
 
