@@ -5,11 +5,20 @@ The env var CI is currently set to false in github actions so won't fail if warn
 
 # TODO
 
+* Add copyright to front page (MS/HashiCorp)
 * Handle Browser back/forward button events
 * Set up domain properly
-* Upgrade GA
+* Upgrade GA to newest version
+    * Add GA to all pages
 * Finish terminal pages
 * Set up blog space
+    * Create db to store blog entries
+    * Add blog entries to home page
+* Create email signup page
+    * Create db to store emails
+    * Place email signup infront of resume
+    * Update Resume
+    * Set up email verification
 
 # Workflow Status
 
