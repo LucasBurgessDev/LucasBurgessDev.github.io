@@ -5,6 +5,7 @@ The env var CI is currently set to false in github actions so won't fail if warn
 
 # TODO
 
+* Add copyright to front page (MS/HashiCorp)
 * Handle Browser back/forward button events
 * Set up domain properly
 * Upgrade GA to newest version
