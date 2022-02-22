@@ -23,6 +23,7 @@ The env var CI is currently set to false in github actions so won't fail if warn
 * Link socials
 * Create Logo
 * Set up SEO
+* Increase test coverage
 
 
 # Workflow Status
