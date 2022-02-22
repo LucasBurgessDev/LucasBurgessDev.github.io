@@ -1,7 +1,12 @@
 import React from 'react';
 import './App.css';
 import NavBar from './components/NavBar';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import Home from "./components/pages/Home";
 import Projects from "./components/pages/Projects";
 import Resume from "./components/pages/Resume";
@@ -22,6 +27,7 @@ function App() {
           </Switch>
       </Router>
     </>
+    
   );
 }
 

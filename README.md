@@ -5,7 +5,7 @@ The env var CI is currently set to false in github actions so won't fail if warn
 
 # TODO
 
-* Add copyright to front page (MS/HashiCorp)
+* ~~Add copyright to front page (MS/HashiCorp)~~
 * Handle Browser back/forward button events
 * Set up domain properly
 * Upgrade GA to newest version
@@ -19,6 +19,12 @@ The env var CI is currently set to false in github actions so won't fail if warn
     * Place email signup infront of resume
     * Update Resume
     * Set up email verification
+* Fix mobile view render
+* Link socials
+* Create Logo
+* Set up SEO
+* Increase test coverage
+
 
 # Workflow Status
 
