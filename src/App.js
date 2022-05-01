@@ -11,6 +11,7 @@ import Home from "./components/pages/Home";
 import Projects from "./components/pages/Projects";
 import Resume from "./components/pages/Resume";
 import ContactMe from "./components/pages/ContactMe";
+import Blog from "./components/pages/Blog";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path='/projects' exact component={Projects} />
             <Route path='/resume' exact component={Resume} />
             <Route path='/contactme' exact component={ContactMe} />
+            <Route path='/blog' exact component={Blog} />
             <Route path="/404" component={ Error } />
             <Redirect to="/404" />
           </Switch>
