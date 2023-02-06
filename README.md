@@ -6,14 +6,14 @@ The env var CI is currently set to false in github actions so won't fail if warn
 # TODO
 
 * ~~Add copyright to front page (MS/HashiCorp)~~
-* Handle Browser back/forward button events
+* ~~Handle Browser back/forward button events~~
+* Set up blog space
+    * Create db to store blog entries
+    * Add blog entries to home page
 * Set up domain properly
 * Upgrade GA to newest version
     * Add GA to all pages
 * Finish terminal pages
-* Set up blog space
-    * Create db to store blog entries
-    * Add blog entries to home page
 * Create email signup page
     * Create db to store emails
     * Place email signup infront of resume
@@ -41,6 +41,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `npm install`
+Creates the package and package-lock with all of the dependencies.
+### `npm ci`
+CLEAN INSTALL - Creates the package and package-lock with all of the dependencies
+### `npm prune`
+Removes unused dependencies
 ### `npm start`
 
 Runs the app in the development mode.\
@@ -103,3 +109,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### `node upgrade`
+need to change ci/cd scripts
+sudo n install 16.19.0
+upgrade npm
+npm install -g npm@9.4.1
+remove package-lock and then reinstall - npm install
