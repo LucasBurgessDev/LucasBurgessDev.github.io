@@ -109,3 +109,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### `node upgrade`
+need to change ci/cd scripts
+sudo n install 16.19.0
+upgrade npm
+npm install -g npm@9.4.1
+remove package-lock and then reinstall - npm install
