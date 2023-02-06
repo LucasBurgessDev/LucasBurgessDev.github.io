@@ -1,30 +1,22 @@
 {
   "files": {
-    "main.css": "/static/css/main.504595db.chunk.css",
-    "main.js": "/static/js/main.4fffb4a2.chunk.js",
-    "main.js.map": "/static/js/main.4fffb4a2.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.fbecce21.js",
-    "runtime-main.js.map": "/static/js/runtime-main.fbecce21.js.map",
-    "static/js/2.a60d9d51.chunk.js": "/static/js/2.a60d9d51.chunk.js",
-    "static/js/2.a60d9d51.chunk.js.map": "/static/js/2.a60d9d51.chunk.js.map",
-    "static/js/3.fc64b32d.chunk.js": "/static/js/3.fc64b32d.chunk.js",
-    "static/js/3.fc64b32d.chunk.js.map": "/static/js/3.fc64b32d.chunk.js.map",
+    "main.css": "/static/css/main.3787600f.css",
+    "main.js": "/static/js/main.53d97c57.js",
+    "static/js/787.e7817687.chunk.js": "/static/js/787.e7817687.chunk.js",
+    "static/media/video-5.mp4": "/static/media/video-5.910e8a452197d2018756.mp4",
+    "static/media/img-2.jpg": "/static/media/img-2.cbdbf90a167f6673c66b.jpg",
+    "static/media/Burgess_Luke_Data_Architect.pdf": "/static/media/Burgess_Luke_Data_Architect.3f7cd180c93216c7f932.pdf",
+    "static/media/github.png": "/static/media/github.cc9e7c910fc66570180c.png",
+    "static/media/pythonspark.jpeg": "/static/media/pythonspark.ac29cd0f77e42319ad63.jpeg",
+    "static/media/adf.png": "/static/media/adf.ee5938f4dfd807b3c514.png",
+    "static/media/terraform.svg": "/static/media/terraform.424a952aabca174ea7b8e06a3629c05f.svg",
     "index.html": "/index.html",
-    "static/css/main.504595db.chunk.css.map": "/static/css/main.504595db.chunk.css.map",
-    "static/js/2.a60d9d51.chunk.js.LICENSE.txt": "/static/js/2.a60d9d51.chunk.js.LICENSE.txt",
-    "static/media/Burgess_Luke_Data_Architect.3f7cd180.pdf": "/static/media/Burgess_Luke_Data_Architect.3f7cd180.pdf",
-    "static/media/adf.ee5938f4.png": "/static/media/adf.ee5938f4.png",
-    "static/media/github.cc9e7c91.png": "/static/media/github.cc9e7c91.png",
-    "static/media/App.css": "/static/media/img-2.cbdbf90a.jpg",
-    "static/media/pythonspark.ac29cd0f.jpeg": "/static/media/pythonspark.ac29cd0f.jpeg",
-    "static/media/streamdata.daeb76e2.svg": "/static/media/streamdata.daeb76e2.svg",
-    "static/media/terraform.424a952a.svg": "/static/media/terraform.424a952a.svg",
-    "static/media/video-5.910e8a45.mp4": "/static/media/video-5.910e8a45.mp4"
+    "main.3787600f.css.map": "/static/css/main.3787600f.css.map",
+    "main.53d97c57.js.map": "/static/js/main.53d97c57.js.map",
+    "787.e7817687.chunk.js.map": "/static/js/787.e7817687.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.fbecce21.js",
-    "static/js/2.a60d9d51.chunk.js",
-    "static/css/main.504595db.chunk.css",
-    "static/js/main.4fffb4a2.chunk.js"
+    "static/css/main.3787600f.css",
+    "static/js/main.53d97c57.js"
   ]
 }
