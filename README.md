@@ -115,4 +115,4 @@ need to change ci/cd scripts
 sudo n install 16.19.0
 upgrade npm
 npm install -g npm@9.4.1
-remove package-lock and then reinstall - npm install
+remove package-lock and then reinstall - npm install 
