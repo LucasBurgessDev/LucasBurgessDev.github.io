@@ -49,6 +49,15 @@ function NavBar() {
                   Projects
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link
+                  to="/contactme"
+                  className="nav-links"
+                  onClick={closeMobileMenu}
+                >
+                  Contact Me
+                </Link>
+              </li>
               {/*                        <li className='nav-item'>
                             <Link to='/resume' className='nav-links' onClick={closeMobileMenu}>
                                 Resume
@@ -58,27 +67,13 @@ function NavBar() {
                             <Link to='/extra-projects' className='nav-links' onClick={closeMobileMenu}>
                                 Extra Projects
                             </Link>
-<<<<<<< HEAD
-                        </li> */}
-              <li className="nav-item">
-                <Link
-                  to="/blog"
-                  className="nav-links"
-                  onClick={closeMobileMenu}
-                >
-                  Blog
-                </Link>
-              </li>
-=======
                         </li> 
                         <li className='nav-item'>
                             <Link to='/blog' className='nav-links' onClick={closeMobileMenu}>
                                 Blog
                             </Link>
                         </li>*/}
->>>>>>> 31d383fc (remove resume from navbar)
             </ul>
-            {button && <Button buttonStyle="btn--outline">CONTACT ME</Button>}
           </div>
         </nav>
       </>
