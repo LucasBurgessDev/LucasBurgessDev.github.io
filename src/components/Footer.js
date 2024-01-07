@@ -1,6 +1,7 @@
 import React from 'react';
 import './Footer.css';
-import { Button } from './button';
+import { Button } from "./button";
+import sendtodb from "./SubmitButton";
 
 function Footer() {
   return (
@@ -12,15 +13,23 @@ function Footer() {
         <p className="footer-subscription-text">
           You can unsubscribe at any time.
         </p>
-        <div className="input-areas">
+        <div className="input-areas" id="subscribe">
           <form>
             <input
               className="footer-input"
               name="email"
-              type="email"
+              //type="email"
+              type="text"
+              id="email-input"
               placeholder="Your Email"
             />
-            <Button buttonStyle="btn--outline" >Subscribe</Button>
+            <Button
+              buttonStyle="btn--outline"
+              id="contactme"
+              onClick={(event) => sendtodb(event, 100)}
+            >
+              Subscribe
+            </Button>
           </form>
         </div>
       </section>
@@ -49,37 +58,37 @@ function Footer() {
           </div>
         </div>
       </div> */}
-      <section class="social-media">
-        <div class="social-media-wrap">
-          <small class="website-rights">LucasBurgessDev</small>
-          <div class="social-icons">
+      <section className="social-media">
+        <div className="social-media-wrap">
+          <small className="website-rights">LucasBurgessDev</small>
+          <div className="social-icons">
             <a
-              class="social-icon-link GitHub"
+              className="social-icon-link GitHub"
               href="https://github.com/LucasBurgessDev"
               aria-label="GitHub"
             >
-              <i class="fab fa-github" />
+              <i className="fab fa-github" />
             </a>
             <a
-              class="social-icon-link LinkedIn"
+              className="social-icon-link LinkedIn"
               href="https://linkedin.com/luke-burgess-data"
               aria-label="LinkedIn"
             >
-              <i class="fab fa-linkedin" />
+              <i className="fab fa-linkedin" />
             </a>
             <a
-              class="social-icon-link youtube"
+              className="social-icon-link youtube"
               href="https://youtube.com/@lucasburgessdev"
               aria-label="Youtube"
             >
-              <i class="fab fa-youtube" />
+              <i className="fab fa-youtube" />
             </a>
             <a
-              class="social-icon-link twitter"
+              className="social-icon-link twitter"
               href="https://twitter.com/lucasburgessdev"
               aria-label="Twitter"
             >
-              <i class="fab fa-twitter" />
+              <i className="fab fa-twitter" />
             </a>
           </div>
         </div>
