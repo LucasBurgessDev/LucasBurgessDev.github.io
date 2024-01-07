@@ -7,20 +7,20 @@ The env var CI is currently set to false in github actions so won't fail if warn
 
 * ~~Add copyright to front page (MS/HashiCorp)~~
 * ~~Handle Browser back/forward button events~~
+* Set up function for submit email button
+    * Set up google cloud
+    * Create firebase db to store emails
+    * Send details to db
+    * Set up email verification
 * Set up blog space
     * Create db to store blog entries
     * Add blog entries to home page
-* Set up domain properly
+* ~~Set up domain properly~~
 * Upgrade GA to newest version
     * Add GA to all pages
 * Finish terminal pages
-* Create email signup page
-    * Create db to store emails
-    * Place email signup infront of resume
-    * Update Resume
-    * Set up email verification
 * Fix mobile view render
-* Link socials
+* ~~Link socials~~
 * Create Logo
 * Set up SEO
 * Increase test coverage
