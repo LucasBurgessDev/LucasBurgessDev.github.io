@@ -42,7 +42,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 In the project directory, you can run:
 
 ### `npm install`
-Creates the package and package-lock with all of the dependencies.
+Creates the package and package-lock with all of the dependencies. OR USE:
 ### `npm ci`
 CLEAN INSTALL - Creates the package and package-lock with all of the dependencies
 ### `npm prune`
