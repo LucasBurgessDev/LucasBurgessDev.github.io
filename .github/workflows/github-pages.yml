@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [16.19]
         
     steps:
     - name: Checkout repository
@@ -53,7 +53,7 @@ jobs:
     - name: Deploy
       run: |
         git config --global user.name "LucasBurgessDev"
-        git config --global user.email lucasburgess8@gmail.com
+        git config --global user.email 62183529+LucasBurgessDev@users.noreply.github.com
         git remote set-url origin https://${github_token}@github.com/${repository}
         npm run deploy
       env:
