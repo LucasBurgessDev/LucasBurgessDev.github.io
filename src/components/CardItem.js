@@ -17,6 +17,6 @@ function carditem(props) {
             </li> 
         </>
     )
-}
+};
 
-export default carditem
+export default carditem;

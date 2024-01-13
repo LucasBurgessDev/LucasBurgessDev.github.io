@@ -29,20 +29,7 @@
     display: flex;
 
     color: #ece8e1;
-    background-color: #242424;
-}
-
-.left_side {
-    width: 1400px;
-    height: fit-content;
-    height: 200px;
-    }
-
-.right_side {    
-    padding: 30px;
-    flex-grow: 1;
-
-    background-color: rgb(255, 255, 255);
+    background-color: #ffffff;
 }
 
 .blog_posts {
@@ -52,18 +39,4 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.blog_index {
-    width: 100%;
-    height: fit-content;
-}
-
-.blog_index ul {
-    font-size: 20px;
-    font-weight: 900;
-}
-
-.blog_index li {
-    margin: 0 0 20px 0;
 }

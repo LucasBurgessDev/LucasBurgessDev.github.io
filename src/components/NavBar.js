@@ -67,12 +67,12 @@ function NavBar() {
                             <Link to='/extra-projects' className='nav-links' onClick={closeMobileMenu}>
                                 Extra Projects
                             </Link>
-                        </li> 
+                        </li>*/} 
                         <li className='nav-item'>
                             <Link to='/blog' className='nav-links' onClick={closeMobileMenu}>
                                 Blog
                             </Link>
-                        </li>*/}
+                        </li>
             </ul>
           </div>
         </nav>

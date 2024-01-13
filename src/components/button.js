@@ -55,18 +55,27 @@ export const Button = ({
           </button>
         </Link>
       );
-    }
-    else {      
-        return (
-      <Link to="/projects" className="btn-mobile">
-        <button
-          className={`btn ${checkButtonStyle} ${checkButtonSize}`}
-          onClick={onClick}
-          type={type}
-        >
-          {children}
-        </button>
-      </Link>
-    );
+    } else if (id === "submit") {
+      return (
+                  <button
+            className={`btn ${checkButtonStyle} ${checkButtonSize}`}
+            onClick={onClick}
+            type={type}
+          >
+            {children}
+          </button>
+      );
+    } else {
+      return (
+        <Link to="/404" className="btn-mobile">
+          <button
+            className={`btn ${checkButtonStyle} ${checkButtonSize}`}
+            onClick={onClick}
+            type={type}
+          >
+            {children}
+          </button>
+        </Link>
+      );
     }
 };

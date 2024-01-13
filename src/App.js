@@ -18,18 +18,17 @@ function App() {
     <>
       <Router>
         <NavBar />
-          <Switch>
-            <Route path='/' exact component={Home} />
-            <Route path='/projects' exact component={Projects} />
-            <Route path='/resume' exact component={Resume} />
-            <Route path='/contactme' exact component={ContactMe} />
-            <Route path='/blog' exact component={Blog} />
-            <Route path="/404" component={ Error } />
-            <Redirect to="/404" />
-          </Switch>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/projects" exact component={Projects} />
+          <Route path="/resume" exact component={Resume} />
+          <Route path="/contactme" exact component={ContactMe} />
+          <Route path="/blog" exact component={Blog} />
+          <Route path="/404" component={Error} />
+          <Redirect to="/404" />
+        </Switch>
       </Router>
     </>
-    
   );
 }
 
