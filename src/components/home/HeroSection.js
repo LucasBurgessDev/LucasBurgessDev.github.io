@@ -17,7 +17,7 @@ function HeroSection() {
         />
         {/* <img src={Image} alt="background" /> */}
         <h1>ANALYTICS AWAITS</h1>
-        <p>Dive into the data below</p>
+        <p>Dive into the data</p>
         <div className="hero-btns">
           <Button
             className="btns"
@@ -27,7 +27,7 @@ function HeroSection() {
           >
             GET STARTED
           </Button>
-          <Button
+{/*           <Button
             className="btns"
             buttonStyle="btn--primary"
             buttonSize="btn--large"
@@ -35,7 +35,7 @@ function HeroSection() {
             id="demo"
           >
             ON DEMAND DEMOS <i className="far fa-play-circle" />
-          </Button>
+          </Button> */}
         </div>
       </div>
     );

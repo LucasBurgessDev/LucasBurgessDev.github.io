@@ -48,7 +48,7 @@ export const Button = ({
       );
     } else if (id === "letsgo") {
       return (
-        <Link to="/projects" className="btn-mobile">
+        <Link to="/blog" className="btn-mobile">
           <button
             className={`btn ${checkButtonStyle} ${checkButtonSize}`}
             onClick={onClick}

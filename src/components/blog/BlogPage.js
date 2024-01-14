@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './blog_page_styles.css';
+import "./BlogPage.css";
 import BlogList from "./BlogList.js";
 import EmptyList from "../common/EmptyList.js";
 import SearchBar from "../common/SearchBar.js";
