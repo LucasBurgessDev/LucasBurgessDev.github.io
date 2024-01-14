@@ -62,15 +62,15 @@ CodeEditor.propTypes = {
 
 export default CodeEditor;
 
-function LoadLogs() {
+/* function LoadLogs() {
     const GitHubURL="https://api.github.com/repos/LucasBurgessDev/LucasBurgessDev.github.io/actions/workflows?accept=application/vnd.github.v3+json&per_page=30&page=1"
     return (
         GetLogs(GitHubURL).then(data => console.log(data))
     )
-}
+} */
 
-async function GetLogs(GitHubURL) {
+/* async function GetLogs(GitHubURL) {
     let response = await fetch(GitHubURL)
     let data = await response.json()
     return data
-}
+} */
