@@ -1,11 +1,11 @@
 import React from 'react';
 import CardItem from './CardItem';
 import './Cards.css';
-import ImageADF from '../images/adf.png';
-import ImageGithub from '../images/github.png';
-import ImagePython from '../images/pythonspark.jpeg';
-import ImageStream from "../images/streamdata.png";
-import ImageTerraform from '../images/terraform.svg';
+import ImageADF from "../../images/adf.png";
+import ImageGithub from "../../images/github.png";
+import ImagePython from "../../images/pythonspark.jpeg";
+import ImageStream from "../../images/streamdata.png";
+import ImageTerraform from "../../images/terraform.svg";
 
 function Cards() {
     return (

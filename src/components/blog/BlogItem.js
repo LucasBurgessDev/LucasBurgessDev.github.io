@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import "./BlogItem.css";
-import Chip from './Chip.js';
-import cover from "../images/github.png";
+import Chip from '../common/Chip.js';
+import cover from "../../images/github.png";
 
 function BlogItem({blog:{id,description,title,createdAt,authorName,authorAvatar,category}}) {
     return (
@@ -21,7 +21,7 @@ function BlogItem({blog:{id,description,title,createdAt,authorName,authorAvatar,
             </div>
           </div>
           <Link className="blogItem-link" to={`/blog/${id}`}>
-            ➝
+            Go To
           </Link>
         </footer>
       </div>

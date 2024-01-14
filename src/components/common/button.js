@@ -12,7 +12,10 @@ export const Button = ({
   onClick,
   buttonStyle,
   buttonSize,
-  id
+  id,
+  value,
+  onChange,
+  placeholder
 }) => {
   const checkButtonStyle = STYLES.includes(buttonStyle)
     ? buttonStyle
@@ -57,13 +60,16 @@ export const Button = ({
       );
     } else if (id === "submit") {
       return (
-                  <button
-            className={`btn ${checkButtonStyle} ${checkButtonSize}`}
-            onClick={onClick}
-            type={type}
-          >
-            {children}
-          </button>
+        <button
+          className={`btn ${checkButtonStyle} ${checkButtonSize}`}
+          onClick={onClick}
+          type={type}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+        >
+          {children}
+        </button>
       );
     } else {
       return (

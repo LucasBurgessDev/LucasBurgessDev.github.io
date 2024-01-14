@@ -2,7 +2,7 @@ import React from 'react';
 //import CommandLineComponent from 'react-command-line';
 //import CommandLine from 'react-command-line';
 import './Projects.css';
-import CodeEditor from './CodeEditor';
+import CodeEditor from '../codeeditor/CodeEditor';
 
 function ProjectItems() {
 
