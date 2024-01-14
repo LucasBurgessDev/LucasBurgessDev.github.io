@@ -1,10 +1,10 @@
-import '../../App.css';
-import BlogPage from "../BlogPage";
+import React, {useState} from "react";
+import "../../App.css";
+import BlogPage from "../blog/BlogPage";
+
 
 function Blog() {
-    return (
-        <BlogPage />
-    )
+  return <BlogPage />;
 }
 
 export default Blog;

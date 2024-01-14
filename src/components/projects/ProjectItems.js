@@ -2,11 +2,11 @@ import React from 'react';
 //import CommandLineComponent from 'react-command-line';
 //import CommandLine from 'react-command-line';
 import './Projects.css';
-import CodeEditor from './CodeEditor';
+import CodeEditor from '../codeeditor/CodeEditor';
 
 function ProjectItems() {
 
-const messages = {
+/* const messages = {
   'WELCOME_MESSAGE': 'Welcome! Type "help" to see a list of commands.',
   'INVALID_COMMAND': 'Invalid command. Try typing "help" to see a list of supported commands.'
 }
@@ -39,7 +39,7 @@ sleep: Waits for 5 seconds, then returns with a message.`
       //return CommandLineComponent.clear;
     }
   }
-}
+} */
 
 return (
     <div className='ProjectItems'>

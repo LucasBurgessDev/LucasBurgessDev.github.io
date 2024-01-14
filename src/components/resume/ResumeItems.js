@@ -1,4 +1,4 @@
-import '../App.css';
+import "../../App.css";
 import './Resume.css';
 import React from 'react';
 // using CommonJS modules

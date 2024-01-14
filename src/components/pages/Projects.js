@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../App.css';
-import ProjectsList from '../ProjectsList';
+import ProjectsList from '../projects/ProjectsList';
 
 function Projects() {
     return (
