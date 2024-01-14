@@ -19,9 +19,11 @@ The env var CI is currently set to false in github actions so won't fail if warn
     * Set up email verification
 * Set up blog space
     * ~~Set up MVP~~
+    * Redo banner on blog pages
     * Add styling like home page
     * Create db to store blog entries
     * Add blog entries to home page
+    * Add read time
 * ~~Set up domain properly~~
 * ~~Set up domain properly~~
 * Upgrade GA to newest version
