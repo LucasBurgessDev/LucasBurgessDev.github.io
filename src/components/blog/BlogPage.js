@@ -32,15 +32,15 @@ const BlogPage = () => {
   return (
     <div className="blog_page">
       <div className="page_name">Articles</div>
-
-      {/* Search Bar */}
-      <SearchBar
-        value={searchKey}
-        clearSearch={handleClearSearch}
-        formSubmit={handleSearchSubmit}
-        handleSearchKey={(event) => setSearchKey(event.target.value)}
-      />
-
+      <div className="search_bar">
+        {/* Search Bar */}
+        <SearchBar
+          value={searchKey}
+          clearSearch={handleClearSearch}
+          formSubmit={handleSearchSubmit}
+          handleSearchKey={(event) => setSearchKey(event.target.value)}
+        />
+      </div>
       <div className="container">
         <div className="blog_posts">
           {/* Blog List & Empty View */}

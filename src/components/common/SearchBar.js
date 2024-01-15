@@ -36,15 +36,15 @@ const SearchBar = ({ formSubmit, value, handleSearchKey, clearSearch }) => (
         onChange={handleSearchKey}
       />
       {value && <span onClick={clearSearch}>X</span>}
-{/*         <Button
+         <Button
           className="btns"
           buttonStyle="btn--outline"
           buttonSize="btn--medium"
           id="submit"
         >
-          Go
-        </Button> */}
-      <button>GO</button>
+          Submit
+        </Button>
+      {/* <button>GO</button> */}
     </form>
   </div>
 );

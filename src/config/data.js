@@ -5,8 +5,7 @@ export const blogList = [
     category: "personal development",
     subCategory: ["growth", "prd"],
     description:
-      "2024. The year of the dragon 🐲
-That felt as good reason as any to get this blog off the ground. Having finally got my head round react and JavaScript this is the first entry of (hopefully) many in my progress towards my New Years resolution. I plan to feature a mixture of data, technology, management theory and personal development. These will be written alongside ongoing feature development of the site!",
+      "2024. The year of the dragon 🐲 That felt as good reason as any to get this blog off the ground. Having finally got my head round react and JavaScript this is the first entry of (hopefully) many in my progress towards my New Years resolution. I plan to feature a mixture of data, technology, management theory and personal development. These will be written alongside ongoing feature development of the site!",
     authorName: "LucasBurgessDev",
     authorAvatar: "/images/github.png",
     createdAt: "January 14, 2024",

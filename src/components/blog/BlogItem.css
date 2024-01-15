@@ -8,7 +8,18 @@
   object-fit: cover;
   border-radius: 20px;
   margin-bottom: 0.5rem;
+  transition: all 0.2s linear;
 }
+
+.blogItem-cover:hover {
+    transform: scale(1.1);
+}
+
+.fade-img {
+    animation-name: fade-img;
+    animation-duration: 2s;
+}
+
 .blogItem-wrap h3 {
   margin: 0.5rem 0 1rem 0;
   flex: 1;

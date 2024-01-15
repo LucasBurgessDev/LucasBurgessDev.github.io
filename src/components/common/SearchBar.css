@@ -1,9 +1,8 @@
 .searchBar-wrap{
-    background-color: #6b5151;
     width: fit-content;
-    margin: 2.5rem auto 4rem;
-    padding: 0.5rem;
-    border-radius: 5px;
+    /* margin: 2.5rem auto 4rem; */
+    padding: 2rem;
+    border-radius: 4px;
 }
 
 .searchBar-wrap form{
@@ -15,9 +14,14 @@
     background-color: #f0f0f0;
     outline: none;
     border: none;
+    font-size: 24px;
+    text-indent: 8px;
+    
 }
 
 .searchBar-wrap span{
     padding-right: 0.5rem;
     cursor: pointer;
+    background-color: #f0f0f0;
+    font-size: 24px;
 }
