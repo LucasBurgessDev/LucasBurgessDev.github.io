@@ -1,14 +1,15 @@
 export const blogList = [
   {
     id: 1,
-    title: "7 CSS tools you should be using ",
-    category: "development",
-    subCategory: ["frontend", "ui/ux", "design"],
+    title: "My blog page in 2024",
+    category: "personal development",
+    subCategory: ["growth", "prd"],
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    authorName: "John Doe",
+      "2024. The year of the dragon 🐲
+That felt as good reason as any to get this blog off the ground. Having finally got my head round react and JavaScript this is the first entry of (hopefully) many in my progress towards my New Years resolution. I plan to feature a mixture of data, technology, management theory and personal development. These will be written alongside ongoing feature development of the site!",
+    authorName: "LucasBurgessDev",
     authorAvatar: "/images/github.png",
-    createdAt: "June 03, 2021",
+    createdAt: "January 14, 2024",
     cover: "/images/github.png",
   },
   {
