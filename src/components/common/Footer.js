@@ -6,7 +6,7 @@ import sendtodb from "./SubmitButton";
 function Footer() {
   return (
     <div className="footer-container">
-      <section className="footer-subscription">
+{/*       <section className="footer-subscription">
         <p className="footer-subscription-heading">
           Join the newsletter to receive updates on new blog and project posts
         </p>
@@ -32,32 +32,7 @@ function Footer() {
             </Button>
           </form>
         </div>
-      </section>
-      {/* <div class="footer-links">
-        <div className="footer-link-wrapper">
-          <div class="footer-link-items">
-            <h2>About Me</h2>
-            <Link to="/sign-up">How it works</Link>
-          </div>
-          <div class="footer-link-items">
-            <h2>Contact Me</h2>
-            <Link to="/">Contact</Link>
-          </div>
-        </div>
-        <div className="footer-link-wrapper">
-          <div class="footer-link-items">
-            <h2>Videos</h2>
-            <Link to="/">Demos</Link>
-          </div>
-          <div class="footer-link-items">
-            <h2>Social Media</h2>
-            <Link to="/">GitHub</Link>
-            <Link to="/">LinkedIn</Link>
-            <Link to="/">Youtube</Link>
-            <Link to="/">Twitter</Link>
-          </div>
-        </div>
-      </div> */}
+      </section> */}
       <section className="social-media">
         <div className="social-media-wrap">
           <small className="website-rights">LucasBurgessDev</small>

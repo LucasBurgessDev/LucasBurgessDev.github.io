@@ -13,6 +13,7 @@ import Resume from "./components/pages/Resume";
 import ContactMe from "./components/pages/ContactMe";
 import Blog from "./components/pages/Blog";
 import BlogPostPage from "./components/pages/BlogPostPage"; 
+import Footer from "./components/common/Footer";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           {/* <Route path="/404" component={Error} /> */}
           <Redirect to="/404" component={Error} />
         </Switch>
+        <Footer/>
       </Router>
     </>
   );
