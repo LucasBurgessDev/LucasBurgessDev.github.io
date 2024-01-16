@@ -25,6 +25,7 @@ image {
     justify-content: center;
     align-items: center;
     object-fit: contain;
+    margin-top: 0px;
 }
 
 .hero-container>h1 {
