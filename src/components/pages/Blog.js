@@ -4,6 +4,7 @@ import BlogPage from "../blog/BlogPage";
 
 
 function Blog() {
+  window.scrollTo(0, 0);
   return <BlogPage />;
 }
 

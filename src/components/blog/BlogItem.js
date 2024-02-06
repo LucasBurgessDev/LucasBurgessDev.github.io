@@ -21,7 +21,7 @@ function BlogItem({blog:{id,description,title,createdAt,authorName,authorAvatar,
                 <p>{createdAt}</p>
               </div>
             </div>
-            
+
           </footer>
         </Link>
       </div>

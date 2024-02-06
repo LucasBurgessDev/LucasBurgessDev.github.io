@@ -23,7 +23,7 @@ The env var CI is currently set to false in github actions so won't fail if warn
     * ~~Add styling like home page~~
     * Create db to store blog entries
     * Add blog entries to home page
-    * Add read time
+    * ~~Add read time~~
 * ~~Set up domain properly~~
 * ~~Set up domain properly~~
 * Upgrade GA to newest version
