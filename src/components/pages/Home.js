@@ -6,6 +6,7 @@ import Footer from '../common/Footer';
 
 
 function Home() {
+  window.scrollTo(0, 0);
   return (
     <>
       <HeroSection />
