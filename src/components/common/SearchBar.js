@@ -1,25 +1,15 @@
-import React from 'react';
-import { Button } from "./button"; 
-import './SearchBar.css';
+import React from "react";
+import "./SearchBar.css";
 
-const SearchBar = ({ formSubmit, value, handleSearchKey, clearSearch }) => (
-  <div className='searchBar-wrap'>
-    <form onSubmit={formSubmit}>
+const SearchBar = ({ value, handleSearchKey, clearSearch }) => (
+  <div className="searchBar-wrap">
+    <form>
       <input
-        type='text'
-        placeholder='Search By Category'
+        type="text"
+        placeholder="Search By Category"
         value={value}
-        onChange={handleSearchKey}
+        onChange={(event) => handleSearchKey(event.target.value)}
       />
-      {value && <span onClick={clearSearch}>X</span>}
-         <Button
-          className="btns"
-          buttonStyle="btn--outline"
-          buttonSize="btn--medium"
-          id="submit"
-        >
-          Submit
-        </Button>
     </form>
   </div>
 );

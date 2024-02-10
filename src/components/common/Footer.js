@@ -6,33 +6,6 @@ import YourComponent from "./SubmitButton";
 function Footer() {
   return (
     <div className="footer-container">
-      {/*       <section className="footer-subscription">
-        <p className="footer-subscription-heading">
-          Join the newsletter to receive updates on new blog and project posts
-        </p>
-        <p className="footer-subscription-text">
-          You can unsubscribe at any time.
-        </p>
-        <div className="input-areas" id="subscribe">
-          <form>
-            <input
-              className="footer-input"
-              name="email"
-              //type="email"
-              type="text"
-              id="email-input"
-              placeholder="Your Email"
-            />
-            <Button
-              buttonStyle="btn--outline"
-              id="contactme"
-              onClick={(event) => sendtodb(event, 100)}
-            >
-              Subscribe
-            </Button>
-          </form>
-        </div>
-      </section> */}
       <section className="footer-subscription">
         <YourComponent/>
       </section>

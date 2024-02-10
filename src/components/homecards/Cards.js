@@ -10,7 +10,7 @@ import ImageTerraform from "../../images/terraform.svg";
 function Cards() {
     return (
       <div className="cards">
-        <h1>Things of Fancy</h1>
+        <h1>Highlights of the Week</h1>
         <div className="cards__container">
           <div className="cards__wrapper">
             <ul className="cards__items">
