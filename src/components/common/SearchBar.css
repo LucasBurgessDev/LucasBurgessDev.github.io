@@ -1,27 +1,30 @@
-.searchBar-wrap{
-    width: fit-content;
-    /* margin: 2.5rem auto 4rem; */
-    padding: 2rem;
-    border-radius: 4px;
+.searchBar-wrap {
+  width: fit-content;
+  margin: 0 auto 4rem; /* Remove top margin */
+  padding: 2rem;
+  border-radius: 4px;
 }
 
-.searchBar-wrap form{
-    display: flex;
-    align-items: center;
+.searchBar-wrap form {
+  display: flex;
+  align-items: center;
 }
 
-.searchBar-wrap input{
-    background-color: #f0f0f0;
-    outline: none;
-    border: none;
-    font-size: 24px;
-    text-indent: 8px;
-    
+.searchBar-wrap input {
+  background-color: #f0f0f0;
+  outline: none;
+  border: none;
+  padding: 10px;
+  font-size: 24px;
+  text-indent: 8px;
+  border-radius: 4px;
+  margin-right: 10px;
 }
 
-.searchBar-wrap span{
-    padding-right: 0.5rem;
-    cursor: pointer;
-    background-color: #f0f0f0;
-    font-size: 24px;
+.searchBar-wrap span {
+  padding-right: 0.5rem;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  font-size: 24px;
+  border-radius: 4px;
 }

@@ -1,21 +1,40 @@
-.contact-form {
-  max-width: 500px; /* Increase the max-width to make the form wider */
-  margin: 0 auto;
+.contact-button-container {
+  text-align: center;
+}
+
+.contact-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.contact-button:hover {
+    background-color: #fff;
+    color: #242424;
+    transition: all 0.3s ease-out;
+}
+
+.contact-box {
+  max-width: 500px;
+  margin: 20px auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
   background-color: transparent; /* Set background to transparent */
-  text-align: center; /* Center align the content */
+  text-align: center;
 }
 
-.contact-form h2 {
+.contact-box h2 {
   margin-bottom: 20px;
-  font-size: 20px; /* Adjust font size */
+  font-size: 20px;
   color: #fff; /* White text color */
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .form-control {
@@ -43,4 +62,5 @@
 .btn-primary:hover {
     background-color: #fff;
     color: #242424;
-    transition: all 0.3s ease-out;}
+    transition: all 0.3s ease-out;
+}
