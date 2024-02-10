@@ -1,12 +1,12 @@
 import React from 'react';
 import './Footer.css';
 import { Button } from "./button";
-import sendtodb from "./SubmitButton";
+import YourComponent from "./SubmitButton";
 
 function Footer() {
   return (
     <div className="footer-container">
-{/*       <section className="footer-subscription">
+      {/*       <section className="footer-subscription">
         <p className="footer-subscription-heading">
           Join the newsletter to receive updates on new blog and project posts
         </p>
@@ -33,6 +33,9 @@ function Footer() {
           </form>
         </div>
       </section> */}
+      <section className="footer-subscription">
+        <YourComponent/>
+      </section>
       <section className="social-media">
         <div className="social-media-wrap">
           <small className="website-rights">LucasBurgessDev</small>

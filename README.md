@@ -33,6 +33,7 @@ The env var CI is currently set to false in github actions so won't fail if warn
 * ~~Link socials~~
 * Create Logo
 * Set up SEO
+* Convert to using nvm for node package management
 * Increase test coverage
 
 
@@ -57,6 +58,7 @@ Creates the package and package-lock with all of the dependencies. OR USE:
 CLEAN INSTALL - Creates the package and package-lock with all of the dependencies
 ### `npm prune`
 Removes unused dependencies
+### `react-native-debugger`
 ### `npm start`
 
 Runs the app in the development mode.\
@@ -121,8 +123,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 ### `node upgrade`
-need to change ci/cd scripts
+note - need to change ci/cd scripts
 sudo n install 16.19.0
 upgrade npm
 npm install -g npm@9.4.1
 remove package-lock and then reinstall - npm install 
+
+n used to version manage Node.js versions
+npm used to control package management
