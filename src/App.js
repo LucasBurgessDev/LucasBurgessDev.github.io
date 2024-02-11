@@ -8,6 +8,13 @@ import {
   Redirect,
   useLocation,
 } from "react-router-dom";
+import Home from "./components/pages/Home";
+import Projects from "./components/pages/Projects";
+import Resume from "./components/pages/Resume";
+import ContactMe from "./components/pages/ContactMe";
+import Blog from "./components/pages/Blog";
+import BlogPostPage from "./components/pages/BlogPostPage";
+import Footer from "./components/common/Footer";
 
 // Import the GA4 library (gtag.js)
 const GA_MEASUREMENT_ID = "G-DSTGL7K9W7";
@@ -44,7 +51,6 @@ function App() {
           <Route path="/contactme" exact component={ContactMe} />
           <Route path="/blog" exact component={Blog} />
           <Route path="/blog/:id" exact component={BlogPostPage} />
-          {/* <Route path="/404" component={Error} /> */}
           <Redirect to="/404" component={Error} />
         </Switch>
         <Footer />
