@@ -6,11 +6,12 @@ import ImageGithub from "../../images/github.png";
 import ImagePython from "../../images/pythonspark.jpeg";
 import ImageStream from "../../images/streamdata.png";
 import ImageTerraform from "../../images/terraform.svg";
+import WebsitePreview from '../common/WebsitePreview';
 
 function Cards() {
     return (
       <div className="cards">
-        <h1>Things of Fancy</h1>
+        <h1>Highlights of the Week</h1>
         <div className="cards__container">
           <div className="cards__wrapper">
             <ul className="cards__items">
@@ -51,6 +52,19 @@ function Cards() {
                 //path="/Projects"
                 path="/Blog"
               />
+            </ul>
+            <ul className="cards__items">
+{/*               <WebsitePreview url="https://www.wikipedia.org/" />
+              <WebsitePreview url="https://medium.com/@hammadrao891/passing-data-via-links-in-react-a-guide-to-effective-data-transfer-1e0b030e2a12" />
+              <iframe
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/1nXACVQmfoU?si=zvMPwAbXwFej5CKJ"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe> */}
             </ul>
           </div>
         </div>

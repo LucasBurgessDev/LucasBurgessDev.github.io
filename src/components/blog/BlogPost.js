@@ -23,11 +23,6 @@ function BlogPost() {
       {blog ? (
         <div className="blog-wrap">
           <header>
-            <p className="blog-date">Published {blog.createdAt}</p>
-            <p>
-              Estimated Read Time:{" "}
-              <CalculateReadTime content={blog.description} /> minutes
-            </p>
             <h1>{blog.title}</h1>
             <div className="blog-subCategory">
               {blog.subCategory.map((category, i) => (
@@ -36,6 +31,11 @@ function BlogPost() {
                 </div>
               ))}
             </div>
+            <p className="blog-date">Published {blog.createdAt}</p>
+            <p>
+              Estimated Read Time:{" "}
+              <CalculateReadTime content={blog.description} /> minutes
+            </p>
           </header>
           <img src={blog.cover} alt="cover" />
           <p className="blog-desc">{blog.description}</p>
