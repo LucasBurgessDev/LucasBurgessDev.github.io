@@ -6,7 +6,7 @@ import {
   Switch,
   Route,
   Redirect,
-  useLocation,
+  useLocation
 } from "react-router-dom";
 import Home from "./components/pages/Home";
 import Projects from "./components/pages/Projects";
