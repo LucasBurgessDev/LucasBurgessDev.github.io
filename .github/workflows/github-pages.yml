@@ -15,16 +15,16 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20.11]
+        node-version: [16.19]
         
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Set up Node.js ${{ matrix.node-version }}
+    - name: Set up Node.js 20.11
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 20.11
 
     - name: Cache dependencies
       uses: actions/cache@v3
