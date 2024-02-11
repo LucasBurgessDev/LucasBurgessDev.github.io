@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 3rem;
+    padding-bottom: 4rem; /* Adjust the value according to your design */
 }
 
 @media(max-width: 768px){
