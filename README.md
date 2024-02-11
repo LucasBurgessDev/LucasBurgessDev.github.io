@@ -13,6 +13,7 @@ The env var CI is currently set to false in github actions so won't fail if warn
     * Send details to db
     * Set up email verification
 * Set up function for submit email button
+* ~~Front end form~~
     * Set up google cloud
     * Create firebase db to store emails
     * Send details to db
@@ -24,6 +25,7 @@ The env var CI is currently set to false in github actions so won't fail if warn
     * Create db to store blog entries
     * Add blog entries to home page
     * ~~Add read time~~
+* ~~PoC for top website features~~
 * ~~Set up domain properly~~
 * ~~Set up domain properly~~
 * Upgrade GA to newest version
@@ -33,7 +35,7 @@ The env var CI is currently set to false in github actions so won't fail if warn
 * ~~Link socials~~
 * Create Logo
 * Set up SEO
-* Convert to using nvm for node package management
+* ~~Convert to using nvm for node package management~~
 * Increase test coverage
 
 
