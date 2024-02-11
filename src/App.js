@@ -16,33 +16,36 @@ import Blog from "./components/pages/Blog";
 import BlogPostPage from "./components/pages/BlogPostPage";
 import Footer from "./components/common/Footer";
 
-// Import the GA4 library (gtag.js)
+ // Import the GA4 library (gtag.js)
 const GA_MEASUREMENT_ID = "G-DSTGL7K9W7";
 
 // Custom hook for tracking page views
-function usePageViews() {
-  const location = useLocation();
+ function usePageViews() {
+   const location = useLocation();
+   console.log(location);
 
-  useEffect(() => {
-    // Check if the environment is 'test' and return if true
-    if (process.env.NODE_ENV === "test") {
-      return;
+   useEffect(() => {
+     // Check if the environment is 'test' and return if true
+     if (process.env.NODE_ENV === "test") {
+       return;
     }
 
-    // Send pageview event on route change
-    window.gtag("config", GA_MEASUREMENT_ID, {
-      page_path: location.pathname,
-    });
-  }, [location]);
-}
+     // Send pageview event on route change
+     if (typeof window !== "undefined") {
+       window.gtag("config", GA_MEASUREMENT_ID, {
+         page_path: location.pathname,
+       });
+       console.log(location.pathname);
+     }
+   }, [location]); 
+ } 
 
 function App() {
   // Call the custom hook to track page views
   usePageViews();
-
+   
   return (
     <>
-      <Router>
         <NavBar />
         <Switch>
           <Route path="/" exact component={Home} />
@@ -54,7 +57,6 @@ function App() {
           <Redirect to="/404" component={Error} />
         </Switch>
         <Footer />
-      </Router>
     </>
   );
 }
