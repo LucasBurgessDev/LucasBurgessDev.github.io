@@ -8,19 +8,20 @@ import {
   Redirect,
   useLocation,
 } from "react-router-dom";
-import Home from "./components/pages/Home";
-import Projects from "./components/pages/Projects";
-import Resume from "./components/pages/Resume";
-import ContactMe from "./components/pages/ContactMe";
-import Blog from "./components/pages/Blog";
-import BlogPostPage from "./components/pages/BlogPostPage"; 
-import Footer from "./components/common/Footer";
+
+// Import the GA4 library (gtag.js)
+import { GA_MEASUREMENT_ID } from './config'; // Assuming you have your Measurement ID in a separate config file
 
 function App() {
   // Initialize GA4
   useEffect(() => {
-    // Replace 'YOUR_MEASUREMENT_ID' with your actual Measurement ID
-    window.gtag('config', 'YOUR_MEASUREMENT_ID');
+    // Check if the environment is 'test' and return if true
+    if (process.env.NODE_ENV === 'test') {
+      return;
+    }
+
+    // Initialize GA4 with your Measurement ID
+    window.gtag('config', GA_MEASUREMENT_ID);
   }, []);
 
   // Send pageview events on route change
@@ -28,7 +29,12 @@ function App() {
     const location = useLocation();
     useEffect(() => {
       // Send pageview event on route change
-      window.gtag('config', 'YOUR_MEASUREMENT_ID', {
+      // Check if the environment is 'test' and return if true
+      if (process.env.NODE_ENV === 'test') {
+        return;
+      }
+
+      window.gtag('config', GA_MEASUREMENT_ID, {
         page_path: location.pathname,
       });
     }, [location]);
