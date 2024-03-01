@@ -1,7 +1,7 @@
 export const blogList = [
   {
     id: 1,
-    title: "My blog page in 2024",
+    title: "My Blog Page in 2024",
     category: "personal development",
     subCategory: ["growth", "prd"],
     description:
