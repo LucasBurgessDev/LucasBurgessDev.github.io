@@ -54,7 +54,6 @@
     "url-loader": "^4.1.1"
   },
   "jest": {
-    "preset": "@vue/cli-plugin-unit-jest",
     "transformIgnorePatterns": ["node_modules\/(?!axios)"]
   }
 }
