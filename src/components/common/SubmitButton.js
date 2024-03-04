@@ -55,7 +55,24 @@ const ContactBox = () => {
 
       console.log("Cloud Function response:", response.data);
     } catch (error) {
-      console.error("Error submitting form:", error);
+      // Handle errors
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.error("Server error:", error.response.data);
+        // Display the error message to the user
+        alert(error.response.data);
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.error("Network error:", error.request);
+        // Display a generic error message to the user
+        alert("Network error. Please try again later.");
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.error("Request error:", error.message);
+        // Display a generic error message to the user
+        alert("An error occurred. Please try again later.");
+      }
     }
   };
 
