@@ -8,16 +8,14 @@ The env var CI is currently set to false in github actions so won't fail if warn
 * ~~Add copyright to front page (MS/HashiCorp)~~
 * ~~Handle Browser back/forward button events~~
 * Set up function for submit email button
+    * ~~Front end form~~
     * Set up google cloud
     * Create firebase db to store emails
     * Send details to db
     * Set up email verification
-* Set up function for submit email button
-* ~~Front end form~~
-    * Set up google cloud
-    * Create firebase db to store emails
-    * Send details to db
-    * Set up email verification
+* Get tests working properly
+* Create Logo
+* Set up SEO
 * Set up blog space
     * ~~Set up MVP~~
     * ~~Redo banner on blog pages~~
@@ -28,16 +26,14 @@ The env var CI is currently set to false in github actions so won't fail if warn
 * ~~PoC for top website features~~
 * ~~Set up domain properly~~
 * ~~Set up domain properly~~
-* Upgrade GA to newest version
-    * Add GA to all pages
-* Finish terminal pages
+* ~~Upgrade GA to newest version~~
+    * ~~Add GA to all pages~~
 * ~~Fix mobile view render~~
 * ~~Link socials~~
-* Create Logo
-* Set up SEO
 * ~~Convert to using nvm for node package management~~
 * Increase test coverage
-
+* Increase Coverage of GA
+* Finish terminal pages
 
 # Workflow Status
 
