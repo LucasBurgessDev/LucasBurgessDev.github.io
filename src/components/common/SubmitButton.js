@@ -51,7 +51,15 @@ const ContactBox = () => {
           lastName: event.target.elements.lastName.value,
           email: event.target.elements.email.value,
         },
-        { withCredentials: true }
+        {
+          headers: {
+            "Cache-Control": "no-cache",
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Access-Control-Allow-Origin": "*",
+          },
+          withCredentials: true,
+          crossDomain: true
+        }
       );
 
       console.log("Cloud Function response:", response.data);
