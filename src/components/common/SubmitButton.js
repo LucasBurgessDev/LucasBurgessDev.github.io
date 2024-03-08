@@ -44,7 +44,7 @@ const ContactBox = () => {
       // Additional form submission logic...
 
       // Send data to Cloud Function endpoint
-      const response = await axios.post(
+      const response = await axios.options(
         "https://user-write-7hptrwqgna-nw.a.run.app",
         {
           firstName: event.target.elements.firstName.value,
