@@ -50,7 +50,8 @@ const ContactBox = () => {
           firstName: event.target.elements.firstName.value,
           lastName: event.target.elements.lastName.value,
           email: event.target.elements.email.value,
-        }
+        },
+        { withCredentials: true }
       );
 
       console.log("Cloud Function response:", response.data);
