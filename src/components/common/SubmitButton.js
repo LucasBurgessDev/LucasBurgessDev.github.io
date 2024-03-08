@@ -56,9 +56,10 @@ const ContactBox = () => {
             "Cache-Control": "no-cache",
             "Content-Type": "application/x-www-form-urlencoded",
             "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials":true,
+            "Access-Control-Request-Method": "POST"
           },
-          withCredentials: true,
-          crossDomain: true
+          crossDomain: true,
         }
       );
 
