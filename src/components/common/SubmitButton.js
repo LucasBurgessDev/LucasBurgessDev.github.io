@@ -55,9 +55,9 @@ const ContactBox = () => {
           headers: {
             "Cache-Control": "no-cache",
             "Content-Type": "application/x-www-form-urlencoded",
-            "Access-Control-Allow-Origin": "*",
+/*             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Credentials":true,
-            "Access-Control-Request-Method": "POST"
+            "Access-Control-Request-Method": "POST" */
           },
           crossDomain: true,
         }
