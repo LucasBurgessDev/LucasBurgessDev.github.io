@@ -44,17 +44,18 @@ const ContactBox = () => {
       // Additional form submission logic...
 
       // Send data to Cloud Function endpoint
+      // improve with https://www.freecodecamp.org/news/axios-react-how-to-make-get-post-and-delete-api-requests/
       const response = await axios.post(
         "https://user-write-7hptrwqgna-nw.a.run.app",
         {
-          firstName: event.target.elements.firstName.value,
-          lastName: event.target.elements.lastName.value,
+          first_name: event.target.elements.firstName.value,
+          last_name: event.target.elements.lastName.value,
           email: event.target.elements.email.value,
         },
         {
           headers: {
             "Content-Type": "application/json",
-/*             "Cache-Control": "no-cache",
+            /*             "Cache-Control": "no-cache",
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Credentials": true,
             "Access-Control-Request-Method": "POST", */
