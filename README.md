@@ -9,18 +9,21 @@ The env var CI is currently set to false in github actions so won't fail if warn
 * ~~Handle Browser back/forward button events~~
 * Set up function for submit email button
     * ~~Front end form~~
-    * Set up google cloud
-    * Create firebase db to store emails
-    * Send details to db
+    * ~~Set up google cloud~~
+    * ~~Create firebase db to store emails~~
+    * ~~Send details to db~~
+    * Return positve response on form submission and clear fields and close box
     * Set up email verification
 * Get tests working properly
+* Remove white line at top on mobile
 * Create Logo
 * Set up SEO
 * Set up blog space
     * ~~Set up MVP~~
     * ~~Redo banner on blog pages~~
     * ~~Add styling like home page~~
-    * Create db to store blog entries
+    * ~~Create db to store blog entries~~
+    * Create front end code to collect
     * Add blog entries to home page
     * ~~Add read time~~
 * ~~PoC for top website features~~
@@ -32,7 +35,7 @@ The env var CI is currently set to false in github actions so won't fail if warn
 * ~~Link socials~~
 * ~~Convert to using nvm for node package management~~
 * Increase test coverage
-* Increase Coverage of GA
+* ~~Increase Coverage of GA~~
 * Finish terminal pages
 
 # Workflow Status
