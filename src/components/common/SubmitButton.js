@@ -52,7 +52,8 @@ const ContactBox = ({ setShowContactBox }) => {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Credentials": true,
             "Access-Control-Request-Method": "POST", */
-      const response = await axios.post(
+      const response =
+       await axios.post(
         "https://user-write-7hptrwqgna-nw.a.run.app",
         {
           first_name: event.target.elements.firstName.value,
@@ -64,7 +65,7 @@ const ContactBox = ({ setShowContactBox }) => {
           crossDomain: true,
         }
       );
-
+ 
       console.log("Cloud Function response:", response.data);
       // Return a success message to the user
       alert("Data submitted successfully, thank you!");
@@ -76,6 +77,7 @@ const ContactBox = ({ setShowContactBox }) => {
 
       // Close the input form
       setShowContactBox(false);
+
     } catch (error) {
       // Handle errors
       if (error.response) {
