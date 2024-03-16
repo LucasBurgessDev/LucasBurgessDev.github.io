@@ -4,10 +4,6 @@ import axios from "axios"; // Import axios for making HTTP requests
 
 const YourComponent = () => {
   const [showContactBox, setShowContactBox] = useState(false);
-  {
-    showContactBox && <ContactBox setShowContactBox={setShowContactBox} />;
-  }
-
 
   const handleButtonClick = () => {
     setShowContactBox(!showContactBox);
@@ -24,7 +20,7 @@ const YourComponent = () => {
       <button onClick={handleButtonClick} className="contact-button">
         Contact Me
       </button>
-      {showContactBox && <ContactBox />}
+      {showContactBox && <ContactBox setShowContactBox={setShowContactBox} />}
     </div>
   );
 };
