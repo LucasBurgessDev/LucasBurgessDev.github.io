@@ -16,17 +16,12 @@ The env var CI is currently set to false in github actions so won't fail if warn
 * ~~Link socials~~
 * ~~Convert to using nvm for node package management~~
 * ~~Increase Coverage of GA~~
-* Set up function for submit email button
+* ~~Set up function for submit email button~~
     * ~~Front end form~~
     * ~~Set up google cloud~~
     * ~~Create firebase db to store emails~~
     * ~~Send details to db~~
-    * Return positve response on form submission and clear fields and close box
-    * Set up email verification
-* Get tests working properly
-* Remove white line at top on mobile
-* Create Logo
-* Set up SEO
+    * ~~Return positive response on form submission and clear fields and close box~~
 * Set up blog space
     * ~~Set up MVP~~
     * ~~Redo banner on blog pages~~
@@ -34,10 +29,13 @@ The env var CI is currently set to false in github actions so won't fail if warn
     * ~~Create db to store blog entries~~
     * ~~Add read time~~
     * Create front end code to collect
-    * Add blog entries to home page
-
+    * Add blog entries to home page    
+* Set up email verification
+* Get tests working properly
+* Remove white line at top on mobile
+* Create Logo
+* Set up SEO
 * Increase test coverage
-
 * Finish terminal pages
 * Google API Key move to secrets
 
