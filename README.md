@@ -7,22 +7,6 @@ The env var CI is currently set to false in github actions so won't fail if warn
 
 * ~~Add copyright to front page (MS/HashiCorp)~~
 * ~~Handle Browser back/forward button events~~
-* Set up function for submit email button
-    * ~~Front end form~~
-    * Set up google cloud
-    * Create firebase db to store emails
-    * Send details to db
-    * Set up email verification
-* Get tests working properly
-* Create Logo
-* Set up SEO
-* Set up blog space
-    * ~~Set up MVP~~
-    * ~~Redo banner on blog pages~~
-    * ~~Add styling like home page~~
-    * Create db to store blog entries
-    * Add blog entries to home page
-    * ~~Add read time~~
 * ~~PoC for top website features~~
 * ~~Set up domain properly~~
 * ~~Set up domain properly~~
@@ -31,9 +15,29 @@ The env var CI is currently set to false in github actions so won't fail if warn
 * ~~Fix mobile view render~~
 * ~~Link socials~~
 * ~~Convert to using nvm for node package management~~
+* ~~Increase Coverage of GA~~
+* ~~Set up function for submit email button~~
+    * ~~Front end form~~
+    * ~~Set up google cloud~~
+    * ~~Create firebase db to store emails~~
+    * ~~Send details to db~~
+    * ~~Return positive response on form submission and clear fields and close box~~
+* Set up blog space
+    * ~~Set up MVP~~
+    * ~~Redo banner on blog pages~~
+    * ~~Add styling like home page~~
+    * ~~Create db to store blog entries~~
+    * ~~Add read time~~
+    * Create front end code to collect
+    * Add blog entries to home page    
+* Set up email verification
+* Get tests working properly
+* Remove white line at top on mobile
+* Create Logo
+* Set up SEO
 * Increase test coverage
-* Increase Coverage of GA
 * Finish terminal pages
+* Google API Key move to secrets
 
 # Workflow Status
 

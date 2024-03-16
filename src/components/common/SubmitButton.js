@@ -4,6 +4,10 @@ import axios from "axios"; // Import axios for making HTTP requests
 
 const YourComponent = () => {
   const [showContactBox, setShowContactBox] = useState(false);
+  {
+    showContactBox && <ContactBox setShowContactBox={setShowContactBox} />;
+  }
+
 
   const handleButtonClick = () => {
     setShowContactBox(!showContactBox);
@@ -25,7 +29,7 @@ const YourComponent = () => {
   );
 };
 
-const ContactBox = () => {
+const ContactBox = ({ setShowContactBox }) => {
   const scrollToContactBox = () => {
     const contactBoxElement = document.getElementById("contact-box");
     contactBoxElement.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -55,9 +59,9 @@ const ContactBox = () => {
       const response = await axios.post(
         "https://user-write-7hptrwqgna-nw.a.run.app",
         {
-          "first_name": event.target.elements.firstName.value,
-          "last_name": event.target.elements.lastName.value,
-          "email": event.target.elements.email.value,
+          first_name: event.target.elements.firstName.value,
+          last_name: event.target.elements.lastName.value,
+          email: event.target.elements.email.value,
         },
         {
           options,
@@ -66,6 +70,16 @@ const ContactBox = () => {
       );
 
       console.log("Cloud Function response:", response.data);
+      // Return a success message to the user
+      alert("Data submitted successfully, thank you!");
+
+      // Clear input fields
+      event.target.elements.firstName.value = "";
+      event.target.elements.lastName.value = "";
+      event.target.elements.email.value = "";
+
+      // Close the input form
+      setShowContactBox(false);
     } catch (error) {
       // Handle errors
       if (error.response) {
