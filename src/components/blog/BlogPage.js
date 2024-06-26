@@ -4,6 +4,7 @@ import BlogList from "./BlogList.js";
 import EmptyList from "../common/EmptyList.js";
 import SearchBar from "../common/SearchBar.js";
 import { blogList } from "../../config/data.js";
+//import { blogList } from "../../config/get_data.js";
 
 const BlogPage = () => {
   const [blogs, setBlogs] = useState(blogList);
@@ -35,7 +36,7 @@ const BlogPage = () => {
           handleSearchKey={handleSearchKey}
         />
       </div>
-      <div className="container">
+      <div className="blog_post_container">
         <div className="blog_posts">
           {/* Render Blog List or No Results Message */}
           {blogs.length ? (

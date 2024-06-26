@@ -1,8 +1,9 @@
 .searchBar-wrap {
   width: fit-content;
-  margin: 0 auto 4rem; /* Remove top margin */
+  margin: 0 auto 0rem; /* Remove top margin */
   padding: 2rem;
   border-radius: 4px;
+  /* need to add to this to stop search bar going on forrrreverrr */
 }
 
 .searchBar-wrap form {

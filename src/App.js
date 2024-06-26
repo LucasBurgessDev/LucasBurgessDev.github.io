@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import "./App.css";
 import NavBar from "./components/common/NavBar";
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
