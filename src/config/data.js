@@ -15,7 +15,7 @@ export const blogList = [
     authorName: "Feeling Optimistic",
     authorAvatar: "/src/images/Luke Headshot.jpeg",
     createdAt: "June 21, 2024",
-    cover: "/src/images/Luke Deck chair Twickenham Pic.jpeg",
+    cover: "../../images/Luke Deck chair Twickenham Pic.jpeg",
   },
   /*   {
     id: 2,

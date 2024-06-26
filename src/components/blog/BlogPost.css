@@ -4,6 +4,11 @@
   padding: 2rem 1rem; /* Adjusted padding for more top and bottom padding */
 }
 
+img[src="null"] {
+  display: none;
+  size: 1rem;
+}
+
 .blog-goBack {
   text-decoration: none;
   font-size: 0.8rem;

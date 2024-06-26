@@ -35,22 +35,21 @@ function BlogPost() {
             <p>
               Estimated Read Time:{" "}
               <CalculateReadTime
-                //content={concatanate(blog.para1, blog.para2, blog.para3, blog.para4)}
-                content={blog.para1}
+                content={blog.para1.concat(blog.para2, blog.para3, blog.para4)}
+                //content={blog.para1}
               />{" "}
               minutes
             </p>
           </header>
-          {/* TODO: if no image ignore */}
-          <img src={blog.cover} alt="cover" />
+          <img src={blog.cover} />
           <p className="blog-para">{blog.para1}</p>
-          <img src={blog.para1_image} alt="cover" />
+          <img src={blog.para1_image} />
           <p className="blog-para">{blog.para2}</p>
-          <img src={blog.para2_image} alt="cover" />
+          <img src={blog.para2_image} />
           <p className="blog-para">{blog.para3}</p>
-          <img src={blog.para3_image} alt="cover" />
+          <img src={blog.para3_image} />
           <p className="blog-para">{blog.para4}</p>
-          <img src={blog.para4_image} alt="cover" />
+          <img src={blog.para4_image} />
         </div>
       ) : (
         <EmptyList />
