@@ -14,9 +14,15 @@ const BlogPage = () => {
   const apiUrl = "https://get-blog-info-7hptrwqgna-nw.a.run.app";
 
   // Define fetchBlogs function
+  const options = {
+    headers: { "Content-Type": "application/json" },
+  };
   const fetchBlogs = async () => {
     try {
-      const response = await axios.get(apiUrl);
+      const response = await axios.get(apiUrl, {
+        options,
+        crossDomain: true,
+      });
       setBlogs(response.data);
     } catch (error) {
       console.error("Error fetching blog data:", error);
