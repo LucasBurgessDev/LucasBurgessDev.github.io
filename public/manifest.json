@@ -3,18 +3,18 @@
   "name": "Portfolio created by LucasBurgessDev",
   "icons": [
     {
-      "src": "./images/github.png",
+      "src": "./images/Luke Headshot.jpeg",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/png"
+      "type": "image/jpeg"
     },
     {
-      "src": "./images/github.png",
-      "type": "image/png",
+      "src": "./images/Luke Headshot.jpeg",
+      "type": "image/jpeg",
       "sizes": "192x192"
     },
     {
-      "src": "./images/github.png",
-      "type": "image/png",
+      "src": "./images/Luke Headshot.jpeg",
+      "type": "image/jpeg",
       "sizes": "512x512"
     }
   ],

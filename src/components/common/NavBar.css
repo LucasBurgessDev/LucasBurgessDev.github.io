@@ -22,6 +22,7 @@ box-sizing: border-box;
     justify-content: center;
     align-items: center;
     height: 80px;
+    vertical-align: top;
 }
 
 .navbar-logo {

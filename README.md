@@ -28,11 +28,16 @@ The env var CI is currently set to false in github actions so won't fail if warn
     * ~~Add styling like home page~~
     * ~~Create db to store blog entries~~
     * ~~Add read time~~
-    * Create front end code to collect
-    * Add blog entries to home page    
+    * Create front end code to collect blogs from db
+    * Work it out for image hosting
+    * ~~Add blog entries to home page~~    
+* Update all images used
+    * add proper image for no results
+    * ignore images if not passed
+* Handle error on homepage website links where no internet connection
 * Set up email verification
 * Get tests working properly
-* Remove white line at top on mobile
+* ~~Remove white line at top on mobile~~
 * Create Logo
 * Set up SEO
 * Increase test coverage

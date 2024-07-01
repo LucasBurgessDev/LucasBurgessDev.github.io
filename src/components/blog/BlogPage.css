@@ -16,8 +16,8 @@
         background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
 }
 
-.container {
-    padding-top: 50px;
+.blog_post_container {
+    padding-top: 20px;
     width: 90%;
     height: fit-content;
     display: flex;
