@@ -1,10 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import EmptyList from "../common/EmptyList.js";
-import { blogList } from "../../config/data.js";
+import { blogList as rawBlogList } from "../../config/data.js";
+//import { blogList } from "../../config/get_data.js";
 import Chip from "../common/Chip.js";
 import "./BlogPost.css";
 import { CalculateReadTime } from "./WordCount.js";
+import lukeHeadshot from "../../images/Luke Headshot.jpg";
+import lukeDeckChair from "../../images/Luke Deck chair Twickenham Pic.jpeg";
+
+// Image mapping
+const imageMap = {
+  lukeHeadshot,
+  lukeDeckChair,
+};
+
+// Map the blogList to include actual image paths
+const blogList = rawBlogList.map(blog => ({
+  ...blog,
+  authorAvatar: imageMap[blog.authorAvatar], // Map the identifier to the actual image
+  cover: imageMap[blog.cover], // Map the identifier to the actual image
+}));
 
 
 function BlogPost() {
