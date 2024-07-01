@@ -16,8 +16,8 @@ function HeroSection() {
           muted
         />
         {/* <img src={Image} alt="background" /> */}
-        <h1>ANALYTICS AWAITS</h1>
-        <p>Dive into the data</p>
+        <h1>Insights Inside</h1>
+        {/* <p></p> */}
         <div className="hero-btns">
           <Button
             className="btns"

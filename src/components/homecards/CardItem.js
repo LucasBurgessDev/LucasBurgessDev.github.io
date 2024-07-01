@@ -13,7 +13,6 @@ function carditem(props) {
             >
               <img
                 src={props.src}
-                alt="Travel Image"
                 className="cards__item__img"
               />
               <Chip label={props.label} />

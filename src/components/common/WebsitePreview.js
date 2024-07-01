@@ -9,6 +9,7 @@ const WebsitePreview = ({ url }) => {
         width="600"
         height="400"
         allowFullScreen
+        //TODO: how to set the background when no internet
       />
     </div>
   );

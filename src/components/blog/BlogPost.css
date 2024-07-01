@@ -4,6 +4,11 @@
   padding: 2rem 1rem; /* Adjusted padding for more top and bottom padding */
 }
 
+img[src="null"] {
+  display: none;
+  size: 1rem;
+}
+
 .blog-goBack {
   text-decoration: none;
   font-size: 0.8rem;
@@ -42,9 +47,9 @@
   margin: 1.5rem; /* Increased margin around subCategory items */
 }
 
-.blog-desc {
+.blog-para {
   padding: 1.5rem; /* Increased padding around description */
   margin-top: 1.5rem;
-  border: 1px solid #e0e0e0;
+  /*border: 1px solid #e0e0e0;*/
   margin-bottom: 2rem; /* Increased margin between description blocks */
 }
