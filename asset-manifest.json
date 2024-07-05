@@ -1,21 +1,19 @@
 {
   "files": {
     "main.css": "/static/css/main.3c4e5729.css",
-    "main.js": "/static/js/main.0300d7a2.js",
+    "main.js": "/static/js/main.7d042a27.js",
     "static/js/592.9df77922.chunk.js": "/static/js/592.9df77922.chunk.js",
     "static/media/video-5.mp4": "/static/media/video-5.910e8a452197d2018756.mp4",
     "static/media/img-2.jpg": "/static/media/img-2.cbdbf90a167f6673c66b.jpg",
-    "static/media/Luke Deck chair Twickenham Pic.jpeg": "/static/media/Luke Deck chair Twickenham Pic.729f3de5d49579197b51.jpeg",
     "static/media/github.png": "/static/media/github.cc9e7c910fc66570180c.png",
-    "static/media/Luke Headshot.jpg": "/static/media/Luke Headshot.22db07c926bc94d9a942.jpg",
     "static/media/terraform.svg": "/static/media/terraform.424a952aabca174ea7b8e06a3629c05f.svg",
     "index.html": "/index.html",
     "main.3c4e5729.css.map": "/static/css/main.3c4e5729.css.map",
-    "main.0300d7a2.js.map": "/static/js/main.0300d7a2.js.map",
+    "main.7d042a27.js.map": "/static/js/main.7d042a27.js.map",
     "592.9df77922.chunk.js.map": "/static/js/592.9df77922.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3c4e5729.css",
-    "static/js/main.0300d7a2.js"
+    "static/js/main.7d042a27.js"
   ]
 }
