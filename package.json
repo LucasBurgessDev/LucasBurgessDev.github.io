@@ -50,7 +50,7 @@
   "devDependencies": {
     "@testing-library/react": "^11.2.7",
     "file-loader": "^6.1.1",
-    "gh-pages": "^3.2.3",
+    "gh-pages": "^5.0.0",
     "url-loader": "^4.1.1"
   },
   "jest": {
