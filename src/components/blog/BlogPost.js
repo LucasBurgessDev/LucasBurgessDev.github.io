@@ -1,38 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import EmptyList from "../common/EmptyList.js";
-import { blogList as rawBlogList } from "../../config/data.js";
-//import { blogList } from "../../config/get_data.js";
 import Chip from "../common/Chip.js";
 import "./BlogPost.css";
 import { CalculateReadTime } from "./WordCount.js";
-import lukeHeadshot from "../../images/Luke Headshot.jpg";
-import lukeDeckChair from "../../images/Luke Deck chair Twickenham Pic.jpeg";
-
-// Image mapping
-const imageMap = {
-  lukeHeadshot,
-  lukeDeckChair,
-};
-
-// Map the blogList to include actual image paths
-const blogList = rawBlogList.map(blog => ({
-  ...blog,
-  authorAvatar: imageMap[blog.authorAvatar], // Map the identifier to the actual image
-  cover: imageMap[blog.cover], // Map the identifier to the actual image
-}));
+import axios from "axios";
 
 
 function BlogPost() {
   const { id } = useParams();
-  const [blog, setBlog] = useState(null);
-  
-  useEffect(() => {
-    let blog = blogList.find((blog) => blog.id === parseInt(id));
-    if (blog) {
-      setBlog(blog);
+  const [blog, setBlogs] = useState([]);
+  const apiUrl = "https://get-blog-info-7hptrwqgna-nw.a.run.app";
+  //const apiUrl = "http://localhost:5000/get_blog_info";
+
+  // Define fetchBlogs function
+  const options = {
+    headers: { "Content-Type": "application/json" },
+  };
+  const fetchBlogs = async () => {
+    try {
+      const response = await axios.get(apiUrl + "?blog_id=" + parseInt(id), {
+        options,
+        crossDomain: true,
+      });
+      setBlogs(response.data);
+    } catch (error) {
+      console.error("Error fetching blog data:", error);
     }
-  }, []);
+  };
+
+  useEffect(() => {
+    fetchBlogs(); // Fetch blogs when component mounts
+  }, []); // Empty dependency array ensures this effect runs once
 
   return (
     <>
@@ -51,7 +50,15 @@ function BlogPost() {
             <p>
               Estimated Read Time:{" "}
               <CalculateReadTime
-                content={blog.para1.concat(blog.para2, blog.para3, blog.para4)}
+                content={
+                  blog.para1 +
+                  " " +
+                  blog.para2 +
+                  " " +
+                  blog.para3 +
+                  " " +
+                  blog.para4
+                }
                 //content={blog.para1}
               />{" "}
               minutes

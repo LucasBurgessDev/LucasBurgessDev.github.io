@@ -4,14 +4,12 @@ import "./BlogPage.css";
 import BlogList from "./BlogList.js";
 import EmptyList from "../common/EmptyList.js";
 import SearchBar from "../common/SearchBar.js";
-//import { blogList as rawBlogList } from "../../config/data.js";
-//import lukeHeadshot from "../../images/Luke Headshot.jpg";
-//import lukeDeckChair from "../../images/Luke Deck chair Twickenham Pic.jpeg";
 
 const BlogPage = () => {
   const [blogs, setBlogs] = useState([]);
   const [searchKey, setSearchKey] = useState("");
   const apiUrl = "https://get-blog-info-7hptrwqgna-nw.a.run.app";
+  //const apiUrl = "http://localhost:5000/get_blog_info";
 
   // Define fetchBlogs function
   const options = {
