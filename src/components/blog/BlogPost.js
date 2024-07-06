@@ -9,8 +9,8 @@ import axios from "axios";
 function BlogPost() {
   const { id } = useParams();
   const [blog, setBlog] = useState(null); // Initialize as null
-  //const apiUrl = "https://get-blog-info-7hptrwqgna-nw.a.run.app";
-   const apiUrl = "http://localhost:5000/get_blog_info";
+  const apiUrl = "https://get-blog-info-7hptrwqgna-nw.a.run.app";
+  //const apiUrl = "http://localhost:5000/get_blog_info";
 
   const fetchBlog = async () => {
     try {
