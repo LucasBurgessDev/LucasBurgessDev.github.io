@@ -5,10 +5,12 @@ import Chip from "../common/Chip.js";
 import "./BlogPost.css";
 import { CalculateReadTime } from "./WordCount.js";
 import axios from "axios";
+import { Bars } from "react-loader-spinner";
 
 function BlogPost() {
   const { id } = useParams();
   const [blog, setBlog] = useState(null); // Initialize as null
+  const [loading, setLoading] = useState(true); // Initialize loading state
   const apiUrl = "https://get-blog-info-7hptrwqgna-nw.a.run.app";
   //const apiUrl = "http://localhost:5000/get_blog_info";
 
@@ -19,8 +21,10 @@ function BlogPost() {
         crossDomain: true,
       });
       setBlog(response.data[0]); // Always access the first item in the array
+      setLoading(false); // Set loading to false after data is fetched
     } catch (error) {
       console.error("Error fetching blog data:", error);
+      setLoading(false); // Set loading to false even if there is an error
     }
   };
 
@@ -30,7 +34,19 @@ function BlogPost() {
 
   return (
     <>
-      {blog ? (
+      {loading ? (
+        <div className="loading-spinner">
+          <Bars
+            visible={true}
+            height="300"
+            width="300"
+            color="#000000"
+            ariaLabel="bars-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+          />
+        </div>
+      ) : blog ? (
         <div className="blog-wrap">
           <header>
             <h1>{blog.title}</h1>
