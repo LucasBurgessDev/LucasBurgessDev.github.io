@@ -6,10 +6,9 @@ import "./BlogPost.css";
 import { CalculateReadTime } from "./WordCount.js";
 import axios from "axios";
 
-
 function BlogPost() {
   const { id } = useParams();
-  const [blog, setBlogs] = useState([]);
+  const [blog, setBlog] = useState(null); // Initialize as null or an empty object
   const apiUrl = "https://get-blog-info-7hptrwqgna-nw.a.run.app";
   //const apiUrl = "http://localhost:5000/get_blog_info";
 
@@ -17,20 +16,20 @@ function BlogPost() {
   const options = {
     headers: { "Content-Type": "application/json" },
   };
-  const fetchBlogs = async () => {
+  const fetchBlog = async () => {
     try {
       const response = await axios.get(apiUrl + "?blog_id=" + parseInt(id), {
         options,
         crossDomain: true,
       });
-      setBlogs(response.data);
+      setBlog(response.data);
     } catch (error) {
       console.error("Error fetching blog data:", error);
     }
   };
 
   useEffect(() => {
-    fetchBlogs(); // Fetch blogs when component mounts
+    fetchBlog(); // Fetch blog when component mounts
   }, []); // Empty dependency array ensures this effect runs once
 
   return (
