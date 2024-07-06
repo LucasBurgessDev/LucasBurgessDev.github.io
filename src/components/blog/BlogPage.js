@@ -4,10 +4,12 @@ import "./BlogPage.css";
 import BlogList from "./BlogList.js";
 import EmptyList from "../common/EmptyList.js";
 import SearchBar from "../common/SearchBar.js";
+import { Bars } from "react-loader-spinner";
 
 const BlogPage = () => {
   const [blogs, setBlogs] = useState([]);
   const [searchKey, setSearchKey] = useState("");
+  const [loading, setLoading] = useState(true); // Initialize loading state
   const apiUrl = "https://get-blog-info-7hptrwqgna-nw.a.run.app";
   //const apiUrl = "http://localhost:5000/get_blog_info";
 
@@ -22,8 +24,10 @@ const BlogPage = () => {
         crossDomain: true,
       });
       setBlogs(response.data);
+      setLoading(false); // Set loading to false after data is fetched
     } catch (error) {
       console.error("Error fetching blog data:", error);
+      setLoading(false); // Set loading to false even if there is an error
     }
   };
 
@@ -58,7 +62,18 @@ const BlogPage = () => {
       </div>
       <div className="blog_post_container">
         <div className="blog_posts">
-          {blogs.length ? (
+          {loading ? (
+            //<div className="loading">Loading...</div> // Loading screen
+            <Bars
+              visible={true}
+              height="300"
+              width="300"
+              color="#000000"
+              ariaLabel="bars-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+            />
+          ) : blogs.length ? (
             <BlogList blogs={blogs} />
           ) : (
             <EmptyList message="No results found." />

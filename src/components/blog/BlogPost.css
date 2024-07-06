@@ -53,3 +53,8 @@ img[src="null"] {
   /*border: 1px solid #e0e0e0;*/
   margin-bottom: 2rem; /* Increased margin between description blocks */
 }
+
+.ThreeCircles {
+  margin: 200px;
+  padding: 200px;
+}
