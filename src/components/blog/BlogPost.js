@@ -18,7 +18,7 @@ function BlogPost() {
         headers: { "Content-Type": "application/json" },
         crossDomain: true,
       });
-      setBlog(response.data);
+      setBlog(response.data[0]); // Always access the first item in the array
     } catch (error) {
       console.error("Error fetching blog data:", error);
     }
