@@ -15,9 +15,9 @@ function BlogItem({
     para3_image,
     para4_image,
     title,
-    createdAt,
-    authorName,
-    authorAvatar,
+    created_on,
+    author_name,
+    author_avatar,
     category,
     cover,
   },
@@ -32,10 +32,10 @@ function BlogItem({
         <p className="blogItem-desc">{para1}</p>
         <footer>
           <div className="blogItem-author">
-            <img src={authorAvatar} alt="avatar" />
+            <img src={author_avatar} alt="avatar" />
             <div>
-              <h6>{authorName}</h6>
-              <p>{createdAt}</p>
+              <h6>{author_name}</h6>
+              <p>{created_on}</p>
             </div>
           </div>
         </footer>

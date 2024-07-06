@@ -8,18 +8,14 @@ import axios from "axios";
 
 function BlogPost() {
   const { id } = useParams();
-  const [blog, setBlog] = useState(null); // Initialize as null or an empty object
-  const apiUrl = "https://get-blog-info-7hptrwqgna-nw.a.run.app";
-  //const apiUrl = "http://localhost:5000/get_blog_info";
+  const [blog, setBlog] = useState(null); // Initialize as null
+  //const apiUrl = "https://get-blog-info-7hptrwqgna-nw.a.run.app";
+   const apiUrl = "http://localhost:5000/get_blog_info";
 
-  // Define fetchBlogs function
-  const options = {
-    headers: { "Content-Type": "application/json" },
-  };
   const fetchBlog = async () => {
     try {
       const response = await axios.get(apiUrl + "?blog_id=" + parseInt(id), {
-        options,
+        headers: { "Content-Type": "application/json" },
         crossDomain: true,
       });
       setBlog(response.data);
@@ -39,13 +35,14 @@ function BlogPost() {
           <header>
             <h1>{blog.title}</h1>
             <div className="blog-subCategory">
-              {blog.subCategory.map((category, i) => (
-                <div key={i}>
-                  <Chip label={category} />
-                </div>
-              ))}
+              {blog.sub_category &&
+                blog.sub_category.map((category, i) => (
+                  <div key={i}>
+                    <Chip label={category} />
+                  </div>
+                ))}
             </div>
-            <p className="blog-date">Published {blog.createdAt}</p>
+            <p className="blog-date">Published {blog.created_on}</p>
             <p>
               Estimated Read Time:{" "}
               <CalculateReadTime
@@ -58,20 +55,19 @@ function BlogPost() {
                   " " +
                   blog.para4
                 }
-                //content={blog.para1}
               />{" "}
               minutes
             </p>
           </header>
-          <img src={blog.cover} />
+          <img src={blog.cover} alt="Cover" />
           <p className="blog-para">{blog.para1}</p>
-          <img src={blog.para1_image} />
+          {blog.para1_image && <img src={blog.para1_image} alt="Para1" />}
           <p className="blog-para">{blog.para2}</p>
-          <img src={blog.para2_image} />
+          {blog.para2_image && <img src={blog.para2_image} alt="Para2" />}
           <p className="blog-para">{blog.para3}</p>
-          <img src={blog.para3_image} />
+          {blog.para3_image && <img src={blog.para3_image} alt="Para3" />}
           <p className="blog-para">{blog.para4}</p>
-          <img src={blog.para4_image} />
+          {blog.para4_image && <img src={blog.para4_image} alt="Para4" />}
         </div>
       ) : (
         <EmptyList />
