@@ -58,20 +58,20 @@ function Cards() {
               {/* <WebsitePreview url="https://www.wikipedia.org/" /> */}
               {/* <WebsitePreview url="https://medium.com/@hammadrao891/passing-data-via-links-in-react-a-guide-to-effective-data-transfer-1e0b030e2a12" /> */}
               <iframe
-                width="560"
-                height="315"
+                //width="560"
+                //height="315"
                 src="https://www.youtube.com/embed/MV1qaFv4VUg?si=WAgrdLdfNov70Hwu"
                 title="Golf Data"
-                frameborder="0"
+                frameborder="20"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen
               ></iframe>
               <iframe
-                width="560"
-                height="315"
+                //width="560"
+                //height="315"
                 src="https://www.youtube.com/embed/PeMlggyqz0Y?si=nGTAbs7XkIxdtX77"
                 title="Golf Data"
-                frameborder="0"
+                frameborder="20"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen
               ></iframe>
