@@ -17,7 +17,7 @@ function HeroSection() {
         />
         {/* <img src={Image} alt="background" /> */}
         <h1>Insights Inside</h1>
-        {/* <p></p> */}
+        <p>A collection of my thoughts on technology, worldly goings on and life beyond the shire.</p>
         <div className="hero-btns">
           <Button
             className="btns"

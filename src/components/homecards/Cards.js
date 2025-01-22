@@ -12,7 +12,7 @@ import ImageLukeDeckChair from '../../images/Luke Deck chair Twickenham Pic.jpeg
 function Cards() {
     return (
       <div className="cards">
-        <h1>Highlights</h1>
+        <h1>Featured</h1>
         <div className="cards__container">
           <div className="cards__wrapper">
             <ul className="cards__items">
@@ -30,6 +30,15 @@ function Cards() {
                 //path="/Projects"
                 path="/Blog/2"
               />
+              <iframe
+                //width="560"
+                //height="315"
+                src="https://www.youtube.com/embed/MV1qaFv4VUg?si=WAgrdLdfNov70Hwu"
+                title="Golf Data"
+                frameborder="100"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
             </ul>
             {/*                          <ul className="cards__items">
               <CardItem
@@ -54,28 +63,28 @@ function Cards() {
                 path="/Blog"
               />
             </ul>  */}
-            <ul className="cards__items">
-              {/* <WebsitePreview url="https://www.wikipedia.org/" /> */}
-              {/* <WebsitePreview url="https://medium.com/@hammadrao891/passing-data-via-links-in-react-a-guide-to-effective-data-transfer-1e0b030e2a12" /> */}
+            {/*             <ul className="cards__items">
+              <WebsitePreview url="https://www.wikipedia.org/" />
+              <WebsitePreview url="https://medium.com/@hammadrao891/passing-data-via-links-in-react-a-guide-to-effective-data-transfer-1e0b030e2a12" />
               <iframe
-                width="560"
-                height="315"
+                //width="560"
+                //height="315"
                 src="https://www.youtube.com/embed/MV1qaFv4VUg?si=WAgrdLdfNov70Hwu"
                 title="Golf Data"
-                frameborder="0"
+                frameborder="100"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen
               ></iframe>
               <iframe
-                width="560"
-                height="315"
+                //width="560"
+                //height="315"
                 src="https://www.youtube.com/embed/PeMlggyqz0Y?si=nGTAbs7XkIxdtX77"
                 title="Golf Data"
-                frameborder="0"
+                frameborder="20"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen
               ></iframe>
-            </ul>
+            </ul> */}
           </div>
         </div>
       </div>

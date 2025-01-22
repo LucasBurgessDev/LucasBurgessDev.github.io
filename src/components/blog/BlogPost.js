@@ -5,7 +5,7 @@ import Chip from "../common/Chip.js";
 import "./BlogPost.css";
 import { CalculateReadTime } from "./WordCount.js";
 import axios from "axios";
-import { Bars } from "react-loader-spinner";
+import { TailSpin } from "react-loader-spinner";
 
 function BlogPost() {
   const { id } = useParams();
@@ -36,54 +36,70 @@ function BlogPost() {
     <>
       {loading ? (
         <div className="loading-spinner">
-          <Bars
+          <TailSpin
             visible={true}
-            height="300"
-            width="300"
+            height="50"
+            width="50"
             color="#000000"
             ariaLabel="bars-loading"
-            wrapperStyle={{}}
-            wrapperClass=""
+            wrapperClass="TailSpin"
           />
         </div>
       ) : blog ? (
         <div className="blog-wrap">
           <header>
-            <h1>{blog.title}</h1>
+            <h1>{blog[0].title}</h1>
             <div className="blog-subCategory">
-              {blog.sub_category &&
-                blog.sub_category.map((category, i) => (
+              {blog[0].sub_category &&
+                blog[0].sub_category.map((category, i) => (
                   <div key={i}>
                     <Chip label={category} />
                   </div>
                 ))}
             </div>
-            <p className="blog-date">Published {blog.created_on}</p>
+            <p className="blog-date">Published {blog[0].created_on}</p>
             <p>
               Estimated Read Time:{" "}
               <CalculateReadTime
-                content={
-                  blog.para1 +
-                  " " +
-                  blog.para2 +
-                  " " +
-                  blog.para3 +
-                  " " +
-                  blog.para4
-                }
+                content={blog.reduce((acc, curr) => acc + curr.content, "")}
               />{" "}
               minutes
             </p>
           </header>
-          <img src={blog.cover} alt="Cover" />
-          <p className="blog-para">{blog.para1}</p>
-          {blog.para1_image && <img src={blog.para1_image} alt="Para1" />}
-          <p className="blog-para">{blog.para2}</p>
-          {blog.para2_image && <img src={blog.para2_image} alt="Para2" />}
-          <p className="blog-para">{blog.para3}</p>
-          {blog.para3_image && <img src={blog.para3_image} alt="Para3" />}
-          <p className="blog-para">{blog.para4}</p>
-          {blog.para4_image && <img src={blog.para4_image} alt="Para4" />}
+          <div className="blog-content">
+            {blog.map((item) => {
+              switch (item.object_type) {
+                case "introduction":
+                  return (
+                    <div className="introduction">
+                      <p>{item.content}</p>
+                    </div>
+                  );
+                case "body":
+                  return (
+                    <div className="body">
+                      <p>{item.content}</p>
+                    </div>
+                  );
+                case "image":
+                  return (
+                    <img
+                      src={item.content}
+                      alt="Blog Image"
+                      className="blog-image"
+                    />
+                  );
+                case "conclusion":
+                  return (
+                    <div className="conclusion">
+                      <p>{item.content}</p>
+                    </div>
+                  );
+                default:
+                  return null;
+              }
+            })}
+          </div>
         </div>
       ) : (
         <EmptyList />
@@ -93,3 +109,4 @@ function BlogPost() {
 }
 
 export default BlogPost;
+

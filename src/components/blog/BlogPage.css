@@ -6,27 +6,33 @@
     align-items: center;
 
     color: #ffffff;
-    font-size: 50px;
+    font-size: 40px;
     font-weight: 900;
 
     background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
 }
 
 .search_bar {
-        background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
-}
+    background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
+    }
 
 .blog_post_container {
     padding-top: 20px;
     width: 90%;
     height: fit-content;
     display: flex;
+    flex-direction: column;
     color: #000000;
     background-color: #ffffff;
+    position: relative;
+    min-height: 65vh;
 }
 
-.ThreeCircles {
-    margin: 200px;
-    padding: 200px;
+.TailSpin {
+    margin: 50px;
+    padding: 50px;
+    align-items: center;
+    position: relative;
+    min-height: 65vh;
 }
 

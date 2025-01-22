@@ -4,7 +4,7 @@ import "./BlogPage.css";
 import BlogList from "./BlogList.js";
 import EmptyList from "../common/EmptyList.js";
 import SearchBar from "../common/SearchBar.js";
-import { Bars } from "react-loader-spinner";
+import { TailSpin } from "react-loader-spinner";
 
 const BlogPage = () => {
   const [blogs, setBlogs] = useState([]);
@@ -64,14 +64,14 @@ const BlogPage = () => {
         <div className="blog_posts">
           {loading ? (
             //<div className="loading">Loading...</div> // Loading screen
-            <Bars
+            <TailSpin
               visible={true}
               height="300"
               width="300"
               color="#000000"
-              ariaLabel="bars-loading"
-              wrapperStyle={{}}
-              wrapperClass=""
+              ariaLabel="circle-loading"
+              //wrapperStyle={{ marginTop: "50px" }}
+              wrapperClass="TailSpin"
             />
           ) : blogs.length ? (
             <BlogList blogs={blogs} />

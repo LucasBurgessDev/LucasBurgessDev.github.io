@@ -24,20 +24,16 @@ const GA_MEASUREMENT_ID = "G-DSTGL7K9W7";
    console.log(location);
 
    useEffect(() => {
-     // Check if the environment is 'test' and return if true
-     if (process.env.NODE_ENV === "test") {
-       return;
-    }
-
-     // Send pageview event on route change
-     if (typeof window !== "undefined") {
+     if (typeof window !== "undefined" && process.env.NODE_ENV !== "test") {
        window.gtag("config", GA_MEASUREMENT_ID, {
          page_path: location.pathname,
        });
        console.log(location.pathname);
      }
-   }, [location]); 
- } 
+   }, [location]);
+
+   return null;
+ }
 
 function App() {
   // Call the custom hook to track page views
