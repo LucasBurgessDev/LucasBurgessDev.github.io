@@ -22,22 +22,48 @@ The env var CI is currently set to false in github actions so won't fail if warn
     * ~~Create firebase db to store emails~~
     * ~~Send details to db~~
     * ~~Return positive response on form submission and clear fields and close box~~
-* Set up blog space
+* ~~Set up blog space~~
     * ~~Set up MVP~~
     * ~~Redo banner on blog pages~~
     * ~~Add styling like home page~~
     * ~~Create db to store blog entries~~
     * ~~Add read time~~
-    * Create front end code to collect blogs from db
-    * Work it out for image hosting
+    * ~~Create front end code to collect blogs from db~~
+    * ~~Work it out for image hosting~~
     * ~~Add blog entries to home page~~    
-* Update all images used
+* ~~Update all images used~~
     * add proper image for no results
-    * ignore images if not passed
-* Handle error on homepage website links where no internet connection
+    * ~~ignore images if not passed~~
+* ~~Handle error on homepage website links where no internet connection~~
+* ~~Set footer to always be page bottom~~
+* Load CSS blog stylings from database
+    * Change body database structure to pass an array with finite types e.g. content 
+[
+{
+    object_type: "introduction",
+    object_information: "..."
+},
+{
+    object_type: "body",
+    object_information: "..."
+},
+{
+    object_type: "image",
+    object_information: "BUCKET_REF"
+},
+{
+    object_type: "conclusion",
+    object_information: "..."
+}
+]
+    * Create handler for text object types
+    * Create CSS for object types
+    * Create bucket front cloud run
+    * Create handler for image object types
+* Fix menu button on webpage
 * Set up email verification
 * Get tests working properly
-* ~~Remove white line at top on mobile~~
+* Remove white line at top on mobile
 * Create Logo
 * Set up SEO
 * Increase test coverage

@@ -54,7 +54,10 @@ img[src="null"] {
   margin-bottom: 2rem; /* Increased margin between description blocks */
 }
 
-.ThreeCircles {
-  margin: 200px;
-  padding: 200px;
+.TailSpin {
+  margin: 50px;
+  padding: 50px;
+  align-items: center;
+  position: relative;
+  min-height: 65vh;
 }

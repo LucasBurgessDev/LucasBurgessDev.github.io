@@ -1,10 +1,12 @@
 .emptyList-wrap {
   display: flex;
   justify-content: center;
+  position: relative;
+  min-height: 65vh;
 }
 .emptyList-wrap img {
   max-width: 250px;
-  width: 100%;
+  max-height: 250px;
   vertical-align: middle;
   padding: 2rem;
 }
