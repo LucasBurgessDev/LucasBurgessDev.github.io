@@ -3,6 +3,6 @@ import App from './App';
 
 
 test('renders app page', () => {
-  //render(<App />);
+  render(<App />);
 
 });
