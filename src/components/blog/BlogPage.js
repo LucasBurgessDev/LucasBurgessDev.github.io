@@ -10,8 +10,12 @@ const BlogPage = () => {
   const [blogs, setBlogs] = useState([]);
   const [searchKey, setSearchKey] = useState("");
   const [loading, setLoading] = useState(true); // Initialize loading state
-  const apiUrl = "https://get-blog-info-7hptrwqgna-nw.a.run.app";
-  //const apiUrl = "http://localhost:5000/get_blog_info";
+  const apiUrl = "http://localhost:5000/get_blog_info";
+  if (process.env.NODE_ENV !== "production") {
+    const apiUrl = "http://localhost:5000/get_blog_info";
+  } else {
+    const apiUrl = "https://get-blog-info-7hptrwqgna-nw.a.run.app";
+  }
 
   // Define fetchBlogs function
   const options = {

@@ -30,7 +30,7 @@ function Cards() {
                 //path="/Projects"
                 path="/Blog/2"
               />
-              <iframe
+{/*               <iframe
                 //width="560"
                 //height="315"
                 src="https://www.youtube.com/embed/MV1qaFv4VUg?si=WAgrdLdfNov70Hwu"
@@ -38,7 +38,7 @@ function Cards() {
                 frameborder="100"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen
-              ></iframe>
+              ></iframe> */}
             </ul>
             {/*                          <ul className="cards__items">
               <CardItem

@@ -7,13 +7,6 @@ function BlogItem({
   blog: {
     id,
     para1,
-    para2,
-    para3,
-    para4,
-    para1_image,
-    para2_image,
-    para3_image,
-    para4_image,
     title,
     created_on,
     author_name,
