@@ -11,13 +11,21 @@ function BlogPost() {
   const { id } = useParams();
   const [blog, setBlog] = useState(null); // Initialize as null
   const [loading, setLoading] = useState(true); // Initialize loading state
-  const apiUrl = "https://get-blog-info-7hptrwqgna-nw.a.run.app";
-  //const apiUrl = "http://localhost:5000/get_blog_info";
+  const apiUrl = "http://localhost:5000/get_blog_info";
+  if (process.env.NODE_ENV !== "production") {
+    const apiUrl = "http://localhost:5000/get_blog_info";
+  } else {
+    const apiUrl = "https://get-blog-info-7hptrwqgna-nw.a.run.app";
+  }
 
+  // Define fetchBlogs function
+  const options = {
+    headers: { "Content-Type": "application/json" },
+  };
   const fetchBlog = async () => {
     try {
       const response = await axios.get(apiUrl + "?blog_id=" + parseInt(id), {
-        headers: { "Content-Type": "application/json" },
+        options,
         crossDomain: true,
       });
       setBlog(response.data[0]); // Always access the first item in the array
@@ -61,45 +69,28 @@ function BlogPost() {
             <p>
               Estimated Read Time:{" "}
               <CalculateReadTime
-                content={blog.reduce((acc, curr) => acc + curr.content, "")}
+                content={
+                  blog.para1 +
+                  " " +
+                  blog.para2 +
+                  " " +
+                  blog.para3 +
+                  " " +
+                  blog.para4
+                }
               />{" "}
               minutes
             </p>
           </header>
-          <div className="blog-content">
-            {blog.map((item) => {
-              switch (item.object_type) {
-                case "introduction":
-                  return (
-                    <div className="introduction">
-                      <p>{item.content}</p>
-                    </div>
-                  );
-                case "body":
-                  return (
-                    <div className="body">
-                      <p>{item.content}</p>
-                    </div>
-                  );
-                case "image":
-                  return (
-                    <img
-                      src={item.content}
-                      alt="Blog Image"
-                      className="blog-image"
-                    />
-                  );
-                case "conclusion":
-                  return (
-                    <div className="conclusion">
-                      <p>{item.content}</p>
-                    </div>
-                  );
-                default:
-                  return null;
-              }
-            })}
-          </div>
+          <img src={blog.cover} alt="Cover" />
+          <p className="blog-para">{blog.para1}</p>
+          {blog.para1_image && <img src={blog.para1_image} alt="Para1" />}
+          <p className="blog-para">{blog.para2}</p>
+          {blog.para2_image && <img src={blog.para2_image} alt="Para2" />}
+          <p className="blog-para">{blog.para3}</p>
+          {blog.para3_image && <img src={blog.para3_image} alt="Para3" />}
+          <p className="blog-para">{blog.para4}</p>
+          {blog.para4_image && <img src={blog.para4_image} alt="Para4" />}
         </div>
       ) : (
         <EmptyList />
