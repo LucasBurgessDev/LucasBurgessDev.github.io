@@ -1,0 +1,41 @@
+.searchBar-wrap {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.searchBar-wrap form {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.searchBar-wrap input {
+  width: 100%;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  outline: none;
+  border: 1px solid var(--glass-border);
+  padding: 1rem 1.5rem;
+  font-size: 1.1rem;
+  color: hsl(var(--text-primary));
+  border-radius: 50px; /* Full pill shape */
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.searchBar-wrap input::placeholder {
+  color: hsl(var(--text-secondary));
+}
+
+.searchBar-wrap input:focus {
+  background: rgba(30, 41, 59, 0.9);
+  border-color: hsl(var(--accent-primary));
+  box-shadow: 0 0 0 2px hsla(var(--accent-primary), 0.3);
+}
+
+.searchBar-wrap span {
+  display: none; /* Hide the clear button if not needed, or style it similarly */
+}
