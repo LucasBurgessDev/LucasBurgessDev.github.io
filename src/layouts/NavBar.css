@@ -1,0 +1,176 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1300px;
+  padding: 0 2rem;
+  height: 80px;
+}
+
+.navbar-logo {
+  color: hsl(var(--text-primary));
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+
+.fa-typo3 {
+  margin-left: 0.5rem;
+  font-size: 1.8rem;
+}
+
+.nav-menu {
+  display: flex;
+  grid-gap: 2rem;
+  list-style: none;
+  text-align: center;
+  justify-content: end;
+}
+
+.nav-item {
+  height: 80px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-links {
+  color: hsl(var(--text-primary));
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  height: 100%;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-links:hover {
+  color: hsl(var(--accent-secondary));
+}
+
+.fa-bars {
+  color: hsl(var(--text-primary));
+}
+
+.nav-links-mobile {
+  display: none;
+}
+
+.menu-icon {
+  display: none;
+}
+
+@media screen and (max-width: 960px) {
+  .NavbarItems {
+    position: relative;
+  }
+
+  .nav-menu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: calc(100vh - 80px);
+    position: absolute;
+    top: 80px;
+    left: -100%;
+    opacity: 1;
+    transition: all 0.5s ease;
+    background: hsl(var(--bg-secondary));
+    gap: 0; /* Remove gap so hover effects touch/overlap */
+  }
+
+  .nav-menu.active {
+    background: hsl(var(--bg-secondary));
+    left: 0;
+    opacity: 1;
+    transition: all 0.5s ease;
+    z-index: 1;
+    justify-content: flex-start;
+    padding-top: 0; /* Remove top padding for a flush look */
+  }
+
+  .nav-item {
+    height: auto;
+    width: 100%;
+  }
+
+  .nav-links {
+    text-align: center;
+    padding: 2rem; /* Increased padding for better touch target */
+    width: 100%;
+    display: block; /* Ensure full width block */
+    font-size: 1.5rem;
+    transition: all 0.3s ease; /* Slick transition */
+  }
+
+  .nav-links:hover {
+    background-color: hsl(var(--bg-primary));
+    color: hsl(var(--accent-primary));
+    border-radius: 0;
+  }
+
+  .navbar-logo {
+    font-size: 1.5rem;
+  }
+
+  .menu-icon {
+    display: block;
+    position: static; /* Let flexbox handle it */
+    transform: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: hsl(var(--text-primary));
+  }
+
+  .fa-times {
+    color: hsl(var(--text-primary));
+    font-size: 2rem;
+  }
+
+  .nav-links-mobile {
+    display: block;
+    text-align: center;
+    margin: 2rem auto;
+    border-radius: 4px;
+    width: 80%;
+    text-decoration: none;
+    font-size: 1.5rem;
+    background-color: transparent;
+    color: hsl(var(--text-primary));
+    padding: 14px 20px;
+    border: 1px solid hsl(var(--text-primary));
+    transition: all 0.3s ease-out;
+  }
+
+  .nav-links-mobile:hover {
+    background: hsl(var(--text-primary));
+    color: hsl(var(--bg-primary));
+  }
+}
