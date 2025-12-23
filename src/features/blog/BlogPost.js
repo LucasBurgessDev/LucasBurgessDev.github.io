@@ -30,6 +30,51 @@ function BlogPost() {
     fetchBlog();
   }, [id]);
 
+  // Robust content parsing helper
+  const parseContent = (data) => {
+    if (!data) return [];
+    let blocks = [];
+    
+    // Initial parse if it's a string
+    if (typeof data === 'string') {
+      try {
+        const parsed = JSON.parse(data);
+        return parseContent(parsed);
+      } catch (e) {
+        return [{ type: 'text', value: data }];
+      }
+    }
+
+    if (Array.isArray(data)) {
+      data.forEach(item => {
+        if (typeof item === 'string') {
+          // Flatten stringified arrays/objects
+          blocks = blocks.concat(parseContent(item));
+        } else if (Array.isArray(item)) {
+          blocks = blocks.concat(parseContent(item));
+        } else if (item && typeof item === 'object') {
+          blocks.push({
+            type: (item.type || item.object_type || 'text').toLowerCase(),
+            value: item.value || item.object_information || '',
+            alt: item.alt || '',
+            caption: item.caption || ''
+          });
+        }
+      });
+    } else if (data && typeof data === 'object') {
+      blocks.push({
+        type: (data.type || data.object_type || 'text').toLowerCase(),
+        value: data.value || data.object_information || '',
+        alt: data.alt || '',
+        caption: data.caption || ''
+      });
+    }
+
+    return blocks;
+  };
+
+  const parsedContent = parseContent(blog?.content);
+
   return (
     <div className="blog-page-container">
       <Link to="/blog" className="blog-goBack">
@@ -62,7 +107,7 @@ function BlogPost() {
               </span>
               <span className="blog-readTime">
                 <i className="far fa-clock"></i> {(() => {
-                  const textForReadTime = (blog.content || [])
+                  const textForReadTime = parsedContent
                     .filter(b => b.type !== 'image')
                     .map(b => b.value || "")
                     .join(" ")
@@ -76,10 +121,10 @@ function BlogPost() {
           <div className="blog-content">
             {blog.cover && <img src={blog.cover} alt="Cover" className="blog-cover-img" />}
             
-            {blog.content && blog.content.length > 0 ? (
-              blog.content.map((block, index) => {
-              const type = (block.type || '').toLowerCase();
-              const value = block.value || '';
+            {parsedContent && parsedContent.length > 0 ? (
+              parsedContent.map((block, index) => {
+              const type = block.type;
+              const value = block.value;
 
               if (!value) return null;
 
