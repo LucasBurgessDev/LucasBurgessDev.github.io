@@ -15,38 +15,43 @@ function BlogItem({
     cover,
   },
 }) {
-  // Helper function to extract text content, handling potential JSON strings
+  // Helper function to extract text content, handling potential JSON strings recursively
   const getDescription = (data) => {
     if (!data) return "Read more about this project...";
     
-    const blocks = Array.isArray(data) ? data : (() => {
-      try { return JSON.parse(data); } catch { return []; }
-    })();
-
-    if (!Array.isArray(blocks)) return "Read more about this project...";
-
-    for (const block of blocks) {
-      // If block itself is a JSON string, try to parse it
-      let b = block;
-      if (typeof block === 'string') {
-        try { b = JSON.parse(block); } catch { continue; }
+    // 1. If it's a string, try to parse it
+    if (typeof data === 'string') {
+      try {
+        const parsed = JSON.parse(data);
+        return getDescription(parsed);
+      } catch (e) {
+        // Not a JSON string, treat as plain text if it's not a block
+        return data;
       }
+    }
 
-      // If it's a nested array after parsing
-      if (Array.isArray(b)) {
-        const nestedDesc = getDescription(b);
-        if (nestedDesc && nestedDesc !== "Read more about this project...") return nestedDesc;
-        continue;
-      }
-
-      if (b && typeof b === 'object') {
-        const type = (b.type || b.object_type || '').toLowerCase();
-        const value = b.value || b.object_information;
-        if (['text', 'body', 'introduction', 'conclusion'].includes(type) && value) {
-          return value;
+    // 2. If it's an array, look for the first text-like block
+    if (Array.isArray(data)) {
+      for (const item of data) {
+        const result = getDescription(item);
+        if (result && result !== "Read more about this project..." && typeof result === 'string' && !result.startsWith('[') && !result.startsWith('{')) {
+          return result;
         }
       }
     }
+
+    // 3. If it's an object, check if it's a content block
+    if (data && typeof data === 'object') {
+      const type = (data.type || data.object_type || '').toLowerCase();
+      const value = data.value || data.object_information;
+      
+      if (['text', 'body', 'introduction', 'conclusion'].includes(type) && value) {
+        // Recurse into value in case it's stringified JSON
+        const parsedValue = getDescription(value);
+        return parsedValue;
+      }
+    }
+
     return "Read more about this project...";
   };
 

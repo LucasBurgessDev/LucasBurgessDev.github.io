@@ -30,47 +30,51 @@ function BlogPost() {
     fetchBlog();
   }, [id]);
 
-  // Robust content parsing helper
+  // Truly recursive content parsing utility
   const parseContent = (data) => {
     if (!data) return [];
-    let blocks = [];
     
-    // Initial parse if it's a string
+    // 1. If it's a string, try to parse it
     if (typeof data === 'string') {
       try {
         const parsed = JSON.parse(data);
         return parseContent(parsed);
       } catch (e) {
+        // Not JSON, return as a text block
         return [{ type: 'text', value: data }];
       }
     }
 
+    // 2. If it's an array, process each item and flatten
     if (Array.isArray(data)) {
-      data.forEach(item => {
-        if (typeof item === 'string') {
-          // Flatten stringified arrays/objects
-          blocks = blocks.concat(parseContent(item));
-        } else if (Array.isArray(item)) {
-          blocks = blocks.concat(parseContent(item));
-        } else if (item && typeof item === 'object') {
-          blocks.push({
-            type: (item.type || item.object_type || 'text').toLowerCase(),
-            value: item.value || item.object_information || '',
-            alt: item.alt || '',
-            caption: item.caption || ''
-          });
-        }
-      });
-    } else if (data && typeof data === 'object') {
-      blocks.push({
-        type: (data.type || data.object_type || 'text').toLowerCase(),
-        value: data.value || data.object_information || '',
-        alt: data.alt || '',
-        caption: data.caption || ''
-      });
+      return data.flatMap(item => parseContent(item));
     }
 
-    return blocks;
+    // 3. If it's an object, check if it's a content block
+    if (data && typeof data === 'object') {
+      const type = (data.type || data.object_type || 'text').toLowerCase();
+      const value = data.value || data.object_information || '';
+      
+      // Special case: if value is stringified JSON, unpack it!
+      if (typeof value === 'string' && (value.trim().startsWith('[') || value.trim().startsWith('{'))) {
+        try {
+          const parsedValue = JSON.parse(value);
+          const unpacked = parseContent(parsedValue);
+          if (unpacked.length > 0) return unpacked;
+        } catch (e) {
+          // Fall through to standard block
+        }
+      }
+
+      return [{
+        type: type,
+        value: value,
+        alt: data.alt || '',
+        caption: data.caption || ''
+      }];
+    }
+
+    return [];
   };
 
   const parsedContent = parseContent(blog?.content);
