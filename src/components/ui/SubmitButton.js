@@ -1,0 +1,159 @@
+import "./SubmitButton.css";
+import React, { useState } from "react";
+import axios from "axios"; // Import axios for making HTTP requests
+
+const YourComponent = () => {
+  const [showContactBox, setShowContactBox] = useState(false);
+
+  const handleButtonClick = () => {
+    setShowContactBox(!showContactBox);
+
+    // Send button click event to GA4
+    window.gtag("event", "contact_button_click", {
+      event_category: "Button Click",
+      event_label: "Contact Me Button Clicked",
+    });
+  };
+
+  return (
+    <div className="contact-button-container">
+      <button onClick={handleButtonClick} className="contact-button">
+        Contact Me
+      </button>
+      {showContactBox && <ContactBox setShowContactBox={setShowContactBox} />}
+    </div>
+  );
+};
+
+const ContactBox = ({ setShowContactBox }) => {
+  const scrollToContactBox = () => {
+    const contactBoxElement = document.getElementById("contact-box");
+    contactBoxElement.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      // Send form submission event to GA4
+      window.gtag("event", "form_submission", {
+        event_category: "Form Submission",
+        event_label: "Contact Form Submitted",
+      });
+
+      // Additional form submission logic...
+
+      // Send data to Cloud Function endpoint
+      // improve with https://www.freecodecamp.org/news/axios-react-how-to-make-get-post-and-delete-api-requests/
+      const options = {
+        headers: { "Content-Type": "application/json" },
+      };
+      /*             "Cache-Control": "no-cache",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": true,
+            "Access-Control-Request-Method": "POST", */
+      const response =
+       await axios.post(
+        "https://user-write-7hptrwqgna-nw.a.run.app",
+        {
+          first_name: event.target.elements.firstName.value,
+          last_name: event.target.elements.lastName.value,
+          email: event.target.elements.email.value,
+        },
+        {
+          headers: { "Content-Type": "application/json" }
+        }
+      );
+ 
+      console.log("Cloud Function response:", response.data);
+      // Return a success message to the user
+      alert("Data submitted successfully, thank you!");
+
+      // Clear input fields
+      event.target.elements.firstName.value = "";
+      event.target.elements.lastName.value = "";
+      event.target.elements.email.value = "";
+
+      // Close the input form
+      setShowContactBox(false);
+
+    } catch (error) {
+      // Handle errors
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.error("Server error:", error.response.data);
+        // Display the error message to the user
+        alert(error.response.data);
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.error("Network error:", error.request);
+        // Display a generic error message to the user
+        alert("Network error. Please try again later.");
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.error("Request error:", error.message);
+        // Display a generic error message to the user
+        alert("An error occurred. Please try again later.");
+      }
+    }
+  };
+
+  return (
+    <div id="contact-box" className="contact-box" onLoad={scrollToContactBox}>
+      <h2>Contact Me</h2>
+      <form onSubmit={handleFormSubmit}>
+        <div className="form-group">
+          <input
+            type="text"
+            placeholder="First Name"
+            className="form-control"
+            name="firstName" // Add name attribute
+            // Send input field focus event to GA4
+            onFocus={() => {
+              window.gtag("event", "input_focus", {
+                event_category: "Input Focus",
+                event_label: "First Name Input Focused",
+              });
+            }}
+          />
+        </div>
+        <div className="form-group">
+          <input
+            type="text"
+            placeholder="Last Name"
+            className="form-control"
+            name="lastName" // Add name attribute
+            // Send input field focus event to GA4
+            onFocus={() => {
+              window.gtag("event", "input_focus", {
+                event_category: "Input Focus",
+                event_label: "Last Name Input Focused",
+              });
+            }}
+          />
+        </div>
+        <div className="form-group">
+          <input
+            type="text"
+            placeholder="Email"
+            className="form-control"
+            name="email" // Add name attribute
+            // Send input field focus event to GA4
+            onFocus={() => {
+              window.gtag("event", "input_focus", {
+                event_category: "Input Focus",
+                event_label: "Email Input Focused",
+              });
+            }}
+          />
+        </div>
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default YourComponent;

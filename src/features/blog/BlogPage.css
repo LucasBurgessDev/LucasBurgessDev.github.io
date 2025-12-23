@@ -1,0 +1,66 @@
+.page_name {
+  width: 100%;
+  padding: 4rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: hsl(var(--text-primary));
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 700;
+  background: transparent;
+}
+
+.search_bar {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.blog_post_container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto;
+  min-height: 65vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.blog_posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+}
+
+.TailSpin {
+  margin: 50px auto;
+  display: flex;
+}
+
+.error-message {
+  text-align: center;
+  padding: 3rem;
+  color: hsl(var(--text-secondary));
+}
+
+.error-message h3 {
+  color: hsl(var(--text-primary));
+  margin-bottom: 1rem;
+}
+
+.retry-btn {
+  padding: 0.75rem 1.5rem;
+  background-color: hsl(var(--accent-primary));
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: opacity 0.2s ease;
+  margin-top: 1rem;
+}
+
+.retry-btn:hover {
+  opacity: 0.9;
+}
+
