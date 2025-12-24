@@ -14,13 +14,17 @@ const BlogPage = () => {
   const [error, setError] = useState(null);
 
   const fetchBlogs = async () => {
+    setLoading(true);
+    setError(null);
     try {
       const data = await getBlogInfo();
       console.log("Fetched blogs data in BlogPage:", data);
       if (Array.isArray(data)) {
-        setBlogs(data);
+        const sortedData = [...data].sort((a, b) => new Date(b.created_on) - new Date(a.created_on));
+        setBlogs(sortedData);
       } else if (data && Array.isArray(data.blogs)) {
-         setBlogs(data.blogs);
+        const sortedData = [...data.blogs].sort((a, b) => new Date(b.created_on) - new Date(a.created_on));
+         setBlogs(sortedData);
       } else {
         console.error("Unexpected data format received from API:", data);
         setBlogs([]);
