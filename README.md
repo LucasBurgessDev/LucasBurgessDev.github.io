@@ -64,7 +64,8 @@ The env var CI is currently set to false in github actions so won't fail if warn
 * Set up email verification
 * ~~Get tests working properly~~
 * ~~Remove white line at top on mobile~~
-* Create Logo
+* ~~Create Logo~~
+* Integrate logo into header
 * Set up SEO
 * ~~Increase test coverage~~
 * Finish terminal pages
