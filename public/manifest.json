@@ -3,17 +3,17 @@
   "name": "Portfolio created by LucasBurgessDev",
   "icons": [
     {
-      "src": "./images/Luke Headshot.jpeg",
+      "src": "./images/lucasburgessdev_logo.png",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/jpeg"
+      "type": "image/png"
     },
     {
-      "src": "./images/Luke Headshot.jpeg",
-      "type": "image/jpeg",
+      "src": "./images/lucasburgessdev_logo.png",
+      "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "./images/Luke Headshot.jpeg",
+      "src": "./images/lucasburgessdev_logo.png",
       "type": "image/jpeg",
       "sizes": "512x512"
     }
