@@ -32,12 +32,12 @@ The env var CI is currently set to false in github actions so won't fail if warn
     * ~~Work it out for image hosting~~
     * ~~Add blog entries to home page~~    
 * ~~Update all images used~~
-    * add proper image for no results
+    * ~~add proper image for no results~~
     * ~~ignore images if not passed~~
 * ~~Handle error on homepage website links where no internet connection~~
 * ~~Set footer to always be page bottom~~
-* Load CSS blog stylings from database
-    * Change body database structure to pass an array with finite types e.g. content 
+* ~~Load CSS blog stylings from database~~
+    *~~Change body database structure to pass an array with finite types e.g. content 
 [
 {
     object_type: "introduction",
@@ -55,18 +55,18 @@ The env var CI is currently set to false in github actions so won't fail if warn
     object_type: "conclusion",
     object_information: "..."
 }
-]
+]~~
     * Create handler for text object types
     * Create CSS for object types
     * Create bucket front cloud run
     * Create handler for image object types
-* Fix menu button on webpage
+* ~~Fix menu button on webpage~~
 * Set up email verification
-* Get tests working properly
-* Remove white line at top on mobile
+* ~~Get tests working properly~~
+* ~~Remove white line at top on mobile~~
 * Create Logo
 * Set up SEO
-* Increase test coverage
+* ~~Increase test coverage~~
 * Finish terminal pages
 * Google API Key move to secrets
 
