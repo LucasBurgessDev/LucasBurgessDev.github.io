@@ -56,10 +56,10 @@ The env var CI is currently set to false in github actions so won't fail if warn
     object_information: "..."
 }
 ]~~
-    * Create handler for text object types
-    * Create CSS for object types
-    * Create bucket front cloud run
-    * Create handler for image object types
+    * ~~Create handler for text object types~~
+    * ~~Create CSS for object types~~
+    * ~~Create bucket front cloud run~~
+    * ~~Create handler for image object types~~
 * ~~Fix menu button on webpage~~
 * Set up email verification
 * ~~Get tests working properly~~
