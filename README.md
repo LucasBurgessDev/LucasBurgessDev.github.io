@@ -65,6 +65,7 @@ The env var CI is currently set to false in github actions so won't fail if warn
 * ~~Remove white line at top on mobile~~
 * ~~Create Logo~~
 * ~~Increase test coverage~~
+* Ensure codecov is recieving updates
 * Google API Key move to secrets
 * Integrate logo into header
 * Optimise API blog calls to only return past creation dates
