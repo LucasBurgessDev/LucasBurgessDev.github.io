@@ -61,15 +61,17 @@ The env var CI is currently set to false in github actions so won't fail if warn
     * ~~Create bucket front cloud run~~
     * ~~Create handler for image object types~~
 * ~~Fix menu button on webpage~~
-* Set up email verification
 * ~~Get tests working properly~~
 * ~~Remove white line at top on mobile~~
 * ~~Create Logo~~
-* Integrate logo into header
-* Set up SEO
 * ~~Increase test coverage~~
-* Finish terminal pages
 * Google API Key move to secrets
+* Integrate logo into header
+* Optimise API blog calls to only return past creation dates
+* Set up SEO
+* Set up email verification
+* Create template terminal interactive content types
+
 
 # Workflow Status
 
