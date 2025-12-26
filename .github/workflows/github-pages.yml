@@ -41,8 +41,9 @@ jobs:
       
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v5
-      with: token: ${{ secrets.CODECOV_TOKEN }} # This bypasses the rate-limited global pool
-      fail_ci_if_error: true # This ensures the build fails if upload fails
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        fail_ci_if_error: true
       
     - name: Dump GitHub env object
       env:
