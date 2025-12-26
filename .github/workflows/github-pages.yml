@@ -40,7 +40,9 @@ jobs:
       run: npm test -- --coverage
       
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v5
+      with: token: ${{ secrets.CODECOV_TOKEN }} # This bypasses the rate-limited global pool
+      fail_ci_if_error: true # This ensures the build fails if upload fails
       
     - name: Dump GitHub env object
       env:
