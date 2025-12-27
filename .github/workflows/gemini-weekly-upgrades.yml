@@ -4,6 +4,10 @@ on:
     - cron: '0 0 * * 1'
   workflow_dispatch:
 
+concurrency:
+  group: gemini-react-dev-evolution
+  cancel-in-progress: true
+
 jobs:
   evolution:
     runs-on: ubuntu-latest
@@ -18,12 +22,16 @@ jobs:
           ref: dev
           fetch-depth: 0
 
+      - name: Capture base SHA
+        run: echo "BASE_SHA=$(git rev-parse HEAD)" >> $GITHUB_ENV
+
       - name: Gemini React Engineer
-        uses: google-github-actions/run-gemini-cli@main
-        env:
-          GEMINI_DEBUG: false
+        uses: google-github-actions/run-gemini-cli@v0.1.18
         with:
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
+          gemini_debug: false
+          # Optional pin for deterministic CLI behavior:
+          # gemini_cli_version: "0.1.18"
           command: >
             Analyze /src. Perform 3 tasks: 1. Security 2. Perf 3. New React Component.
             CONSTRAINTS: No Tailwind, No Lucide. Use standard React/CSS.
@@ -32,28 +40,37 @@ jobs:
 
       - name: Create Individual PRs
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          COMMITS=$(git log dev..HEAD --oneline | grep "task:")
-          
+          set -euo pipefail
+
+          COMMITS=$(git log "${BASE_SHA}..HEAD" --oneline | grep -E " task:" || true)
+
           if [ -z "$COMMITS" ]; then
             echo "No 'task:' commits found. Gemini might not have made changes."
             exit 0
           fi
 
           while read -r line; do
-            HASH=$(echo $line | awk '{print $1}')
-            TASK=$(echo $line | awk '{print $2}' | sed 's/task://')
-            BRANCH="gemini/upgrade-$TASK-$(date +%s)"
-            
-            git checkout -b "$BRANCH" "$HASH"
+            [ -z "$line" ] && continue
+
+            HASH=$(echo "$line" | awk '{print $1}')
+            SUBJECT=$(echo "$line" | awk '{print $2}')
+            TASK=$(echo "$SUBJECT" | sed 's/task://')
+            BRANCH="gemini/upgrade-${TASK}-$(date +%s)"
+
+            git checkout dev
+            git checkout -b "$BRANCH"
+            git cherry-pick "$HASH"
+
             git push origin "$BRANCH" --force
-            
+
             gh pr create \
               --base dev \
               --head "$BRANCH" \
               --title "🚀 React Evolution: $TASK" \
-              --body "Automated upgrade for $TASK. Verified React patterns used." || echo "PR already exists for $TASK"
-            
+              --body "Automated upgrade for $TASK. Verified React patterns used." \
+              || echo "PR already exists or could not be created for $TASK"
+
             git checkout dev
           done <<< "$COMMITS"
