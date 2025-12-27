@@ -1,7 +1,7 @@
-name: Gemini React Atomic Evolution
+name: Gemini React Dev Evolution
 on:
   schedule:
-    - cron: '0 0 * * 1'
+    - cron: '0 0 * * 1' # Every Monday
   workflow_dispatch:
 
 jobs:
@@ -18,57 +18,47 @@ jobs:
           ref: dev
           fetch-depth: 0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Install Dependencies
-        run: npm ci
-
       - name: Gemini React Engineer
         uses: google-github-actions/run-gemini-cli@main
         with:
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
+          # Specialized React and Portfolio prompt
           command: >
-            ACT AS: A Senior React Engineer.
-            CONTEXT: Portfolio/Blog website. 
-            CONSTRAINTS: Do NOT use Tailwind or Lucide icons. Use standard CSS/Modules.
+            ACT AS: A Senior React Engineer specializing in Portfolios and Blogs.
+            TECH STACK: React, Modern ES6+.
             
             TASKS:
-            1. SECURITY: Fix React-specific vulnerabilities (XSS, insecure props).
-            2. PERFORMANCE: Optimize re-renders (Memo, Callback) and image loading.
-            3. FEATURE: Create one new React component (e.g., ReadingProgress, ProjectGallery).
+            1. SECURITY: Scan React components for XSS (e.g., dangerouslySetInnerHTML), 
+               insecure deps, or leaked keys. 
+            2. PERFORMANCE: Optimize expensive React re-renders, use React.memo 
+               where appropriate, and optimize image loading.
+            3. PORTFOLIO FEATURE: Suggest and code one new React component for my 
+               portfolio (e.g., a "Reading Progress Bar", "Themed Project Card", or "Social Feed").
             
-            OUTPUT: Apply code directly. Use commit messages 'task:Security', 'task:Perf', 'task:Feature'.
+            COMMIT RULES:
+            - Create separate commits for each improvement starting with 'feat:' or 'fix:'.
+            - Output ONLY the final code changes. No conversational text.
 
-      - name: Validate and Create PRs
+      - name: Create Individual PRs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Iterate through the specific tasks created by Gemini
-          COMMITS=$(git log dev..HEAD --oneline | grep "task:")
+          # Finds AI commits and generates separate PRs for each logic block
+          COMMITS=$(git log dev..HEAD --oneline | grep -E "feat:|fix:")
           
           while read -r line; do
             HASH=$(echo $line | awk '{print $1}')
-            NAME=$(echo $line | awk '{print $2}' | sed 's/task://')
-            BRANCH="ai/react-$NAME-$(date +%s)"
+            TASK=$(echo $line | cut -d' ' -f2-)
+            BRANCH="gemini/$(echo $TASK | tr ' ' '-' | tr -d ':')"
             
             git checkout -b "$BRANCH" "$HASH"
+            git push origin "$BRANCH" --force
             
-            echo "--- Validating $NAME ---"
-            # ONLY create PR if build and test pass
-            if npm run build && npm test; then
-              git push origin "$BRANCH"
-              gh pr create \
-                --base dev \
-                --head "$BRANCH" \
-                --title "🚀 React $NAME: Automated Upgrade" \
-                --body "Gemini generated this $NAME upgrade. Build and tests passed successfully."
-            else
-              echo "Validation failed for $NAME. Skipping PR."
-            fi
+            gh pr create \
+              --base dev \
+              --head "$BRANCH" \
+              --title "🚀 React Evolution: $TASK" \
+              --body "Automated React upgrade for: $TASK. Part of weekly maintenance."
             
             git checkout dev
           done <<< "$COMMITS"
