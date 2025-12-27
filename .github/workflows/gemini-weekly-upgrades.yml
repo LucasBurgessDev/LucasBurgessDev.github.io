@@ -1,7 +1,7 @@
 name: Gemini React Dev Evolution
 on:
   schedule:
-    - cron: '0 0 * * 1' # Every Monday
+    - cron: '0 0 * * 1'
   workflow_dispatch:
 
 jobs:
@@ -15,41 +15,32 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
-          ref: dev
+          ref: dev # Target dev branch
           fetch-depth: 0
 
       - name: Gemini React Engineer
-        uses: google-github-actions/run-gemini-cli@main
+        uses: google-github-actions/run-gemini-cli@main # Fixed version tag
         with:
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
           # Specialized React and Portfolio prompt
           command: >
-            ACT AS: A Senior React Engineer specializing in Portfolios and Blogs.
-            TECH STACK: React, Modern ES6+.
-            
-            TASKS:
-            1. SECURITY: Scan React components for XSS (e.g., dangerouslySetInnerHTML), 
-               insecure deps, or leaked keys. 
-            2. PERFORMANCE: Optimize expensive React re-renders, use React.memo 
-               where appropriate, and optimize image loading.
-            3. PORTFOLIO FEATURE: Suggest and code one new React component for my 
-               portfolio (e.g., a "Reading Progress Bar", "Themed Project Card", or "Social Feed").
-            
-            COMMIT RULES:
-            - Create separate commits for each improvement starting with 'feat:' or 'fix:'.
-            - Output ONLY the final code changes. No conversational text.
+            Analyze the /src folder. Perform 3 tasks: 
+            1. SECURITY: Fix React vulnerabilities.
+            2. PERFORMANCE: Optimize re-renders. 
+            3. FEATURE: Create one new React portfolio component (No Tailwind/Lucide).
+            Apply changes directly. Output ONLY code. Use commit messages 'task:Name'.
 
       - name: Create Individual PRs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Finds AI commits and generates separate PRs for each logic block
-          COMMITS=$(git log dev..HEAD --oneline | grep -E "feat:|fix:")
+          # Finds AI commits and generates separate PRs for each task
+          COMMITS=$(git log dev..HEAD --oneline | grep "task:")
           
           while read -r line; do
             HASH=$(echo $line | awk '{print $1}')
-            TASK=$(echo $line | cut -d' ' -f2-)
-            BRANCH="gemini/$(echo $TASK | tr ' ' '-' | tr -d ':')"
+            TASK=$(echo $line | awk '{print $2}' | sed 's/task://')
+            BRANCH="gemini/upgrade-$TASK-$(date +%s)"
             
             git checkout -b "$BRANCH" "$HASH"
             git push origin "$BRANCH" --force
@@ -58,7 +49,7 @@ jobs:
               --base dev \
               --head "$BRANCH" \
               --title "🚀 React Evolution: $TASK" \
-              --body "Automated React upgrade for: $TASK. Part of weekly maintenance."
+              --body "Automated React upgrade for: $TASK."
             
             git checkout dev
           done <<< "$COMMITS"
