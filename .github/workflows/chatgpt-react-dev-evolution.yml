@@ -6,15 +6,9 @@ on:
   workflow_dispatch:
     inputs:
       task:
-        description: "Which task to run"
+        description: "Task to run: all, Security, Perf, Feature"
         required: false
         default: "all"
-        type: choice
-        options:
-          - all
-          - Security
-          - Perf
-          - Feature
 
 concurrency:
   group: chatgpt-react-dev-evolution
@@ -30,7 +24,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        task: [Security, Perf, Feature]
+        task:
+          - Security
+          - Perf
+          - Feature
 
     env:
       BASE_BRANCH: dev
@@ -40,11 +37,27 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: ${{ env.BASE_BRANCH }}
+          ref: dev
           fetch-depth: 0
 
+      - name: Validate manual input
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: |
+          set -euo pipefail
+          TASK_INPUT="${{ github.event.inputs.task }}"
+          if [ -z "$TASK_INPUT" ]; then TASK_INPUT="all"; fi
+
+          case "$TASK_INPUT" in
+            all|Security|Perf|Feature) ;;
+            *)
+              echo "Invalid input for task: '$TASK_INPUT'"
+              echo "Allowed: all, Security, Perf, Feature"
+              exit 1
+              ;;
+          esac
+
       - name: Skip task if not selected
-        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.task != 'all' && github.event.inputs.task != matrix.task }}
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.task != '' && github.event.inputs.task != 'all' && github.event.inputs.task != matrix.task }}
         run: |
           echo "Skipping task ${{ matrix.task }}"
           exit 0
@@ -70,7 +83,11 @@ jobs:
           set -euo pipefail
 
           echo "### TREE" > /tmp/context.txt
-          (cd "${SRC_DIR}" && find . -maxdepth 4 -type f | sed 's|^\./||' | sort) >> /tmp/context.txt
+          if [ -d "${SRC_DIR}" ]; then
+            (cd "${SRC_DIR}" && find . -maxdepth 4 -type f | sed 's|^\./||' | sort) >> /tmp/context.txt
+          else
+            echo "WARNING: SRC_DIR '${SRC_DIR}' not found" >> /tmp/context.txt
+          fi
 
           echo "" >> /tmp/context.txt
           echo "### KEY FILES (truncated)" >> /tmp/context.txt
@@ -82,7 +99,7 @@ jobs:
             if [ -f "$f" ]; then FILES="$FILES $f"; fi
           done
 
-          if [ -z "$FILES" ]; then
+          if [ -z "$FILES" ] && [ -d "${SRC_DIR}" ]; then
             FILES=$(find "${SRC_DIR}" -type f \( -name "*.js" -o -name "*.jsx" -o -name "*.ts" -o -name "*.tsx" -o -name "*.css" \) | head -n 10)
           fi
 
@@ -102,6 +119,11 @@ jobs:
         run: |
           set -euo pipefail
 
+          if [ -z "${OPENAI_API_KEY:-}" ]; then
+            echo "Missing secret OPENAI_API_KEY"
+            exit 1
+          fi
+
           TASK="${{ matrix.task }}"
 
           SYSTEM_PROMPT=$'We are an autonomous code change agent.\nReturn ONLY a valid unified diff patch that can be applied with `git apply`.\nNo explanations, no markdown fences, no extra text.\nConstraints: no Tailwind, no Lucide, use standard React and CSS.\nIf no change is needed, return an empty response.'
@@ -119,7 +141,7 @@ Rules:
 
 For Security:
 - Remove obvious unsafe patterns (dangerouslySetInnerHTML misuse, insecure eval-like behavior, unsafe URL handling).
-- Improve input sanitization/encoding where appropriate.
+- Improve input sanitization or encoding where appropriate.
 
 For Perf:
 - Reduce unnecessary re-renders, expensive computations in render, missing memoization where it is clearly beneficial.
@@ -149,7 +171,7 @@ EOF
 
           if [ -n "$PATCH_TEXT" ] && ! head -n 1 /tmp/changes.patch | grep -q "^diff --git"; then
             echo "Model did not return a unified diff. Failing."
-            echo "$PATCH_TEXT" | head -n 60
+            echo "$PATCH_TEXT" | head -n 80
             exit 1
           fi
 
@@ -214,4 +236,3 @@ EOF
             --head "${{ steps.branch.outputs.branch }}" \
             --title "🚀 React Evolution: ${{ matrix.task }}" \
             --body "Automated change set for ${{ matrix.task }} via ChatGPT. No Tailwind, no Lucide."
-```0
