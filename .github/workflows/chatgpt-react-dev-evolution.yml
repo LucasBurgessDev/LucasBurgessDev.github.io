@@ -4,6 +4,17 @@ on:
   schedule:
     - cron: "0 0 * * 1"
   workflow_dispatch:
+    inputs:
+      task:
+        description: "Which task to run"
+        required: false
+        default: "all"
+        type: choice
+        options:
+          - all
+          - Security
+          - Perf
+          - Feature
 
 concurrency:
   group: chatgpt-react-dev-evolution
@@ -32,6 +43,12 @@ jobs:
           ref: ${{ env.BASE_BRANCH }}
           fetch-depth: 0
 
+      - name: Skip task if not selected
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.task != 'all' && github.event.inputs.task != matrix.task }}
+        run: |
+          echo "Skipping task ${{ matrix.task }}"
+          exit 0
+
       - name: Prepare tools
         run: |
           set -euo pipefail
@@ -52,14 +69,12 @@ jobs:
         run: |
           set -euo pipefail
 
-          # Keep prompts bounded: include structure + key file contents with limits
           echo "### TREE" > /tmp/context.txt
           (cd "${SRC_DIR}" && find . -maxdepth 4 -type f | sed 's|^\./||' | sort) >> /tmp/context.txt
 
           echo "" >> /tmp/context.txt
           echo "### KEY FILES (truncated)" >> /tmp/context.txt
 
-          # Grab common React entry points if present, otherwise sample up to 10 files
           FILES=""
           for f in "package.json" "package-lock.json" "pnpm-lock.yaml" "yarn.lock" \
                    "${SRC_DIR}/index.js" "${SRC_DIR}/index.jsx" "${SRC_DIR}/main.jsx" \
@@ -75,7 +90,6 @@ jobs:
             echo "" >> /tmp/context.txt
             echo "FILE: $f" >> /tmp/context.txt
             echo "-----" >> /tmp/context.txt
-            # Truncate each file to avoid huge prompts
             sed -n '1,240p' "$f" >> /tmp/context.txt
           done
 
@@ -104,7 +118,7 @@ Rules:
 - If creating a new component (Feature task), add it under src/components/ and wire it into the app in a minimal way.
 
 For Security:
-- Remove obvious unsafe patterns (dangerouslySetInnerHTML misuse, insecure eval-like behavior, unsafe URL handling, missing dependency pinning hints).
+- Remove obvious unsafe patterns (dangerouslySetInnerHTML misuse, insecure eval-like behavior, unsafe URL handling).
 - Improve input sanitization/encoding where appropriate.
 
 For Perf:
@@ -120,25 +134,22 @@ EOF
           USER_PROMPT="${USER_PROMPT/__TASK__/$TASK}"
           USER_PROMPT="${USER_PROMPT}"$'\n\n'$(cat "${{ steps.ctx.outputs.context_path }}")
 
-          # Call Responses API: docs show POST /v1/responses with model and input. 1
           RESPONSE=$(curl -sS https://api.openai.com/v1/responses \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer ${OPENAI_API_KEY}" \
             -d "$(jq -n \
-              --arg model "gpt-5.2" \
+              --arg model "gpt-5" \
               --arg instructions "$SYSTEM_PROMPT" \
               --arg input "$USER_PROMPT" \
               '{model: $model, instructions: $instructions, input: $input}')" )
 
           PATCH_TEXT=$(echo "$RESPONSE" | jq -r '.output_text // ""')
 
-          # Save patch
           printf "%s" "$PATCH_TEXT" > /tmp/changes.patch
 
-          # Sanity check: either empty or begins with diff --git
           if [ -n "$PATCH_TEXT" ] && ! head -n 1 /tmp/changes.patch | grep -q "^diff --git"; then
             echo "Model did not return a unified diff. Failing."
-            echo "$PATCH_TEXT" | head -n 40
+            echo "$PATCH_TEXT" | head -n 60
             exit 1
           fi
 
@@ -168,17 +179,12 @@ EOF
             npm install
           fi
 
-      - name: Run tests (best effort)
+      - name: Run tests
         run: |
           set -euo pipefail
-          if npm run -s test --if-present; then
-            echo "Tests passed"
-          else
-            echo "Tests failed or not present: stopping so we do not open a broken PR"
-            exit 1
-          fi
+          npm run -s test --if-present
 
-      - name: Build (best effort)
+      - name: Build
         run: |
           set -euo pipefail
           npm run -s build --if-present
@@ -208,3 +214,4 @@ EOF
             --head "${{ steps.branch.outputs.branch }}" \
             --title "🚀 React Evolution: ${{ matrix.task }}" \
             --body "Automated change set for ${{ matrix.task }} via ChatGPT. No Tailwind, no Lucide."
+```0
