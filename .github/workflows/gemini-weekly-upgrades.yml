@@ -19,9 +19,9 @@ jobs:
           fetch-depth: 0
 
       - name: Gemini React Engineer
-        uses: google-github-actions/run-gemini-cli@main # Fixed version
+        uses: google-github-actions/run-gemini-cli@main
         env:
-          GEMINI_DEBUG: false # Prevents JSON stderr errors
+          GEMINI_DEBUG: false
         with:
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
           command: >
@@ -34,7 +34,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Identify commits created by the AI agent
           COMMITS=$(git log dev..HEAD --oneline | grep "task:")
           
           if [ -z "$COMMITS" ]; then
@@ -50,7 +49,6 @@ jobs:
             git checkout -b "$BRANCH" "$HASH"
             git push origin "$BRANCH" --force
             
-            # Create PR, ignoring errors if one already exists
             gh pr create \
               --base dev \
               --head "$BRANCH" \
