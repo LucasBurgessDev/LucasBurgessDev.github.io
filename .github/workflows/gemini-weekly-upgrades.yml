@@ -4,10 +4,6 @@ on:
     - cron: '0 0 * * 1'
   workflow_dispatch:
 
-concurrency:
-  group: gemini-react-dev-evolution
-  cancel-in-progress: true
-
 jobs:
   evolution:
     runs-on: ubuntu-latest
@@ -22,55 +18,47 @@ jobs:
           ref: dev
           fetch-depth: 0
 
-      - name: Capture base SHA
-        run: echo "BASE_SHA=$(git rev-parse HEAD)" >> $GITHUB_ENV
-
       - name: Gemini React Engineer
-        uses: google-github-actions/run-gemini-cli@v0.1.18
+        uses: google-github-actions/run-gemini-cli@main # Fixed version tag
+        env:
+          GEMINI_DEBUG: false # Crucial: Stops non-JSON logs from breaking the run
         with:
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
-          gemini_debug: false
-          # Optional pin for deterministic CLI behavior:
-          # gemini_cli_version: "0.1.18"
           command: >
-            Analyze /src. Perform 3 tasks: 1. Security 2. Perf 3. New React Component.
+            Analyze /src. Perform these React tasks:
+            1. Security: Fix vulnerabilities.
+            2. Performance: Optimize re-renders.
+            3. Feature: Add one New Portfolio Component.
+            
             CONSTRAINTS: No Tailwind, No Lucide. Use standard React/CSS.
-            OUTPUT: Apply changes. Use commit messages 'task:Security', 'task:Perf', 'task:Feature'.
-            Do NOT include any conversational text or explanations.
+            OUTPUT: Apply changes. Do NOT explain or chat. 
+            Use commit messages 'task:Security', 'task:Perf', 'task:Feature'.
 
       - name: Create Individual PRs
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          set -euo pipefail
-
-          COMMITS=$(git log "${BASE_SHA}..HEAD" --oneline | grep -E " task:" || true)
-
+          # Identify commits created by Gemini
+          COMMITS=$(git log dev..HEAD --oneline | grep "task:" || true)
+          
           if [ -z "$COMMITS" ]; then
-            echo "No 'task:' commits found. Gemini might not have made changes."
+            echo "No changes found. Gemini might have skipped this run."
             exit 0
           fi
 
           while read -r line; do
-            [ -z "$line" ] && continue
-
-            HASH=$(echo "$line" | awk '{print $1}')
-            SUBJECT=$(echo "$line" | awk '{print $2}')
-            TASK=$(echo "$SUBJECT" | sed 's/task://')
-            BRANCH="gemini/upgrade-${TASK}-$(date +%s)"
-
-            git checkout dev
-            git checkout -b "$BRANCH"
-            git cherry-pick "$HASH"
-
+            HASH=$(echo $line | awk '{print $1}')
+            TASK=$(echo $line | awk '{print $2}' | sed 's/task://')
+            BRANCH="gemini/upgrade-$TASK-$(date +%s)"
+            
+            git checkout -b "$BRANCH" "$HASH"
             git push origin "$BRANCH" --force
-
+            
             gh pr create \
               --base dev \
               --head "$BRANCH" \
               --title "🚀 React Evolution: $TASK" \
-              --body "Automated upgrade for $TASK. Verified React patterns used." \
-              || echo "PR already exists or could not be created for $TASK"
-
+              --body "Automated React upgrade for: $TASK." || echo "PR already exists"
+            
             git checkout dev
           done <<< "$COMMITS"
