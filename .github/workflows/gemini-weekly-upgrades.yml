@@ -1,8 +1,8 @@
 name: Gemini React Dev Evolution
 on:
   schedule:
-    - cron: '0 0 * * 1' # Runs every Monday
-  workflow_dispatch: # Allows manual testing
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
 
 jobs:
   evolution:
@@ -19,20 +19,21 @@ jobs:
           fetch-depth: 0
 
       - name: Gemini React Engineer
-        uses: google-github-actions/run-gemini-cli@main # Use @main for latest stable
+        uses: google-github-actions/run-gemini-cli@main
         env:
-          GEMINI_DEBUG: false # Stops non-JSON logs from breaking parser
+          GEMINI_DEBUG: false
         with:
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
-          # FIX: Renamed 'command' to 'prompt'
-          prompt: >
-            Analyze /src. Perform these React tasks:
-            1. Security: Fix potential vulnerabilities (e.g., XSS, insecure props).
-            2. Performance: Optimize React re-renders or asset loading.
-            3. Feature: Add one new portfolio-specific React component.
+          # Explicitly use the high-performance Gemini 3 model
+          gemini_model: "gemini-3-flash"
+          # Positional prompt (no more -p flag)
+          prompt: |
+            Analyze /src. Perform 3 React tasks:
+            1. SECURITY: Fix XSS or insecure prop patterns.
+            2. PERFORMANCE: Optimize re-renders with Memo/Callback.
+            3. FEATURE: Create one new Portfolio component (No Tailwind/Lucide).
             
-            CONSTRAINTS: No Tailwind, No Lucide. Use standard React/CSS.
-            OUTPUT: Apply changes. Do NOT explain or chat. 
+            OUTPUT: Apply code directly. Do NOT explain. 
             Use commit messages 'task:Security', 'task:Perf', 'task:Feature'.
 
       - name: Create Individual PRs
@@ -43,7 +44,7 @@ jobs:
           COMMITS=$(git log dev..HEAD --oneline | grep "task:" || true)
           
           if [ -z "$COMMITS" ]; then
-            echo "No 'task:' commits found. Gemini may have found no improvements."
+            echo "No changes found. Gemini may have hit a safety filter or found no issues."
             exit 0
           fi
 
@@ -52,7 +53,6 @@ jobs:
             TASK=$(echo $line | awk '{print $2}' | sed 's/task://')
             BRANCH="gemini/upgrade-$TASK-$(date +%s)"
             
-            echo "Creating branch and PR for $TASK..."
             git checkout -b "$BRANCH" "$HASH"
             git push origin "$BRANCH" --force
             
@@ -60,7 +60,7 @@ jobs:
               --base dev \
               --head "$BRANCH" \
               --title "🚀 React Evolution: $TASK" \
-              --body "Automated React upgrade for: $TASK. Please review for security and performance." || echo "PR already exists"
+              --body "Automated React upgrade for: $TASK." || echo "PR already exists"
             
             git checkout dev
           done <<< "$COMMITS"
