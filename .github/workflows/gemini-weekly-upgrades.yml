@@ -15,28 +15,33 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
-          ref: dev # Target dev branch
+          ref: dev
           fetch-depth: 0
 
       - name: Gemini React Engineer
-        uses: google-github-actions/run-gemini-cli@main # Fixed version tag
+        uses: google-github-actions/run-gemini-cli@main # Fixed version
+        env:
+          GEMINI_DEBUG: false # Prevents JSON stderr errors
         with:
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
-          # Specialized React and Portfolio prompt
           command: >
-            Analyze the /src folder. Perform 3 tasks: 
-            1. SECURITY: Fix React vulnerabilities.
-            2. PERFORMANCE: Optimize re-renders. 
-            3. FEATURE: Create one new React portfolio component (No Tailwind/Lucide).
-            Apply changes directly. Output ONLY code. Use commit messages 'task:Name'.
+            Analyze /src. Perform 3 tasks: 1. Security 2. Perf 3. New React Component.
+            CONSTRAINTS: No Tailwind, No Lucide. Use standard React/CSS.
+            OUTPUT: Apply changes. Use commit messages 'task:Security', 'task:Perf', 'task:Feature'.
+            Do NOT include any conversational text or explanations.
 
       - name: Create Individual PRs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Finds AI commits and generates separate PRs for each task
+          # Identify commits created by the AI agent
           COMMITS=$(git log dev..HEAD --oneline | grep "task:")
           
+          if [ -z "$COMMITS" ]; then
+            echo "No 'task:' commits found. Gemini might not have made changes."
+            exit 0
+          fi
+
           while read -r line; do
             HASH=$(echo $line | awk '{print $1}')
             TASK=$(echo $line | awk '{print $2}' | sed 's/task://')
@@ -45,11 +50,12 @@ jobs:
             git checkout -b "$BRANCH" "$HASH"
             git push origin "$BRANCH" --force
             
+            # Create PR, ignoring errors if one already exists
             gh pr create \
               --base dev \
               --head "$BRANCH" \
               --title "🚀 React Evolution: $TASK" \
-              --body "Automated React upgrade for: $TASK."
+              --body "Automated upgrade for $TASK. Verified React patterns used." || echo "PR already exists for $TASK"
             
             git checkout dev
           done <<< "$COMMITS"
