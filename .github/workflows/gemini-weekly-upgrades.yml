@@ -1,8 +1,8 @@
 name: Gemini React Dev Evolution
 on:
   schedule:
-    - cron: '0 0 * * 1'
-  workflow_dispatch:
+    - cron: '0 0 * * 1' # Runs every Monday
+  workflow_dispatch: # Allows manual testing
 
 jobs:
   evolution:
@@ -19,16 +19,17 @@ jobs:
           fetch-depth: 0
 
       - name: Gemini React Engineer
-        uses: google-github-actions/run-gemini-cli@main # Fixed version tag
+        uses: google-github-actions/run-gemini-cli@main # Use @main for latest stable
         env:
-          GEMINI_DEBUG: false # Crucial: Stops non-JSON logs from breaking the run
+          GEMINI_DEBUG: false # Stops non-JSON logs from breaking parser
         with:
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
-          command: >
+          # FIX: Renamed 'command' to 'prompt'
+          prompt: >
             Analyze /src. Perform these React tasks:
-            1. Security: Fix vulnerabilities.
-            2. Performance: Optimize re-renders.
-            3. Feature: Add one New Portfolio Component.
+            1. Security: Fix potential vulnerabilities (e.g., XSS, insecure props).
+            2. Performance: Optimize React re-renders or asset loading.
+            3. Feature: Add one new portfolio-specific React component.
             
             CONSTRAINTS: No Tailwind, No Lucide. Use standard React/CSS.
             OUTPUT: Apply changes. Do NOT explain or chat. 
@@ -38,11 +39,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Identify commits created by Gemini
+          # Identify commits created by the AI agent
           COMMITS=$(git log dev..HEAD --oneline | grep "task:" || true)
           
           if [ -z "$COMMITS" ]; then
-            echo "No changes found. Gemini might have skipped this run."
+            echo "No 'task:' commits found. Gemini may have found no improvements."
             exit 0
           fi
 
@@ -51,6 +52,7 @@ jobs:
             TASK=$(echo $line | awk '{print $2}' | sed 's/task://')
             BRANCH="gemini/upgrade-$TASK-$(date +%s)"
             
+            echo "Creating branch and PR for $TASK..."
             git checkout -b "$BRANCH" "$HASH"
             git push origin "$BRANCH" --force
             
@@ -58,7 +60,7 @@ jobs:
               --base dev \
               --head "$BRANCH" \
               --title "🚀 React Evolution: $TASK" \
-              --body "Automated React upgrade for: $TASK." || echo "PR already exists"
+              --body "Automated React upgrade for: $TASK. Please review for security and performance." || echo "PR already exists"
             
             git checkout dev
           done <<< "$COMMITS"
