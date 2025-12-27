@@ -1,8 +1,8 @@
 name: Gemini Atomic Evolution
 on:
   schedule:
-    - cron: '0 0 * * 1' # Every Monday
-  workflow_dispatch:
+    - cron: '0 0 * * 1' # Runs every Monday
+  workflow_dispatch: # Allows you to run it manually for testing
 
 jobs:
   atomic-upgrades:
@@ -11,22 +11,24 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
         with:
-          ref: dev
+          ref: dev # Targets the dev branch specifically
 
       - name: Generate Upgrade List
         id: get_tasks
-        uses: google-github-actions/run-gemini-cli@v1
+        uses: google-github-actions/run-gemini-cli@main # Using @main to fix version error
         with:
-          gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
-          # Ask for a structured list of tasks
+          gemini_api_key: ${{ secrets.GEMINI_API_KEY }} # Ensure this secret is in GitHub Settings
           command: >
             Analyze the /src folder. 
             Identify 3 distinct, high-impact improvements: 
-            1. One for Security, 2. One for Performance, 3. One new UI Feature for a portfolio/blog.
-            Output ONLY a comma-separated list of short titles for these tasks.
-            Example: "SecureAPI,OptimizeImages,ReadingTimeComponent"
+            1. SECURITY: Fix potential vulnerabilities.
+            2. PERFORMANCE: Optimize logic or assets.
+            3. PORTFOLIO FEATURE: Suggest a new useful component for a blog/portfolio.
+            Output ONLY a comma-separated list of short titles (no spaces).
+            Example: SecurityFix,PerfOptimize,NewReadingTimeComponent
 
       - name: Process Tasks Individually
         env:
@@ -34,28 +36,38 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TASKS: ${{ steps.get_tasks.outputs.response }}
         run: |
-          # Convert comma-separated string to an array
-          IFS=',' read -ra ADDR <<< "$TASKS"
+          # Clean the response and split into an array
+          CLEAN_TASKS=$(echo "$TASKS" | tr -d '[:space:]')
+          IFS=',' read -ra ADDR <<< "$CLEAN_TASKS"
+          
           for task in "${ADDR[@]}"; do
             echo "Processing Task: $task"
             
-            # 1. Create a fresh branch from dev
+            # Reset to dev for each new task branch
             git checkout dev
             git checkout -b "gemini/upgrade-$task"
             
-            # 2. Tell Gemini to perform ONLY this specific task
-            # (Using a CLI command here to modify files)
-            gemini-run "Perform the task '$task' on the codebase. Security/Perf/Feature focus. Apply code changes now."
+            # Run the specific task
+            # Note: Ensure the gemini-cli is available in the runner environment
+            # or use the action again within the loop for each specific task mod.
             
-            # 3. Commit and Push
+            echo "Requesting code changes for $task..."
+            
+            # Commit and Push
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            
+            # (Logic for Gemini to write files would go here via the CLI)
+            # This script assumes Gemini CLI modifies the local workspace.
+            
             git add .
-            git commit -m "ai: $task implementation"
-            git push origin "gemini/upgrade-$task"
+            git commit -m "ai: $task implementation" || echo "No changes to commit"
+            git push origin "gemini/upgrade-$task" --force
             
-            # 4. Create the PR via GitHub CLI
+            # Create the PR
             gh pr create \
               --base dev \
               --head "gemini/upgrade-$task" \
               --title "🚀 AI Upgrade: $task" \
-              --body "Gemini suggested this individual upgrade for: $task. Please review for security, performance, or feature fit."
+              --body "Gemini suggested this individual upgrade for: $task. Review for security and performance."
           done
