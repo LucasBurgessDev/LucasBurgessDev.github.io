@@ -1,0 +1,61 @@
+name: Gemini Atomic Evolution
+on:
+  schedule:
+    - cron: '0 0 * * 1' # Every Monday
+  workflow_dispatch:
+
+jobs:
+  atomic-upgrades:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev
+
+      - name: Generate Upgrade List
+        id: get_tasks
+        uses: google-github-actions/run-gemini-cli@v1
+        with:
+          gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
+          # Ask for a structured list of tasks
+          command: >
+            Analyze the /src folder. 
+            Identify 3 distinct, high-impact improvements: 
+            1. One for Security, 2. One for Performance, 3. One new UI Feature for a portfolio/blog.
+            Output ONLY a comma-separated list of short titles for these tasks.
+            Example: "SecureAPI,OptimizeImages,ReadingTimeComponent"
+
+      - name: Process Tasks Individually
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TASKS: ${{ steps.get_tasks.outputs.response }}
+        run: |
+          # Convert comma-separated string to an array
+          IFS=',' read -ra ADDR <<< "$TASKS"
+          for task in "${ADDR[@]}"; do
+            echo "Processing Task: $task"
+            
+            # 1. Create a fresh branch from dev
+            git checkout dev
+            git checkout -b "gemini/upgrade-$task"
+            
+            # 2. Tell Gemini to perform ONLY this specific task
+            # (Using a CLI command here to modify files)
+            gemini-run "Perform the task '$task' on the codebase. Security/Perf/Feature focus. Apply code changes now."
+            
+            # 3. Commit and Push
+            git add .
+            git commit -m "ai: $task implementation"
+            git push origin "gemini/upgrade-$task"
+            
+            # 4. Create the PR via GitHub CLI
+            gh pr create \
+              --base dev \
+              --head "gemini/upgrade-$task" \
+              --title "🚀 AI Upgrade: $task" \
+              --body "Gemini suggested this individual upgrade for: $task. Please review for security, performance, or feature fit."
+          done
