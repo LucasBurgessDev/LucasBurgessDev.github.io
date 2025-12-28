@@ -1,0 +1,48 @@
+name: Gemini Security Evolution
+on:
+  schedule:
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev
+          fetch-depth: 0
+
+      - name: Gemini Security Fix
+        uses: google-github-actions/run-gemini-cli@main
+        env:
+          GEMINI_DEBUG: false
+        with:
+          gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
+          gemini_model: "gemini-3-flash"
+          prompt: |
+            ACT AS: React Performance Engineer.
+            TASK: Optimize component rendering in /src.
+            - Wrap expensive functional components in React.memo.
+            - Use useCallback for functions passed as props to children.
+            - Optimize long lists or heavy loops using useMemo.
+            CONSTRAINTS: Do not over-memoize simple components. No Tailwind.
+            OUTPUT: Apply changes. Use commit message 'task:Perf'.
+      - name: Create PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          COMMIT=$(git log dev..HEAD --oneline | grep "task:Security" || true)
+          if [ -n "$COMMIT" ]; then
+            BRANCH="ai/security-$(date +%s)"
+            git checkout -b "$BRANCH"
+            git push origin "$BRANCH"
+            gh pr create --base dev --head "$BRANCH" --title "🛡️ AI Security Hardening" --body "Automated security audit and fix."
+          fi
