@@ -20,13 +20,17 @@ jobs:
           ref: dev
           fetch-depth: 0
 
-      - name: Gemini Security Fix
+      - name: Gemini Performance Optimisation
         uses: google-github-actions/run-gemini-cli@main
         env:
           GEMINI_DEBUG: false
         with:
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
-          gemini_model: "gemini-3-flash"
+          settings: |
+            {
+              "model": "gemini-3-flash",
+              "yolo": true
+            }          
           prompt: |
             ACT AS: React Performance Engineer.
             TASK: Optimize component rendering in /src.

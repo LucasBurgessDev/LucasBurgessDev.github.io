@@ -20,7 +20,7 @@ jobs:
           ref: dev
           fetch-depth: 0
 
-      - name: Gemini Security Fix
+      - name: Gemini Feature Upgrade
         uses: google-github-actions/run-gemini-cli@main
         env:
           GEMINI_DEBUG: false
