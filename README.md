@@ -1,7 +1,7 @@
 # This project builds the portfolio of LucasBurgessDev
 
 It uses GitHub actions for full CI/CD with test coverage from Codecov.
-The env var CI is currently set to false in github actions so won't fail if warnings are present.
+The env var CI is currently set to false in github actions so won't fail if warnings are present...
 
 # TODO
 
