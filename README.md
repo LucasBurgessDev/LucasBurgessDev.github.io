@@ -37,25 +37,6 @@ The env var CI is currently set to false in github actions so won't fail if warn
 * ~~Handle error on homepage website links where no internet connection~~
 * ~~Set footer to always be page bottom~~
 * ~~Load CSS blog stylings from database~~
-    *~~Change body database structure to pass an array with finite types e.g. content 
-[
-{
-    object_type: "introduction",
-    object_information: "..."
-},
-{
-    object_type: "body",
-    object_information: "..."
-},
-{
-    object_type: "image",
-    object_information: "BUCKET_REF"
-},
-{
-    object_type: "conclusion",
-    object_information: "..."
-}
-]~~
     * ~~Create handler for text object types~~
     * ~~Create CSS for object types~~
     * ~~Create bucket front cloud run~~
@@ -68,6 +49,7 @@ The env var CI is currently set to false in github actions so won't fail if warn
 * ~~Ensure codecov is recieving updates~~
 * ~~Integrate logo into header~~
 * ~~Optimise API blog calls to only return past creation dates~~
+* Safari open the video on the home screeen in a player
 * Google API Key move to secrets
 * Set up SEO
 * Set up email verification
