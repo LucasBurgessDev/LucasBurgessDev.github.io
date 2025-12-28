@@ -30,6 +30,7 @@ function NavBar() {
         <nav className="navbar">
           <div className="navbar-container">
             <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
+              <img src="/images/lucasburgessdev_logo.png" alt="Logo" className="navbar-logo-img" />
               <i 
               // className="fas fa-database"
               ></i>LucasBurgessDev

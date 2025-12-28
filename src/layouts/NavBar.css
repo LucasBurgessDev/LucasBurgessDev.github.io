@@ -40,6 +40,12 @@
   font-family: var(--font-display);
 }
 
+.navbar-logo-img {
+  margin-right: 10px;
+  width: 50px; /* Adjust as needed */
+  height: 50px; /* Adjust as needed */
+}
+
 .fa-typo3 {
   margin-left: 0.5rem;
   font-size: 1.8rem;
