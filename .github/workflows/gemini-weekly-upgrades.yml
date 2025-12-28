@@ -1,0 +1,66 @@
+name: Gemini React Dev Evolution
+on:
+  schedule:
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+
+jobs:
+  evolution:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          ref: dev
+          fetch-depth: 0
+
+      - name: Gemini React Engineer
+        uses: google-github-actions/run-gemini-cli@main
+        env:
+          GEMINI_DEBUG: false
+        with:
+          gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
+          # Explicitly use the high-performance Gemini 3 model
+          gemini_model: "gemini-3-flash"
+          # Positional prompt (no more -p flag)
+          prompt: |
+            Analyze /src. Perform 3 React tasks:
+            1. SECURITY: Fix XSS or insecure prop patterns.
+            2. PERFORMANCE: Optimize re-renders with Memo/Callback.
+            3. FEATURE: Create one new Portfolio component (No Tailwind/Lucide).
+            
+            OUTPUT: Apply code directly. Do NOT explain. 
+            Use commit messages 'task:Security', 'task:Perf', 'task:Feature'.
+
+      - name: Create Individual PRs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Identify commits created by the AI agent
+          COMMITS=$(git log dev..HEAD --oneline | grep "task:" || true)
+          
+          if [ -z "$COMMITS" ]; then
+            echo "No changes found. Gemini may have hit a safety filter or found no issues."
+            exit 0
+          fi
+
+          while read -r line; do
+            HASH=$(echo $line | awk '{print $1}')
+            TASK=$(echo $line | awk '{print $2}' | sed 's/task://')
+            BRANCH="gemini/upgrade-$TASK-$(date +%s)"
+            
+            git checkout -b "$BRANCH" "$HASH"
+            git push origin "$BRANCH" --force
+            
+            gh pr create \
+              --base dev \
+              --head "$BRANCH" \
+              --title "🚀 React Evolution: $TASK" \
+              --body "Automated React upgrade for: $TASK." || echo "PR already exists"
+            
+            git checkout dev
+          done <<< "$COMMITS"
