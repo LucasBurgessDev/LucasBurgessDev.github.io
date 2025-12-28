@@ -1,4 +1,4 @@
-name: Gemini Security Evolution
+name: Gemini Feature Evolution
 on:
   schedule:
     - cron: '0 0 * * 1'
