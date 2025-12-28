@@ -9,28 +9,42 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  security:
+  performance:
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
+
     steps:
       - uses: actions/checkout@v4
         with:
           ref: dev
           fetch-depth: 0
 
+      - name: Configure git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Create working branch
+        run: |
+          BRANCH="ai/perf-$(date +%s)"
+          echo "BRANCH=$BRANCH" >> $GITHUB_ENV
+          git checkout -b "$BRANCH"
+
       - name: Gemini Performance Optimisation
-        uses: google-github-actions/run-gemini-cli@main
+        uses: google-github-actions/run-gemini-cli@v0.1.18
         env:
           GEMINI_DEBUG: false
         with:
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
+          gemini_cli_version: latest
+          gemini_model: gemini-3-flash-preview
           settings: |
             {
-              "model": "gemini-3-flash",
+              "model": "gemini-3-flash-preview",
               "yolo": true
-            }          
+            }
           prompt: |
             ACT AS: React Performance Engineer.
             TASK: Optimize component rendering in /src.
@@ -39,14 +53,30 @@ jobs:
             - Optimize long lists or heavy loops using useMemo.
             CONSTRAINTS: Do not over-memoize simple components. No Tailwind.
             OUTPUT: Apply changes. Use commit message 'task:Perf'.
+
+      - name: Dump Gemini error report if present
+        if: always()
+        run: |
+          ls -la /tmp/gemini-client-error-*.json || true
+          for f in /tmp/gemini-client-error-*.json; do
+            echo "===== $f ====="
+            cat "$f"
+          done || true
+
       - name: Create PR
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          COMMIT=$(git log dev..HEAD --oneline | grep "task:Security" || true)
-          if [ -n "$COMMIT" ]; then
-            BRANCH="ai/security-$(date +%s)"
-            git checkout -b "$BRANCH"
-            git push origin "$BRANCH"
-            gh pr create --base dev --head "$BRANCH" --title "🛡️ AI Security Hardening" --body "Automated security audit and fix."
+          git fetch origin dev
+
+          # Only continue if Gemini created the expected commit on this branch
+          if git log --oneline origin/dev..HEAD | grep -q "task:Perf"; then
+            git push -u origin "$BRANCH"
+            gh pr create \
+              --base dev \
+              --head "$BRANCH" \
+              --title "⚡ AI Performance Optimisation" \
+              --body "Automated React performance pass (memo/useCallback/useMemo where appropriate)."
+          else
+            echo "No task:Perf commit found, skipping PR."
           fi

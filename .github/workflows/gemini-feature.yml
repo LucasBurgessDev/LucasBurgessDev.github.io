@@ -9,7 +9,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  security:
+  feature:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -37,7 +37,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          COMMIT=$(git log dev..HEAD --oneline | grep "task:Security" || true)
+          COMMIT=$(git log dev..HEAD --oneline | grep "task:Feature" || true)
           if [ -n "$COMMIT" ]; then
             BRANCH="ai/security-$(date +%s)"
             git checkout -b "$BRANCH"
