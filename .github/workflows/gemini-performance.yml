@@ -40,6 +40,8 @@ jobs:
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
           gemini_cli_version: latest
           gemini_model: gemini-3-flash-preview
+          # use Vertex AI (requires GCP auth inputs)
+          # use_vertex_ai: true
           settings: |
             {
               "model": "gemini-3-flash-preview",
@@ -47,12 +49,18 @@ jobs:
             }
           prompt: |
             ACT AS: React Performance Engineer.
+
+            IMPORTANT: If using GrepLogic or ripgrep regex searches, escape braces:
+            - Use \\{ and \\}
+            - To find JSX prop assignments like ={ use regex =\\{ (do not search for ={ unescaped)
+
             TASK: Optimize component rendering in /src.
             - Wrap expensive functional components in React.memo.
             - Use useCallback for functions passed as props to children.
             - Optimize long lists or heavy loops using useMemo.
             CONSTRAINTS: Do not over-memoize simple components. No Tailwind.
             OUTPUT: Apply changes. Use commit message 'task:Perf'.
+
 
       - name: Dump Gemini error report if present
         if: always()
@@ -66,17 +74,16 @@ jobs:
       - name: Create PR
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git fetch origin dev
-
-          # Only continue if Gemini created the expected commit on this branch
-          if git log --oneline origin/dev..HEAD | grep -q "task:Perf"; then
+          COMMIT=$(git log --oneline -n 50 | grep "task:Perf" || true)
+          if [ -n "$COMMIT" ]; then
             git push -u origin "$BRANCH"
             gh pr create \
               --base dev \
               --head "$BRANCH" \
               --title "⚡ AI Performance Optimisation" \
-              --body "Automated React performance pass (memo/useCallback/useMemo where appropriate)."
+              --body "Automated performance improvements."
           else
             echo "No task:Perf commit found, skipping PR."
           fi
