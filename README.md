@@ -50,6 +50,7 @@ The env var CI is currently set to false in github actions so won't fail if warn
 * ~~Integrate logo into header~~
 * ~~Optimise API blog calls to only return past creation dates~~
 * Safari open the video on the home screeen in a player
+* LinkedIn Autopost
 * Google API Key move to secrets
 * Set up SEO
 * Set up email verification
