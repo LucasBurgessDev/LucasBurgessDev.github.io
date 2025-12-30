@@ -13,6 +13,7 @@ function HeroSection() {
           autoPlay
           loop
           muted
+          playsInline
           className="hero-video"
         />
         <div className="hero-overlay"></div>
