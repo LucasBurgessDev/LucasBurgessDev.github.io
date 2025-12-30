@@ -1,0 +1,93 @@
+name: Gemini Performance Evolution
+on:
+  schedule:
+    - cron: "0 0 * * 1"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  performance:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev
+          fetch-depth: 0
+
+      - name: Configure git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Create working branch
+        run: |
+          BRANCH="ai/perf-$(date +%s)"
+          echo "BRANCH=$BRANCH" >> $GITHUB_ENV
+          git checkout -b "$BRANCH"
+
+      - name: Auth to Google Cloud (WIF)
+        uses: google-github-actions/auth@v3
+        with:
+          project_id: ${{ vars.GCP_PROJECT_ID }}
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_SERVICE_ACCOUNT_EMAIL }}
+
+      - name: Gemini Performance Optimisation (Vertex AI)
+        uses: google-github-actions/run-gemini-cli@v0.1.18
+        with:
+          use_vertex_ai: true
+          use_gemini_code_assist: false
+          gcp_project_id: ${{ vars.GCP_PROJECT_ID }}
+          gcp_location: ${{ vars.GCP_LOCATION }}
+          gcp_workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          gcp_service_account: ${{ vars.GCP_SERVICE_ACCOUNT_EMAIL }}
+          gemini_cli_version: latest
+          gemini_model: gemini-3-flash-preview
+          settings: |
+            { "model": "gemini-3-flash-preview", "yolo": true }
+          prompt: |
+            ACT AS: React Performance Engineer.
+
+            IMPORTANT: If using GrepLogic or ripgrep regex searches, escape braces:
+            - Use \\{ and \\}
+            - To find JSX prop assignments like ={ use regex =\\{
+
+            TASK: Optimize component rendering in /src.
+            - Wrap expensive functional components in React.memo.
+            - Use useCallback for functions passed as props to children.
+            - Optimize long lists or heavy loops using useMemo.
+            CONSTRAINTS: Do not over-memoize simple components. No Tailwind.
+            OUTPUT: Apply changes. Use commit message 'task:Perf'.
+
+      - name: Dump Gemini error report if present
+        if: always()
+        run: |
+          ls -la /tmp/gemini-client-error-*.json || true
+          for f in /tmp/gemini-client-error-*.json; do
+            echo "===== $f ====="
+            cat "$f"
+          done || true
+
+      - name: Create PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if git log --oneline -n 50 | grep -q "task:Perf"; then
+            git push -u origin "$BRANCH"
+            gh pr create \
+              --base dev \
+              --head "$BRANCH" \
+              --title "⚡ AI Performance Optimisation" \
+              --body "Automated performance improvements."
+          else
+            echo "No task:Perf commit found, skipping PR."
+          fi

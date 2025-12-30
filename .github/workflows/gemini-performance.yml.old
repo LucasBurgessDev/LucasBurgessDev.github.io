@@ -1,0 +1,90 @@
+name: Gemini Performance Evolution
+on:
+  schedule:
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  performance:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev
+          fetch-depth: 0
+
+      - name: Configure git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Create working branch
+        run: |
+          BRANCH="ai/perf-$(date +%s)"
+          echo "BRANCH=$BRANCH" >> $GITHUB_ENV
+          git checkout -b "$BRANCH"
+
+      - name: Gemini Performance Optimisation
+        uses: google-github-actions/run-gemini-cli@v0.1.18
+        env:
+          GEMINI_DEBUG: false
+        with:
+          gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
+          gemini_cli_version: latest
+          gemini_model: gemini-3-flash-preview
+          #use_gemini_code_assist: true
+          # use Vertex AI (requires GCP auth inputs)
+          # use_vertex_ai: true
+          settings: |
+            {
+              "model": "gemini-3-flash-preview",
+              "yolo": true
+            }
+          prompt: |
+            ACT AS: React Performance Engineer.
+
+            IMPORTANT: If using GrepLogic or ripgrep regex searches, escape braces:
+            - Use \\{ and \\}
+            - To find JSX prop assignments like ={ use regex =\\{ (do not search for ={ unescaped)
+
+            TASK: Optimize component rendering in /src.
+            - Wrap expensive functional components in React.memo.
+            - Use useCallback for functions passed as props to children.
+            - Optimize long lists or heavy loops using useMemo.
+            CONSTRAINTS: Do not over-memoize simple components. No Tailwind.
+            OUTPUT: Apply changes. Use commit message 'task:Perf'.
+
+
+      - name: Dump Gemini error report if present
+        if: always()
+        run: |
+          ls -la /tmp/gemini-client-error-*.json || true
+          for f in /tmp/gemini-client-error-*.json; do
+            echo "===== $f ====="
+            cat "$f"
+          done || true
+
+      - name: Create PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          COMMIT=$(git log --oneline -n 50 | grep "task:Perf" || true)
+          if [ -n "$COMMIT" ]; then
+            git push -u origin "$BRANCH"
+            gh pr create \
+              --base dev \
+              --head "$BRANCH" \
+              --title "⚡ AI Performance Optimisation" \
+              --body "Automated performance improvements."
+          else
+            echo "No task:Perf commit found, skipping PR."
+          fi

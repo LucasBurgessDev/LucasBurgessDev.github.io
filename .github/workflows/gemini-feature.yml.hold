@@ -1,4 +1,4 @@
-name: Gemini Security Evolution
+name: Gemini Feature Evolution
 on:
   schedule:
     - cron: '0 0 * * 1'
@@ -9,7 +9,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  security:
+  feature:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -20,7 +20,7 @@ jobs:
           ref: dev
           fetch-depth: 0
 
-      - name: Gemini Security Fix
+      - name: Gemini Feature Upgrade
         uses: google-github-actions/run-gemini-cli@main
         env:
           GEMINI_DEBUG: false
@@ -28,18 +28,16 @@ jobs:
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
           gemini_model: "gemini-3-flash"
           prompt: |
-            ACT AS: React Performance Engineer.
-            TASK: Optimize component rendering in /src.
-            - Wrap expensive functional components in React.memo.
-            - Use useCallback for functions passed as props to children.
-            - Optimize long lists or heavy loops using useMemo.
-            CONSTRAINTS: Do not over-memoize simple components. No Tailwind.
-            OUTPUT: Apply changes. Use commit message 'task:Perf'.
+            ACT AS: Creative React Developer.
+            TASK: Add ONE new UI feature to the portfolio.
+            IDEAS: Custom 'useReadingTime' hook, a 'ScrollProgress' bar, or a 'ThemeSwitcher' (CSS variables).
+            CONSTRAINTS: No Tailwind/Lucide. Use CSS Modules or standard CSS.
+            OUTPUT: Create the component and export it. Use commit message 'task:Feature'.
       - name: Create PR
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          COMMIT=$(git log dev..HEAD --oneline | grep "task:Security" || true)
+          COMMIT=$(git log dev..HEAD --oneline | grep "task:Feature" || true)
           if [ -n "$COMMIT" ]; then
             BRANCH="ai/security-$(date +%s)"
             git checkout -b "$BRANCH"
