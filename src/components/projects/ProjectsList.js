@@ -1,6 +1,7 @@
 import React from "react";
 import { projects } from "../../data/projects";
 import ProjectCard from "./ProjectCard";
+import AskProjects from "./AskProjects";
 import "./Projects.css";
 
 function ProjectsList() {
@@ -16,6 +17,7 @@ function ProjectsList() {
           <ProjectCard key={project.id} project={project} />
         ))}
       </div>
+      <AskProjects />
     </div>
   );
 }
