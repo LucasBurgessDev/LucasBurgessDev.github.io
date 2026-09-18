@@ -3,64 +3,83 @@
 }
 
 .contact-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 600;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, hsl(var(--accent-primary)), hsl(var(--accent-secondary)));
+  color: hsl(var(--text-primary));
   border: none;
-  border-radius: 5px;
+  border-radius: 999px;
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .contact-button:hover {
-    background-color: #fff;
-    color: #242424;
-    transition: all 0.3s ease-out;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
 }
 
 .contact-box {
-  max-width: 500px;
-  margin: 20px auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  background-color: transparent; /* Set background to transparent */
+  max-width: 460px;
+  margin: 24px auto 0;
+  padding: 28px;
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
   text-align: center;
 }
 
 .contact-box h2 {
   margin-bottom: 20px;
-  font-size: 20px;
-  color: #fff; /* White text color */
+  font-size: 1.25rem;
+  color: hsl(var(--text-primary));
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 14px;
 }
 
 .form-control {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box; /* Ensure padding is included in width */
+  padding: 12px 14px;
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  color: hsl(var(--text-primary));
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+.form-control::placeholder {
+  color: hsl(var(--text-secondary));
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: hsl(var(--accent-secondary));
 }
 
 .btn {
   display: inline-block;
-  padding: 10px 20px;
-  background-color: #007bff; /* Blue button */
-  color: #fff; /* White text color */
+  font-family: var(--font-display);
+  font-weight: 600;
+  padding: 10px 24px;
   border: none;
-  border-radius: 5px;
+  border-radius: 999px;
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn-primary {
-  background-color: #007bff;
+  background: linear-gradient(135deg, hsl(var(--accent-primary)), hsl(var(--accent-secondary)));
+  color: hsl(var(--text-primary));
 }
 
 .btn-primary:hover {
-    background-color: #fff;
-    color: #242424;
-    transition: all 0.3s ease-out;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
 }
