@@ -51,7 +51,7 @@ function LiveStatus() {
         <h2>Live from my flat</h2>
         <p>
           Real sensor data streaming out of{" "}
-          <Link to="/projects">PlantAgent</Link>, the AI horticulturalist I built.
+          <Link to="/blog/8">PlantAgent</Link>, the AI horticulturalist I built.
         </p>
       </div>
       <div className="live-status-grid">
