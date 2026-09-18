@@ -16,11 +16,11 @@ const mockBlog = {
   category: 'Tech',
   sub_category: ['React', 'Jest'],
   created_on: '2023-10-01',
-  content: JSON.stringify([
+  content: [
     { type: 'header', value: 'Introduction' },
     { type: 'text', value: 'This is the body content.' },
     { type: 'image', value: 'img.png', alt: 'Test Image', caption: 'Capt' }
-  ]),
+  ],
   cover: 'cover.png'
 };
 
@@ -59,16 +59,15 @@ describe('BlogPost Component', () => {
     });
   });
 
-  test('renders blog content with nested JSON and unknown types', async () => {
+  test('renders unknown block types via the default paragraph fallback and skips empty values', async () => {
     const complexBlog = {
       ...mockBlog,
       id: 2,
-      content: JSON.stringify([
+      content: [
         { type: 'header', value: 'Header' },
         { type: 'unknown', value: 'Default Text' },
-        { type: 'text', value: JSON.stringify([{ type: 'text', value: 'Unpacked Text' }]) },
         { type: 'text', value: null } // Should be skipped in map
-      ])
+      ]
     };
     getBlogInfo.mockResolvedValue([complexBlog]);
 
@@ -80,7 +79,6 @@ describe('BlogPost Component', () => {
 
     expect(await screen.findByText('Header')).toBeInTheDocument();
     expect(await screen.findByText('Default Text')).toBeInTheDocument();
-    expect(await screen.findByText('Unpacked Text')).toBeInTheDocument();
   });
 
   test('handles fetch error', async () => {

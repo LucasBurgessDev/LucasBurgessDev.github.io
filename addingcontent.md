@@ -48,6 +48,12 @@ The blog will render the `content` array in the exact order you provide. You can
 1.  **Images**: You can host images in `src/images` and import them if you are hardcoding, or plug in a URL from your cloud storage.
 2.  **Videos**: Currently, videos are supported in the Hero section (`src/videos`). To add a new video background, upload the file to `src/videos` and update `src/features/home/HeroSection.js`.
 
-## Future Improvements
+## Publishing
 
-To make this easier without writing raw JSON, we could implement a small "Admin" page in this app that POSTs data to your backend, if your backend supports it.
+There is no admin UI or public write endpoint — deliberately, since an open
+POST for blog content would be a spam vector. New posts are published with
+`scripts/publish_blog.py` in the `lucasburgess.dev-backend` repo, which
+writes directly to Firestore and uploads any local images to the
+`lucasburgessdev-blogs-images` bucket. See that repo's `scripts/example_post.json`
+for the draft format, or just hand your copy to Claude — see `CLAUDE.md` in
+this repo for the full runbook.
