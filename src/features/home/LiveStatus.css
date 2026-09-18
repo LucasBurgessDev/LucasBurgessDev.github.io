@@ -1,0 +1,96 @@
+.live-status {
+  padding: 2rem 2rem 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.live-status-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.live-status-header h2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 2rem;
+  color: hsl(var(--text-primary));
+}
+
+.live-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: hsl(var(--accent-secondary));
+  box-shadow: 0 0 0 0 hsl(var(--accent-secondary) / 0.6);
+  animation: live-pulse 2s infinite;
+}
+
+@keyframes live-pulse {
+  0% { box-shadow: 0 0 0 0 hsl(var(--accent-secondary) / 0.6); }
+  70% { box-shadow: 0 0 0 8px hsl(var(--accent-secondary) / 0); }
+  100% { box-shadow: 0 0 0 0 hsl(var(--accent-secondary) / 0); }
+}
+
+.live-status-header p {
+  color: hsl(var(--text-secondary));
+  margin-top: 0.5rem;
+}
+
+.live-status-header a {
+  color: hsl(var(--accent-secondary));
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.live-status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.live-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.live-card-label {
+  font-weight: 600;
+  color: hsl(var(--text-primary));
+}
+
+.live-card-readings {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  color: hsl(var(--accent-secondary));
+}
+
+.live-card-updated {
+  font-size: 0.8rem;
+  color: hsl(var(--text-secondary));
+}
+
+.live-card-status {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.live-card-status--ok { color: hsl(var(--accent-secondary)); }
+.live-card-status--warn { color: #f0b429; }
+.live-card-status--bad { color: #f87171; }
+
+@media screen and (max-width: 640px) {
+  .live-status-header h2 {
+    font-size: 1.6rem;
+  }
+}
