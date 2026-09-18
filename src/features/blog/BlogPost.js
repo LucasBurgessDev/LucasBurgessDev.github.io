@@ -30,54 +30,9 @@ function BlogPost() {
     fetchBlog();
   }, [id]);
 
-  // Truly recursive content parsing utility
-  const parseContent = (data) => {
-    if (!data) return [];
-    
-    // 1. If it's a string, try to parse it
-    if (typeof data === 'string') {
-      try {
-        const parsed = JSON.parse(data);
-        return parseContent(parsed);
-      } catch (e) {
-        // Not JSON, return as a text block
-        return [{ type: 'text', value: data }];
-      }
-    }
-
-    // 2. If it's an array, process each item and flatten
-    if (Array.isArray(data)) {
-      return data.flatMap(item => parseContent(item));
-    }
-
-    // 3. If it's an object, check if it's a content block
-    if (data && typeof data === 'object') {
-      const type = (data.type || data.object_type || 'text').toLowerCase();
-      const value = data.value || data.object_information || '';
-      
-      // Special case: if value is stringified JSON, unpack it!
-      if (typeof value === 'string' && (value.trim().startsWith('[') || value.trim().startsWith('{'))) {
-        try {
-          const parsedValue = JSON.parse(value);
-          const unpacked = parseContent(parsedValue);
-          if (unpacked.length > 0) return unpacked;
-        } catch (e) {
-          // Fall through to standard block
-        }
-      }
-
-      return [{
-        type: type,
-        value: value,
-        alt: data.alt || '',
-        caption: data.caption || ''
-      }];
-    }
-
-    return [];
-  };
-
-  const parsedContent = parseContent(blog?.content);
+  // The backend (get_blog_info) always normalizes content to a flat
+  // array of { type, value } blocks before it reaches the client.
+  const parsedContent = Array.isArray(blog?.content) ? blog.content : [];
 
   return (
     <div className="blog-page-container">

@@ -15,44 +15,13 @@ function BlogItem({
     cover,
   },
 }) {
-  // Helper function to extract text content, handling potential JSON strings recursively
-  const getDescription = (data) => {
-    if (!data) return "Read more about this project...";
-    
-    // 1. If it's a string, try to parse it
-    if (typeof data === 'string') {
-      try {
-        const parsed = JSON.parse(data);
-        return getDescription(parsed);
-      } catch (e) {
-        // Not a JSON string, treat as plain text if it's not a block
-        return data;
-      }
-    }
-
-    // 2. If it's an array, look for the first text-like block
-    if (Array.isArray(data)) {
-      for (const item of data) {
-        const result = getDescription(item);
-        if (result && result !== "Read more about this project..." && typeof result === 'string' && !result.startsWith('[') && !result.startsWith('{')) {
-          return result;
-        }
-      }
-    }
-
-    // 3. If it's an object, check if it's a content block
-    if (data && typeof data === 'object') {
-      const type = (data.type || data.object_type || '').toLowerCase();
-      const value = data.value || data.object_information;
-      
-      if (['text', 'body', 'introduction', 'conclusion'].includes(type) && value) {
-        // Recurse into value in case it's stringified JSON
-        const parsedValue = getDescription(value);
-        return parsedValue;
-      }
-    }
-
-    return "Read more about this project...";
+  // The backend normalizes content to a flat array of { type, value }
+  // blocks; the listing preview uses the first text block.
+  const getDescription = (content) => {
+    const block = Array.isArray(content)
+      ? content.find((b) => ['text', 'body', 'introduction', 'conclusion'].includes(b.type) && b.value)
+      : null;
+    return block?.value || "Read more about this project...";
   };
 
   const description = getDescription(content);

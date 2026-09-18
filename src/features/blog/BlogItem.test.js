@@ -11,7 +11,7 @@ const mockBlog = {
   author_name: 'John Doe',
   author_avatar: 'avatar.png',
   cover: 'cover.png',
-  content: 'Simple text content'
+  content: [{ type: 'text', value: 'Simple text content' }]
 };
 
 describe('BlogItem Component', () => {
@@ -27,21 +27,6 @@ describe('BlogItem Component', () => {
     expect(screen.getByText('John Doe')).toBeInTheDocument();
     expect(screen.getByText('2023-10-01')).toBeInTheDocument();
     expect(screen.getByText('Simple text content')).toBeInTheDocument();
-  });
-
-  test('handles JSON string content correctly', () => {
-    const blogWithJson = {
-      ...mockBlog,
-      content: JSON.stringify([{ type: 'text', value: 'Content from JSON' }])
-    };
-
-    render(
-      <MemoryRouter>
-        <BlogItem blog={blogWithJson} />
-      </MemoryRouter>
-    );
-
-    expect(screen.getByText('Content from JSON')).toBeInTheDocument();
   });
 
   test('handles complex nested content correctly', () => {
@@ -62,21 +47,19 @@ describe('BlogItem Component', () => {
     expect(screen.getByText('Nested text')).toBeInTheDocument();
   });
 
-  test('handles recursive JSON strings and conclusion blocks', () => {
-    const blogWithRecursive = {
+  test('handles conclusion blocks', () => {
+    const blogWithConclusion = {
       ...mockBlog,
-      content: JSON.stringify([
-        { type: 'conclusion', value: JSON.stringify([{ type: 'text', value: 'Recursive Desc' }]) }
-      ])
+      content: [{ type: 'conclusion', value: 'Conclusion Desc' }]
     };
 
     render(
       <MemoryRouter>
-        <BlogItem blog={blogWithRecursive} />
+        <BlogItem blog={blogWithConclusion} />
       </MemoryRouter>
     );
 
-    expect(screen.getByText('Recursive Desc')).toBeInTheDocument();
+    expect(screen.getByText('Conclusion Desc')).toBeInTheDocument();
   });
 
   test('handles null content gracefully', () => {
