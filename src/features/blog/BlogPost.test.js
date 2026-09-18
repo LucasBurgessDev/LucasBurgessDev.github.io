@@ -81,6 +81,38 @@ describe('BlogPost Component', () => {
     expect(await screen.findByText('Default Text')).toBeInTheDocument();
   });
 
+  test('renders code, quote, and video blocks', async () => {
+    const richBlog = {
+      ...mockBlog,
+      id: 3,
+      content: [
+        { type: 'code', value: 'SELECT 1;', language: 'sql' },
+        { type: 'quote', value: 'A pull quote.', attribution: 'Someone' },
+        { type: 'video', value: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' },
+        { type: 'video', value: 'https://storage.googleapis.com/bucket/clip.mp4' },
+      ]
+    };
+    getBlogInfo.mockResolvedValue([richBlog]);
+
+    render(
+      <MemoryRouter initialEntries={['/blog/3']}>
+        <BlogPost />
+      </MemoryRouter>
+    );
+
+    expect(await screen.findByText('SELECT 1;')).toBeInTheDocument();
+    expect(screen.getByText('A pull quote.')).toBeInTheDocument();
+    expect(screen.getByText('— Someone')).toBeInTheDocument();
+    expect(screen.getByTitle('Blog video 2')).toHaveAttribute(
+      'src',
+      'https://www.youtube.com/embed/dQw4w9WgXcQ'
+    );
+    expect(document.querySelector('video')).toHaveAttribute(
+      'src',
+      'https://storage.googleapis.com/bucket/clip.mp4'
+    );
+  });
+
   test('handles fetch error', async () => {
     getBlogInfo.mockRejectedValue(new Error('Fetch error'));
     render(

@@ -7,6 +7,21 @@ import { CalculateReadTime } from "./WordCount.js";
 import { getBlogInfo } from "../../services/api";
 import { TailSpin } from "react-loader-spinner";
 import { Link } from "react-router-dom";
+import Prism from "prismjs";
+import "prismjs/components/prism-sql";
+import "prismjs/components/prism-python";
+import "prismjs/components/prism-bash";
+import "prismjs/components/prism-json";
+
+const VIDEO_EMBED_PATTERN = /(?:youtube\.com\/watch\?v=|youtu\.be\/|vimeo\.com\/)/;
+
+function toEmbedUrl(url) {
+  const youtubeMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/);
+  if (youtubeMatch) return `https://www.youtube.com/embed/${youtubeMatch[1]}`;
+  const vimeoMatch = url.match(/vimeo\.com\/(\d+)/);
+  if (vimeoMatch) return `https://player.vimeo.com/video/${vimeoMatch[1]}`;
+  return url;
+}
 
 function BlogPost() {
   const { id } = useParams();
@@ -29,6 +44,14 @@ function BlogPost() {
 
     fetchBlog();
   }, [id]);
+
+  useEffect(() => {
+    // setBlog and setLoading(false) land in separate renders (React 17 doesn't
+    // batch state updates made after an await), so this must wait for both —
+    // otherwise it fires while the loading spinner (not the code blocks) is
+    // still what's actually mounted.
+    if (blog && !loading) Prism.highlightAll();
+  }, [blog, loading]);
 
   // The backend (get_blog_info) always normalizes content to a flat
   // array of { type, value } blocks before it reaches the client.
@@ -67,7 +90,7 @@ function BlogPost() {
               <span className="blog-readTime">
                 <i className="far fa-clock"></i> {(() => {
                   const textForReadTime = parsedContent
-                    .filter(b => b.type !== 'image')
+                    .filter(b => b.type !== 'image' && b.type !== 'video')
                     .map(b => b.value || "")
                     .join(" ")
                     .trim();
@@ -102,6 +125,34 @@ function BlogPost() {
                   );
                 case 'header':
                   return <h2 key={index} className="blog-content-header">{value}</h2>;
+                case 'code':
+                  return (
+                    <pre key={index} className={`blog-code language-${block.language || 'none'}`}>
+                      <code className={`language-${block.language || 'none'}`}>{value}</code>
+                    </pre>
+                  );
+                case 'quote':
+                  return (
+                    <blockquote key={index} className="blog-quote">
+                      <p>{value}</p>
+                      {block.attribution && <cite>— {block.attribution}</cite>}
+                    </blockquote>
+                  );
+                case 'video':
+                  return (
+                    <div key={index} className="blog-video-wrap">
+                      {VIDEO_EMBED_PATTERN.test(value) ? (
+                        <iframe
+                          src={toEmbedUrl(value)}
+                          title={`Blog video ${index}`}
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        />
+                      ) : (
+                        <video src={value} controls />
+                      )}
+                    </div>
+                  );
                 default:
                   return <p key={index} className="blog-para">{value}</p>;
               }

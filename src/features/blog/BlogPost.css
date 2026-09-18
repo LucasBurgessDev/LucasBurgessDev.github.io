@@ -132,6 +132,72 @@
   opacity: 0.95;
 }
 
+.blog-code {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  background: hsl(var(--bg-secondary));
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.blog-quote {
+  margin: 0;
+  padding: 0.5rem 0 0.5rem 1.75rem;
+  border-left: 3px solid hsl(var(--accent-secondary));
+}
+
+.blog-quote p {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: hsl(var(--text-primary));
+  margin: 0;
+}
+
+.blog-quote cite {
+  display: block;
+  margin-top: 0.75rem;
+  font-style: normal;
+  font-size: 0.95rem;
+  color: hsl(var(--text-secondary));
+}
+
+.blog-video-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.blog-video-wrap iframe,
+.blog-video-wrap video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Prism token colors, matched to the site's indigo/teal accent tokens */
+.blog-code .token.comment { color: hsl(var(--text-secondary)); font-style: italic; }
+.blog-code .token.keyword,
+.blog-code .token.builtin { color: hsl(var(--accent-primary)); font-weight: 600; }
+.blog-code .token.string,
+.blog-code .token.char { color: hsl(var(--accent-secondary)); }
+.blog-code .token.function { color: #82aaff; }
+.blog-code .token.number,
+.blog-code .token.boolean { color: #f78c6c; }
+.blog-code .token.operator,
+.blog-code .token.punctuation { color: hsl(var(--text-secondary)); }
+
 .loading-spinner {
   display: flex;
   justify-content: center;
