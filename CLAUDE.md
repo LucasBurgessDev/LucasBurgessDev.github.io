@@ -88,9 +88,16 @@ When the user hands you raw copy to publish:
 2. Turn the copy into a draft JSON matching `scripts/example_post.json`'s
    shape: `title`, `category`, `sub_category`, `author_name`, `author_avatar`,
    `content` (array of `{type: text|header, value}` or
-   `{type: image, local_path}` blocks), and `cover_image_path` if there's a
-   local cover image. Use your judgement to split the copy into `text`/
-   `header` blocks — don't just dump one giant text block.
+   `{type: image, local_path, caption?, alt?}` blocks — `caption`/`alt` are
+   supported end-to-end as of 2026-09), and `cover_image_path` if there's a
+   local cover image (download it first if the user gave an external URL —
+   `cover`/inline images must be real blobs in the bucket, not arbitrary
+   URLs, or the signed-URL step on read breaks). Use your judgement to split
+   the copy into `text`/`header` blocks — don't just dump one giant text
+   block. If the post makes specific technical claims (API/function names,
+   version numbers, syntax), verify them (WebSearch) rather than trusting
+   the draft verbatim — a past post shipped with an outdated BigQuery
+   function name that had to be corrected after the fact.
 3. Confirm `gcloud auth list` shows an authenticated account with access to
    `arboreal-avatar-415621` (currently `contact@lucasburgess.dev`); if not,
    ask the user to re-run `gcloud auth login`.
@@ -99,11 +106,17 @@ When the user hands you raw copy to publish:
 5. On confirmation, re-run without `--dry-run`. It uploads any local images
    to the `lucasburgessdev-blogs-images` bucket, computes the next `id`, and
    writes the Firestore doc with `active: true` (or whatever the draft says).
-6. Tell the user the live URL: `https://lucasburgess.dev/blog/<id>`.
+6. Tell the user the live URL: `https://lucasburgess.dev/blog/<id>`. The
+   post is served straight from the live API with no build/cache step, so
+   it's live the moment the Firestore write completes — you can verify
+   immediately with `curl ".../get_blog_info?blog_id=<id>"` rather than
+   waiting on a deploy.
 
 Never write directly to Firestore ad hoc for a real post — always go through
 the script so the `content`/`cover` shape stays consistent with what
-`get_blog_info` expects.
+`get_blog_info` expects. To edit a post after publishing (typo, wrong byline,
+swapped image) use `scripts/update_blog.py --id <id> patch.json` — a partial
+Firestore update, not a full rewrite of `publish_blog.py`'s document.
 
 ## Known issues / things to watch
 
