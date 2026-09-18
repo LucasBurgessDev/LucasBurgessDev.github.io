@@ -1,0 +1,98 @@
+.ask-projects {
+  max-width: 720px;
+  margin: 3rem auto 0;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.ask-projects h2 {
+  color: hsl(var(--text-primary));
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.ask-projects-intro {
+  color: hsl(var(--text-secondary));
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+.ask-projects-form {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.ask-projects-form input {
+  flex-grow: 1;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.04);
+  color: hsl(var(--text-primary));
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+}
+
+.ask-projects-form input::placeholder {
+  color: hsl(var(--text-secondary));
+}
+
+.ask-projects-form input:focus {
+  outline: none;
+  border-color: hsl(var(--accent-secondary));
+}
+
+.ask-projects-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.ask-suggestion-chip {
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: hsl(var(--text-secondary));
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.ask-suggestion-chip:hover {
+  border-color: hsl(var(--accent-secondary));
+  color: hsl(var(--accent-secondary));
+}
+
+.ask-projects-status {
+  color: hsl(var(--text-secondary));
+  font-style: italic;
+}
+
+.ask-projects-error {
+  color: #f87171;
+}
+
+.ask-projects-answer {
+  text-align: left;
+  color: hsl(var(--text-primary));
+  line-height: 1.7;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-top: 1rem;
+}
+
+@media screen and (max-width: 600px) {
+  .ask-projects-form {
+    flex-direction: column;
+  }
+}
